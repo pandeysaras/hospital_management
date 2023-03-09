@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:medteam/Screen/ProfilePhoto.dart';
+import 'package:medteam/view_model/sign_up_view_models/enter_name_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/hear_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/industry_data_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/moile_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/post_hear_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/profile_image_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/refral_view_model.dart';
+import 'package:medteam/view_model/spec_and_subspec_view_model.dart';
+import 'package:provider/provider.dart';
+import 'package:medteam/Screen/Splash.dart';
+import 'package:medteam/view_model/sign_up_view_models/auth_view_model.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    const MyApp(),
+  );
+}
+
+//--------------------
+
+class MyApp extends StatefulWidget {
+  const MyApp({
+    super.key,
+  });
+
+  // static void restartApp(BuildContext context) {
+  //   context.findAncestorStateOfType<_MyAppState>()!.restartApp();
+  // }
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // Key key = UniqueKey();
+  // RouteObserver<ModalRoute<void>> routeObserver =
+  //     RouteObserver<ModalRoute<void>>();
+  // void restartApp() {
+  //   setState(() {
+  //     key = UniqueKey();
+  //   });
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => EnterNameViewModel()),
+        ChangeNotifierProvider(create: (_) => EnterMobileNumberViewModel()),
+        ChangeNotifierProvider(create: (_) => PrfileViewModel()),
+        ChangeNotifierProvider(create: (_) => HearAboutUSViewModel()),
+        ChangeNotifierProvider(create: (_) => PostHearAboutUSViewModel()),
+        ChangeNotifierProvider(create: (_) => RefralViewMODEL()),
+        ChangeNotifierProvider(create: (_) => IndustryDataViewModel()),
+        ChangeNotifierProvider(create: (_) => SpecAndSubSpecViewModel()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      ),
+    );
+  }
+}
+
+
+
+// DeviceOrientation == Orientation.landscape?
+// SizerUtil.deviceType == DeviceType.web?
+
