@@ -68,6 +68,5 @@ class _MyAppState extends State<MyApp> {
 
 
 
-// DeviceOrientation == Orientation.landscape?
-// SizerUtil.deviceType == DeviceType.web?
+// nilesh
 
