@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medteam/Components/CommonButton.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/CreateAccount.dart';
-import 'package:medteam/Screen/SelectIndustry.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/view_model/sign_up_view_models/login_view_model.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -17,6 +18,7 @@ class _LoginState extends State<Login> {
   late TextEditingController email_controller, password_controller;
   late FocusNode email_focusnode, password_focusnode;
 
+
   @override
   void initState() {
     super.initState();
@@ -27,7 +29,15 @@ class _LoginState extends State<Login> {
   }
 
   @override
+  void dispose() {
+    email_controller.dispose();
+    password_controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final loginViewModel = Provider.of<LoginViewModel>(context);
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
     ScreenUtil.init(context, designSize: Size(screenWidth, screenHeight));
@@ -126,9 +136,23 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             SizedBox(height: 15.h),
-                            CommonButton(
+
+                                loginViewModel.loading ?  SizedBox(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(
+                                      30.0,
+                                    ),
+                                    child:
+                                    LinearProgressIndicator(),
+                                  ),
+                                ): CommonButton(
                                 label: 'SIGN IN',
                                 onPressed: () async {
+                                    Map data = {
+                                      "email":"mili@mailinator.com",
+                                      "password":123456
+                                    };
+                                    loginViewModel.postLoginApi(data, context);
                                   /* Navigator.push(
                                         context,
                                         MaterialPageRoute(
