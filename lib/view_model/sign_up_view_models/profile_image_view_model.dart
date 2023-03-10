@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:medteam/model/profile_upload_model.dart';
@@ -9,12 +7,7 @@ import 'package:medteam/repository/profile_repo.dart';
 import 'package:medteam/resources/app_url.dart';
 import 'package:mime/mime.dart';
 import '../../Utils/utils.dart';
-
-
-//
-
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 class PrfileViewModel with ChangeNotifier {
@@ -51,12 +44,9 @@ class PrfileViewModel with ChangeNotifier {
       request.fields.addAll({
         'user_id': "224",
       });
-
       if(image == null || image == "") {} else {
         request.files.add(await http.MultipartFile.fromPath('profile_picture', image.path));
       }
-
-
       http.StreamedResponse response = await request.send();
       if (response.statusCode == 200) {
         setLoading();
@@ -71,7 +61,6 @@ print(response.reasonPhrase);
     } catch (error){
 throw Exception("Failed to create");
     }
-
 
   }
 

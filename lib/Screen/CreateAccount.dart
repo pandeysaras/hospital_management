@@ -408,8 +408,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                                 .watch<AuthViewModel>()
                                                 .isLoading
                                             ? SizedBox(
-                                                // height: 50,
-                                                // width: 50,
                                                 child: Padding(
                                                   padding: const EdgeInsets.all(
                                                     30.0,

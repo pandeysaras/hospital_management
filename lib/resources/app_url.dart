@@ -25,4 +25,5 @@ class AppUrl {
   static var industryDataEndPoint = "$baseUrl/api/getIndustryData";
   static var specialityIdEndPoint = "$baseUrl/api/getSpecialityData?id=";
   static var subSpecialityIdEndPoint = "$baseUrl/api/getSubSpecialityData?id=";
+  static var loginEndPoint = "$baseUrl/api/login";
 }

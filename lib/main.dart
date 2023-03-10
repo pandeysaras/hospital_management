@@ -3,6 +3,7 @@ import 'package:medteam/Screen/ProfilePhoto.dart';
 import 'package:medteam/view_model/sign_up_view_models/enter_name_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/hear_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/industry_data_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/login_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/moile_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/post_hear_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/profile_image_view_model.dart';
@@ -57,6 +58,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => RefralViewMODEL()),
         ChangeNotifierProvider(create: (_) => IndustryDataViewModel()),
         ChangeNotifierProvider(create: (_) => SpecAndSubSpecViewModel()),
+        ChangeNotifierProvider(create: (_) => LoginViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -12,7 +12,6 @@ class SelectSkillSetSubcatViewModel with ChangeNotifier {
     _authRepo.selectSkillSetApi(data).then((value) {
       Utils.showSnackBar(
           context, "Step 6 Created Successfully", Colors.blue);
-      print("sccdfssssss $value");
     }).onError((error, stackTrace) {
       if (kDebugMode) {
         print(error.toString());
@@ -22,7 +21,6 @@ class SelectSkillSetSubcatViewModel with ChangeNotifier {
 
   Future<void> postSelectSubCatSkillSetApi(dynamic data, BuildContext context) async {
     _authRepo.selectSkillSetSubCatApi(data).then((value) {
-      print("sccdfssssss $value");
       Utils.showSnackBar(
           context, "Step 7 Created Successfully", Colors.blue);
     }).onError((error, stackTrace) {
