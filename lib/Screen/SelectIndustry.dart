@@ -10,7 +10,6 @@ import 'package:medteam/view_model/sign_up_view_models/industry_data_view_model.
 import 'package:provider/provider.dart';
 
 import '../Constant.dart';
-import '../api_interface/ApiCallingWithoutProgressIndicator.dart';
 import '../data/response/status.dart';
 import '../model/SucessModel.dart';
 

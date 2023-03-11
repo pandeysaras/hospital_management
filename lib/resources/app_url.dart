@@ -26,4 +26,9 @@ class AppUrl {
   static var specialityIdEndPoint = "$baseUrl/api/getSpecialityData?id=";
   static var subSpecialityIdEndPoint = "$baseUrl/api/getSubSpecialityData?id=";
   static var loginEndPoint = "$baseUrl/api/login";
+
+  //upload resume
+  static var uploadResumeEndPoint = "$baseUrl/api/profile_info_step_4";
+  //upload resume
+  static var uploadLicence = "$baseUrl/api/profile_info_step_5";
 }

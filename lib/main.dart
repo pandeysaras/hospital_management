@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:medteam/Screen/ProfilePhoto.dart';
+import 'package:medteam/Screen/ProfileInfo.dart';
+import 'package:medteam/Screen/UploadLicense.dart';
+import 'package:medteam/Screen/YourResume.dart';
 import 'package:medteam/view_model/sign_up_view_models/enter_name_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/hear_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/industry_data_view_model.dart';
@@ -8,6 +10,7 @@ import 'package:medteam/view_model/sign_up_view_models/moile_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/post_hear_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/profile_image_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/refral_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/resume_view_model.dart';
 import 'package:medteam/view_model/spec_and_subspec_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:medteam/Screen/Splash.dart';
@@ -27,24 +30,11 @@ class MyApp extends StatefulWidget {
     super.key,
   });
 
-  // static void restartApp(BuildContext context) {
-  //   context.findAncestorStateOfType<_MyAppState>()!.restartApp();
-  // }
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  // Key key = UniqueKey();
-  // RouteObserver<ModalRoute<void>> routeObserver =
-  //     RouteObserver<ModalRoute<void>>();
-  // void restartApp() {
-  //   setState(() {
-  //     key = UniqueKey();
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -59,16 +49,12 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => IndustryDataViewModel()),
         ChangeNotifierProvider(create: (_) => SpecAndSubSpecViewModel()),
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider(create: (_) => UploadFilesViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: UploadLicense(),
       ),
     );
   }
 }
-
-
-
-// nilesh
-

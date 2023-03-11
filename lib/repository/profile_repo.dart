@@ -8,7 +8,7 @@ class ProfileRepository {
   Future<dynamic> uploadProfilePic(dynamic data) async {
     try {
       dynamic response =
-      await _apiServices.getPostApiResponse(AppUrl.uploadProfile, data);
+          await _apiServices.getPostApiResponse(AppUrl.uploadProfile, data);
       return response;
     } catch (e) {
       rethrow;
