@@ -29,6 +29,12 @@ class AppUrl {
 
   //upload resume
   static var uploadResumeEndPoint = "$baseUrl/api/profile_info_step_4";
-  //upload resume
+  //upload license
   static var uploadLicence = "$baseUrl/api/profile_info_step_5";
+
+  //upload bank details
+  static var bankdetailEndPoint = "$baseUrl/api/profile_info_step_6";
+
+  //upload documents
+  static var documetnsUplaoadEndpoint = "$baseUrl/api/profile_info_step_7";
 }

@@ -10,7 +10,7 @@ import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
 import 'package:medteam/Screen/PaymentMethod.dart';
 import 'package:medteam/Utils/colors.dart';
-import 'package:medteam/view_model/sign_up_view_models/resume_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
 import 'package:provider/provider.dart';
 
 class UploadLicense extends StatefulWidget {
@@ -34,6 +34,7 @@ class _UploadLicenseState extends State<UploadLicense> {
     license_no_focusnode = FocusNode();
   }
 
+//---------------upload-------------
   File? file;
 
   void pickFile() async {
@@ -48,6 +49,8 @@ class _UploadLicenseState extends State<UploadLicense> {
       // User canceled the picker
     }
   }
+
+  //---------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -1046,14 +1049,14 @@ class _UploadLicenseState extends State<UploadLicense> {
                               label: 'NEXT',
                               onPressed: () {
                                 context
-                                    .read<UploadFilesViewModel>()
+                                    .read<profileViewModel>()
                                     .updateLicence(file!, context);
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => PaymentMethod(),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentMethod(),
+                                  ),
+                                );
                               },
                               border: 35.h,
                               height: 50.h,

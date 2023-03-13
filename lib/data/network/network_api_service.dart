@@ -42,7 +42,8 @@ class NetworkApiService extends BaseApiServices {
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*",
           'Accept': '*/*',
-          "content-type": "application/json"
+          "content-type": "application/json",
+          "Authorization": "Bearer 15|RwugLsdQVMpFhdTa8H7LuRtFAS9CSSc9VYraopxy"
 
           //------------//
         },
@@ -100,8 +101,6 @@ class NetworkApiService extends BaseApiServices {
         Uri.parse(url),
         body: data,
         headers: {
-          //TODO: api key to be stored in server (for security)
-          // "APIKey": "5567GGH67225HYVGG",
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*",
           'Accept': '*/*',

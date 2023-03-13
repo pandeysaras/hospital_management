@@ -11,7 +11,7 @@ import 'package:medteam/Screen/AddLicense.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
 import 'package:medteam/Screen/UploadLicense.dart';
 import 'package:medteam/Utils/colors.dart';
-import 'package:medteam/view_model/sign_up_view_models/resume_view_model.dart';
+import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
 import 'package:provider/provider.dart';
 
 class YourResume extends StatefulWidget {
@@ -818,7 +818,7 @@ class _YourResumeState extends State<YourResume> {
                                     label: 'NEXT',
                                     onPressed: () async {
                                       await context
-                                          .read<UploadFilesViewModel>()
+                                          .read<profileViewModel>()
                                           .updateUserResume(file!, context);
                                       Navigator.push(
                                         context,

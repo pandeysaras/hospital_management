@@ -5,7 +5,10 @@ import 'package:medteam/Components/CommonButtonWhite.dart';
 import 'package:medteam/Components/CommonButtonWithPadding.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/ProfileCreated.dart';
+import 'package:medteam/Screen/UploadedDocuments.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
+import 'package:provider/provider.dart';
 
 class PaymentMethod extends StatefulWidget {
   @override
@@ -56,14 +59,15 @@ class _PaymentMethodState extends State<PaymentMethod> {
       drawer: Drawer(
         child: Container(
           decoration: new BoxDecoration(
-            gradient: LinearGradient(colors: [Color(0xFF0075B2),Color(0xFF3BA9E2)]),
+            gradient:
+                LinearGradient(colors: [Color(0xFF0075B2), Color(0xFF3BA9E2)]),
           ),
           child: Column(
             children: [
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
-                  margin: EdgeInsets.only(top:35,left: 5,right: 5),
+                  margin: EdgeInsets.only(top: 35, left: 5, right: 5),
                   height: 30,
                   width: 30,
                   child: Image.asset(
@@ -74,7 +78,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
               ),
               ClipRect(
                 child: Container(
-                  margin: EdgeInsets.only(top:5,left: 5,right: 5),
+                  margin: EdgeInsets.only(top: 5, left: 5, right: 5),
                   height: 100,
                   width: 100,
                   child: Image.asset(
@@ -83,7 +87,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   ),
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Expanded(
                 child: Container(
                   color: white,
@@ -93,7 +99,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     padding: EdgeInsets.zero,
                     children: <Widget>[
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -104,9 +110,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -126,7 +134,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -134,9 +141,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -147,9 +156,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -169,7 +180,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -177,10 +187,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -191,9 +202,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -213,7 +226,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -221,9 +233,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -234,9 +248,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -256,7 +272,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -264,10 +279,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -278,9 +294,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -300,7 +318,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -308,10 +325,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -322,9 +340,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -344,7 +364,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -352,10 +371,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -366,9 +386,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -388,7 +410,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -396,10 +417,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -410,9 +432,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -432,16 +456,16 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
@@ -587,180 +611,228 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                           topRight: Radius.circular(30)),
                                     ),
                                     builder: (BuildContext context) {
-                                      return
-                                        SingleChildScrollView(
-                                          child: Container(
-                                            child: SizedBox(
-                                              child: Column(
-
-                                                children: [
-                                                  InkWell(
-                                                    onTap:(){
+                                      return SingleChildScrollView(
+                                        child: Container(
+                                          child: SizedBox(
+                                            child: Column(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
                                                     Navigator.of(context).pop();
-                                                       },
-                                                    child: Container(
-                                                      margin:EdgeInsets.only(left: 40, right: 5),
-                                                      child: Align(
-                                                        alignment:Alignment.topRight,
-                                                        child: Image.asset(
-                                                          'assets/cancel.png',
-                                                          height: 60,
-                                                          width: 60,
-                                                        ),
+                                                  },
+                                                  child: Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 40, right: 5),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: Image.asset(
+                                                        'assets/cancel.png',
+                                                        height: 60,
+                                                        width: 60,
                                                       ),
                                                     ),
                                                   ),
-                                                  Text(
-                                                    'Bank Details',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                        color: black,
-                                                        fontSize: 15.sp,
-                                                        fontFamily: 'nunit_extrabold'),
-                                                  ),
-                                                  Container(
-                                                    margin:
-                                                    EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                                                    child: CommonTextField(
-                                                        thecontroller: mobile_controller,
-                                                        label: "Account Holder Name",
-                                                        type: TextInputType.emailAddress,
-                                                        action: TextInputAction.next,
-                                                        lines: 1,
-                                                        secure: false,
-                                                        focusChange: () {
-                                                          mobile_focusnode.unfocus();
-                                                        },
-                                                        fontSize: 18.sp,
-                                                        focusNode: mobile_focusnode,
-                                                        text_color: black,
-                                                        hint_color:gray
-                                                    ),
-
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      SizedBox(width: 50.w,),
-                                                      Radio(
-                                                          groupValue: gender,
-                                                          value:"Checking",
-                                                          fillColor: MaterialStateColor.resolveWith((states) => gray),
-                                                          activeColor: Colors.black,
-                                                          onChanged:(value){
-                                                            print(value);
-                                                            setState(() {
-                                                              setState(() {
-                                                                gender = value.toString();
-                                                              });
-                                                            });
-                                                          }),
-                                                      Text(
-                                                        'Checking',
-                                                        style: TextStyle(
-                                                            color: black,
-                                                            fontSize: 15.sp,
-                                                            fontFamily: 'nunit_extrabold'),
-                                                      ),
-                                                      SizedBox(width: 15,),
-                                                      Radio(
-                                                          groupValue: gender,
-                                                          value:"Saving",
-                                                          fillColor: MaterialStateColor.resolveWith((states) => gray),
-                                                          activeColor: Colors.black,
-                                                          onChanged:(value){
-                                                            print(value);
-                                                            setState(() {
-                                                              gender = value.toString();
-
-                                                            });
-                                                          }),
-                                                      Text(
-                                                        'Saving',
-                                                        style: TextStyle(
-                                                            color: black,
-                                                            fontSize: 15.sp,
-                                                            fontFamily: 'nunit_extrabold'),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Container(
-                                                    margin:
-                                                    EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                                                    child: CommonTextField(
-                                                        thecontroller: mobile_controller,
-                                                        label: "Account Number",
-                                                        type: TextInputType.emailAddress,
-                                                        action: TextInputAction.next,
-                                                        lines: 1,
-                                                        secure: false,
-                                                        focusChange: () {
-                                                          mobile_focusnode.unfocus();
-                                                        },
-                                                        fontSize: 18.sp,
-                                                        focusNode: mobile_focusnode,
-                                                        text_color: black,
-                                                        hint_color:gray
-                                                    ),
-
-                                                  ),
-                                                  Container(
-                                                    margin:
-                                                    EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                                                    child: CommonTextField(
-                                                        thecontroller: mobile_controller,
-                                                        label: "Confirm Account Number",
-                                                        type: TextInputType.emailAddress,
-                                                        action: TextInputAction.next,
-                                                        lines: 1,
-                                                        secure: false,
-                                                        focusChange: () {
-                                                          mobile_focusnode.unfocus();
-                                                        },
-                                                        fontSize: 18.sp,
-                                                        focusNode: mobile_focusnode,
-                                                        text_color: black,
-                                                        hint_color:gray
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    margin:
-                                                    EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                                                    child: CommonTextField(
-                                                        thecontroller: mobile_controller,
-                                                        label: "Routing Account Number",
-                                                        type: TextInputType.number,
-                                                        action: TextInputAction.done,
-                                                        lines: 1,
-                                                        secure: false,
-                                                        focusChange: () {
-                                                          mobile_focusnode.unfocus();
-                                                        },
-                                                        fontSize: 18.sp,
-                                                        focusNode: mobile_focusnode,
-                                                        text_color: black,
-                                                        hint_color:gray
-                                                    ),
-
-                                                  ),
-                                                  SizedBox(height: 50,),
-                                                  CommonButton(
-                                                      label: 'COMPLETE',
-                                                      onPressed: () async {
-                                                        Navigator.of(context).pop();
+                                                ),
+                                                Text(
+                                                  'Bank Details',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      color: black,
+                                                      fontSize: 15.sp,
+                                                      fontFamily:
+                                                          'nunit_extrabold'),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 20.h,
+                                                      left: 30.h,
+                                                      right: 30.h),
+                                                  child: CommonTextField(
+                                                      thecontroller:
+                                                          mobile_controller,
+                                                      label:
+                                                          "Account Holder Name",
+                                                      type: TextInputType
+                                                          .emailAddress,
+                                                      action:
+                                                          TextInputAction.next,
+                                                      lines: 1,
+                                                      secure: false,
+                                                      focusChange: () {
+                                                        mobile_focusnode
+                                                            .unfocus();
                                                       },
-                                                      border: 35.h,
-                                                      height: 50.h,
-                                                      fontSize: 18,
-                                                      textColor: white,
-                                                      backgroundColor: black),
-                                                  SizedBox(height: 30,),
-                                                ],
-                                              ),
+                                                      fontSize: 18.sp,
+                                                      focusNode:
+                                                          mobile_focusnode,
+                                                      text_color: black,
+                                                      hint_color: gray),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 50.w,
+                                                    ),
+                                                    Radio(
+                                                        groupValue: gender,
+                                                        value: "Checking",
+                                                        fillColor:
+                                                            MaterialStateColor
+                                                                .resolveWith(
+                                                                    (states) =>
+                                                                        gray),
+                                                        activeColor:
+                                                            Colors.black,
+                                                        onChanged: (value) {
+                                                          print(value);
+                                                          setState(() {
+                                                            setState(() {
+                                                              gender = value
+                                                                  .toString();
+                                                            });
+                                                          });
+                                                        }),
+                                                    Text(
+                                                      'Checking',
+                                                      style: TextStyle(
+                                                          color: black,
+                                                          fontSize: 15.sp,
+                                                          fontFamily:
+                                                              'nunit_extrabold'),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 15,
+                                                    ),
+                                                    Radio(
+                                                        groupValue: gender,
+                                                        value: "Saving",
+                                                        fillColor:
+                                                            MaterialStateColor
+                                                                .resolveWith(
+                                                                    (states) =>
+                                                                        gray),
+                                                        activeColor:
+                                                            Colors.black,
+                                                        onChanged: (value) {
+                                                          print(value);
+                                                          setState(() {
+                                                            gender = value
+                                                                .toString();
+                                                          });
+                                                        }),
+                                                    Text(
+                                                      'Saving',
+                                                      style: TextStyle(
+                                                          color: black,
+                                                          fontSize: 15.sp,
+                                                          fontFamily:
+                                                              'nunit_extrabold'),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 20.h,
+                                                      left: 30.h,
+                                                      right: 30.h),
+                                                  child: CommonTextField(
+                                                      thecontroller:
+                                                          mobile_controller,
+                                                      label: "Account Number",
+                                                      type: TextInputType
+                                                          .emailAddress,
+                                                      action:
+                                                          TextInputAction.next,
+                                                      lines: 1,
+                                                      secure: false,
+                                                      focusChange: () {
+                                                        mobile_focusnode
+                                                            .unfocus();
+                                                      },
+                                                      fontSize: 18.sp,
+                                                      focusNode:
+                                                          mobile_focusnode,
+                                                      text_color: black,
+                                                      hint_color: gray),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 20.h,
+                                                      left: 30.h,
+                                                      right: 30.h),
+                                                  child: CommonTextField(
+                                                      thecontroller:
+                                                          mobile_controller,
+                                                      label:
+                                                          "Confirm Account Number",
+                                                      type: TextInputType
+                                                          .emailAddress,
+                                                      action:
+                                                          TextInputAction.next,
+                                                      lines: 1,
+                                                      secure: false,
+                                                      focusChange: () {
+                                                        mobile_focusnode
+                                                            .unfocus();
+                                                      },
+                                                      fontSize: 18.sp,
+                                                      focusNode:
+                                                          mobile_focusnode,
+                                                      text_color: black,
+                                                      hint_color: gray),
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: 20.h,
+                                                      left: 30.h,
+                                                      right: 30.h),
+                                                  child: CommonTextField(
+                                                      thecontroller:
+                                                          mobile_controller,
+                                                      label:
+                                                          "Routing Account Number",
+                                                      type:
+                                                          TextInputType.number,
+                                                      action:
+                                                          TextInputAction.done,
+                                                      lines: 1,
+                                                      secure: false,
+                                                      focusChange: () {
+                                                        mobile_focusnode
+                                                            .unfocus();
+                                                      },
+                                                      fontSize: 18.sp,
+                                                      focusNode:
+                                                          mobile_focusnode,
+                                                      text_color: black,
+                                                      hint_color: gray),
+                                                ),
+                                                SizedBox(
+                                                  height: 50,
+                                                ),
+                                                CommonButton(
+                                                    label: 'COMPLETE',
+                                                    onPressed: () async {
+                                                      context
+                                                          .read<
+                                                              profileViewModel>()
+                                                          .bankDetailsUploadlWIthData(
+                                                              context);
+                                                    },
+                                                    border: 35.h,
+                                                    height: 50.h,
+                                                    fontSize: 18,
+                                                    textColor: white,
+                                                    backgroundColor: black),
+                                                SizedBox(
+                                                  height: 30,
+                                                ),
+                                              ],
                                             ),
-
-
                                           ),
-                                        );
+                                        ),
+                                      );
                                     },
                                   );
                                 },
@@ -873,10 +945,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                 label: 'NEXT',
                                 onPressed: () async {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ProfileCreated()));
-
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => UploadedDocuments(),
+                                    ),
+                                  );
                                 },
                                 border: 35.h,
                                 height: 50.h,

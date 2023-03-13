@@ -5,13 +5,16 @@ import '../resources/app_url.dart';
 class ProfileRepository {
   final BaseApiServices _apiServices = NetworkApiService();
 
-  Future<dynamic> uploadProfilePic(dynamic data) async {
+  Future<dynamic> bankDetails(dynamic data) async {
     try {
       dynamic response =
-          await _apiServices.getPostApiResponse(AppUrl.uploadProfile, data);
+          await _apiServices.getPostApiResponse(AppUrl.bankdetailEndPoint, data);
       return response;
     } catch (e) {
       rethrow;
     }
   }
+
+
+  
 }
