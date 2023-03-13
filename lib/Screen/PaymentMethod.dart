@@ -22,6 +22,14 @@ class _PaymentMethodState extends State<PaymentMethod> {
   late FocusNode mobile_focusnode;
   String gender = "male";
 
+  TextEditingController nameCtrl = TextEditingController();
+
+  TextEditingController acnoCtrl = TextEditingController();
+
+  TextEditingController cAcnoCtrl = TextEditingController();
+
+  TextEditingController routeAcNoCtrl = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -649,8 +657,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                       left: 30.h,
                                                       right: 30.h),
                                                   child: CommonTextField(
-                                                      thecontroller:
-                                                          mobile_controller,
+                                                      thecontroller: nameCtrl,
                                                       label:
                                                           "Account Holder Name",
                                                       type: TextInputType
@@ -737,11 +744,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                       left: 30.h,
                                                       right: 30.h),
                                                   child: CommonTextField(
-                                                      thecontroller:
-                                                          mobile_controller,
+                                                      thecontroller: acnoCtrl,
                                                       label: "Account Number",
-                                                      type: TextInputType
-                                                          .emailAddress,
+                                                      type:
+                                                          TextInputType.number,
                                                       action:
                                                           TextInputAction.next,
                                                       lines: 1,
@@ -762,12 +768,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                       left: 30.h,
                                                       right: 30.h),
                                                   child: CommonTextField(
-                                                      thecontroller:
-                                                          mobile_controller,
+                                                      thecontroller: cAcnoCtrl,
                                                       label:
                                                           "Confirm Account Number",
-                                                      type: TextInputType
-                                                          .emailAddress,
+                                                      type:
+                                                          TextInputType.number,
                                                       action:
                                                           TextInputAction.next,
                                                       lines: 1,
@@ -789,7 +794,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                       right: 30.h),
                                                   child: CommonTextField(
                                                       thecontroller:
-                                                          mobile_controller,
+                                                          routeAcNoCtrl,
                                                       label:
                                                           "Routing Account Number",
                                                       type:
@@ -814,11 +819,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                 CommonButton(
                                                     label: 'COMPLETE',
                                                     onPressed: () async {
-                                                      context
-                                                          .read<
-                                                              profileViewModel>()
-                                                          .bankDetailsUploadlWIthData(
-                                                              context);
+                                                      Navigator.pop(
+                                                        context,
+                                                      );
                                                     },
                                                     border: 35.h,
                                                     height: 50.h,
@@ -941,21 +944,49 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             SizedBox(
                               width: 20.w,
                             ),
-                            CommonButton(
-                                label: 'NEXT',
-                                onPressed: () async {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => UploadedDocuments(),
+                            context.watch<profileViewModel>().isLoading
+                                ? Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: LinearProgressIndicator(),
                                     ),
-                                  );
-                                },
-                                border: 35.h,
-                                height: 50.h,
-                                fontSize: 18,
-                                textColor: white,
-                                backgroundColor: black),
+                                  )
+                                : CommonButton(
+                                    label: 'NEXT',
+                                    onPressed: () async {
+                                      if (nameCtrl.value.text.isNotEmpty &&
+                                          acnoCtrl.value.text.isNotEmpty &&
+                                          cAcnoCtrl.value.text.isNotEmpty &&
+                                          routeAcNoCtrl.value.text.isNotEmpty) {
+                                        // print(
+                                        //   nameCtrl.value.text +
+                                        //       acnoCtrl.value.text +
+                                        //       cAcnoCtrl.value.text +
+                                        //       routeAcNoCtrl.value.text,
+                                        // );
+                                        context
+                                            .read<profileViewModel>()
+                                            .bankDetailsUploadlWIthData(
+                                              context,
+                                              nameCtrl.value.text,
+                                              acnoCtrl.value.text,
+                                              cAcnoCtrl.value.text,
+                                              routeAcNoCtrl.value.text,
+                                            );
+                                      }
+
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => UploadedDocuments(),
+                                      //   ),
+                                      // );
+                                    },
+                                    border: 35.h,
+                                    height: 50.h,
+                                    fontSize: 18,
+                                    textColor: white,
+                                    backgroundColor: black),
                           ],
                         ),
                       ),

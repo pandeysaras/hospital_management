@@ -19,10 +19,13 @@ class profileViewModel with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   void setLoading() {
+    notifyListeners();
     if (_isLoading == true) {
       _isLoading = false;
+      notifyListeners();
     } else {
       _isLoading = true;
+      notifyListeners();
     }
     if (kDebugMode) {
       print(_isChecked);
@@ -31,8 +34,9 @@ class profileViewModel with ChangeNotifier {
   }
 
   Future<void> updateUserResume(File file, BuildContext context) async {
+    setLoading();
     try {
-      setLoading();
+      // setLoading();
       var request = http.MultipartRequest(
         'POST',
         Uri.parse(AppUrl.uploadResumeEndPoint),
@@ -59,6 +63,7 @@ class profileViewModel with ChangeNotifier {
         setLoading();
         Utils.showSnackBar(context, "uploaded Successfully", Colors.blue);
       } else {
+        setLoading();
         print(response.reasonPhrase);
         throw Exception("Failed to create");
       }
@@ -70,8 +75,8 @@ class profileViewModel with ChangeNotifier {
   //-------------------
 
   Future<void> updateLicence(File file, BuildContext context) async {
+    setLoading();
     try {
-      setLoading();
       var request = http.MultipartRequest(
         'POST',
         Uri.parse(AppUrl.uploadLicence),
@@ -106,7 +111,7 @@ class profileViewModel with ChangeNotifier {
         setLoading();
         Utils.showSnackBar(context, "uploaded Successfully", Colors.blue);
       } else {
-        print(response.reasonPhrase);
+        setLoading();
         throw Exception("Failed to create");
       }
     } catch (error) {
@@ -115,28 +120,34 @@ class profileViewModel with ChangeNotifier {
   }
 
   //bank details api
-  void bankDetailsUploadlWIthData(BuildContext context) {
-    _isLoading = true;
-    notifyListeners();
+  void bankDetailsUploadlWIthData(
+    BuildContext context,
+    String name,
+    String acno,
+    String cacno,
+    String racno,
+  ) {
     Map data = {
       "user_id": "224",
-      "account_holder_name": "Karl",
+      "account_holder_name": "$name",
       "account_status": "1",
-      "account_number": "1122333222",
-      "confirm_account_number": "1122333222",
-      "routing_account_number": "112233322222"
+      "account_number": "$acno",
+      "confirm_account_number": "$cacno",
+      "routing_account_number": "$racno",
     };
+
     bankDetailsUpload(data, context);
   }
 
   // List<Data> selectBoxesHearList = [];
 
   Future<void> bankDetailsUpload(data, BuildContext context) async {
+    setLoading();
     //-------register api call-----------//
 
     await _myRepo.bankDetails(data).then((value) async {
       gloabalbankDetailsModel = BankDetailsModel.fromJson(value);
-      Navigator.of(context).pop();
+      Navigator.of(context).pop();  
       // print(value);
 
       // if (hearAboutUsModel.status == true) {
@@ -153,7 +164,9 @@ class profileViewModel with ChangeNotifier {
       if (kDebugMode) {
         print(value.toString());
       }
+      setLoading();
     }).onError((error, stackTrace) async {
+      setLoading();
       _isLoading = false;
       notifyListeners();
       throw {
@@ -168,8 +181,8 @@ class profileViewModel with ChangeNotifier {
 //------------doc upload
 
   Future<void> documentUpload(File file, BuildContext context) async {
+    setLoading();
     try {
-      setLoading();
       var request = http.MultipartRequest(
         'POST',
         Uri.parse(AppUrl.documetnsUplaoadEndpoint),
@@ -200,10 +213,12 @@ class profileViewModel with ChangeNotifier {
         setLoading();
         Utils.showSnackBar(context, "uploaded Successfully", Colors.blue);
       } else {
+        setLoading();
         print(response.reasonPhrase);
         throw Exception("Failed to create");
       }
     } catch (error) {
+      setLoading();
       throw Exception("Failed to create");
     }
   }

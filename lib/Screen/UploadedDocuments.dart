@@ -154,7 +154,7 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                             lines: 1,
                             secure: false,
                             focusChange: () {
-                              mobile_focusnode.unfocus();
+                              // mobile_focusnode.unfocus();
                             },
                             fontSize: 18.sp,
                             focusNode: mobile_focusnode,
@@ -339,7 +339,7 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
-                            //     builder: (context) => FindWorkBySort(),
+                            //     builder: (cont ext) => FindWorkBySort(),
                             //   ),
                             // );
                           },

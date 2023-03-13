@@ -27,16 +27,23 @@ class _YourResumeState extends State<YourResume> {
 
 //----------------------
   File? file;
+  String? fileName;
+  bool fileChoosed = false;
 
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
+
     if (result != null) {
       print("---------------------picked");
       file = File(
         result.files.single.path!,
       );
+      fileName = result.files.single.name.toString();
+      setState(() {
+        fileChoosed = true;
+      });
     } else {
-      print("No pi");
+      print("No file");
       // User canceled the picker
     }
   }
@@ -50,6 +57,7 @@ class _YourResumeState extends State<YourResume> {
     super.initState();
     mobile_controller = TextEditingController();
     mobile_focusnode = FocusNode();
+    // FlutterFileView.init();
   }
 
   @override
@@ -735,6 +743,12 @@ class _YourResumeState extends State<YourResume> {
                     SizedBox(
                       height: 25.h,
                     ),
+                    fileChoosed ? Divider() : SizedBox(),
+                    fileChoosed ? Text(fileName.toString()) : SizedBox(),
+                    fileChoosed ? Divider() : SizedBox(),
+                    SizedBox(
+                      height: 15.h,
+                    ),
                     Container(
                       height: 50.h,
                       decoration: new BoxDecoration(
@@ -770,16 +784,17 @@ class _YourResumeState extends State<YourResume> {
                                 'Upload your Resume',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: white,
-                                    fontSize: 18,
-                                    fontFamily: 'nunit_extrabold',
-                                    shadows: <Shadow>[
-                                      Shadow(
-                                        blurRadius: 10.0,
-                                        color: Colors.black,
-                                        offset: Offset(3.0, 3.0),
-                                      ),
-                                    ]),
+                                  color: white,
+                                  fontSize: 18,
+                                  fontFamily: 'nunit_extrabold',
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      blurRadius: 10.0,
+                                      color: Colors.black,
+                                      offset: Offset(3.0, 3.0),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -789,13 +804,21 @@ class _YourResumeState extends State<YourResume> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    Text(
-                      'View',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+                    InkWell(
+                      onTap: () {
+                        // FileView(
+                        //   controller: FileViewController.asset('$file'),
+                        // );
+                      },
+                      child: Text(
+                        'View',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
                           color: black,
                           fontSize: 20.sp,
-                          fontFamily: 'nunit_bold'),
+                          fontFamily: 'nunit_bold',
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: Column(
@@ -814,24 +837,35 @@ class _YourResumeState extends State<YourResume> {
                                     fontSize: 18,
                                     textColor: app_text_color,
                                     backgroundColor: black),
-                                CommonButton(
-                                    label: 'NEXT',
-                                    onPressed: () async {
-                                      await context
-                                          .read<profileViewModel>()
-                                          .updateUserResume(file!, context);
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => UploadLicense(),
+                                context.watch<profileViewModel>().isLoading
+                                    ? Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: LinearProgressIndicator(),
                                         ),
-                                      );
-                                    },
-                                    border: 35.h,
-                                    height: 50.h,
-                                    fontSize: 18,
-                                    textColor: white,
-                                    backgroundColor: black),
+                                      )
+                                    : CommonButton(
+                                        label: 'NEXT',
+                                        onPressed: () async {
+                                          if (fileChoosed == true) {
+                                            await context
+                                                .read<profileViewModel>()
+                                                .updateUserResume(
+                                                    file!, context);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    UploadLicense(),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        border: 35.h,
+                                        height: 50.h,
+                                        fontSize: 18,
+                                        textColor: white,
+                                        backgroundColor: black),
                               ],
                             ),
                           ),

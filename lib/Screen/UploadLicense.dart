@@ -1045,25 +1045,32 @@ class _UploadLicenseState extends State<UploadLicense> {
                             SizedBox(
                               width: 20.w,
                             ),
-                            CommonButton(
-                              label: 'NEXT',
-                              onPressed: () {
-                                context
-                                    .read<profileViewModel>()
-                                    .updateLicence(file!, context);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PaymentMethod(),
+                            context.watch<profileViewModel>().isLoading
+                                ? Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: LinearProgressIndicator(),
+                                    ),
+                                  )
+                                : CommonButton(
+                                    label: 'NEXT',
+                                    onPressed: () async {
+                                      await context
+                                          .read<profileViewModel>()
+                                          .updateLicence(file!, context);
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PaymentMethod(),
+                                        ),
+                                      );
+                                    },
+                                    border: 35.h,
+                                    height: 50.h,
+                                    fontSize: 18,
+                                    textColor: white,
+                                    backgroundColor: black,
                                   ),
-                                );
-                              },
-                              border: 35.h,
-                              height: 50.h,
-                              fontSize: 18,
-                              textColor: white,
-                              backgroundColor: black,
-                            ),
                           ],
                         ),
                       ),
