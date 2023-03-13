@@ -44,6 +44,7 @@ dependencies:
   mime: ^1.0.4
   file_picker: ^5.2.5
   # flutter_file_view: ^2.2.1
+  syncfusion_flutter_datepicker: ^20.4.53
 
 
 

@@ -837,7 +837,7 @@ class _YourResumeState extends State<YourResume> {
                                     fontSize: 18,
                                     textColor: app_text_color,
                                     backgroundColor: black),
-                                context.watch<profileViewModel>().isLoading
+                                context.watch<ProfileViewModel>().isLoading
                                     ? Expanded(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -849,7 +849,7 @@ class _YourResumeState extends State<YourResume> {
                                         onPressed: () async {
                                           if (fileChoosed == true) {
                                             await context
-                                                .read<profileViewModel>()
+                                                .read<ProfileViewModel>()
                                                 .updateUserResume(
                                                     file!, context);
                                             Navigator.push(

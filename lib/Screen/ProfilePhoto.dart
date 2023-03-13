@@ -41,7 +41,7 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
     });
   }
 
-  PrfileViewModel prfileViewModel = PrfileViewModel();
+  ProfilePicViewModel prfileViewModel = ProfilePicViewModel();
 
   void _toggleCheck1() {
     setState(() {

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:medteam/Components/CommonButton.dart';
 import 'package:medteam/Components/CommonButtonWithPadding.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
 import 'package:medteam/Screen/W9Form.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/model/state_data_model.dart';
+import 'package:medteam/view_model/complete_profile_view_models/complete_profile_1_view_model.dart';
+import 'package:medteam/view_model/state_list_view_model.dart';
+import 'package:provider/provider.dart';
+
+import '../Utils/utils.dart';
 
 class ProfileInfo extends StatefulWidget {
   @override
@@ -17,10 +24,45 @@ class _ProfileInfoState extends State<ProfileInfo> {
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
   late TextEditingController security_controller,address1_controller,address2_controller,city_controller,zip_controller;
   late FocusNode security_focusnode,address1_focusnode,address2_focusnode,city_focusnode,zip_focusnode;
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _monthController = TextEditingController();
+  TextEditingController _yearController = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
+  bool isDateSelected = false;
+  late int  _selectedIndex;
+  bool check = false;
+  String dropdownValue = "State";
+  List<String> list = [ ];
+  StateListViewModel stateListViewModel = StateListViewModel();
+  void _toggleCheck () {
+    setState(() {
+      check = !check;
+    });
+  }
+
+    Future<void> _selectDate(BuildContext context) async {
+      final DateTime? picked = await showDatePicker(
+          context: context,
+          initialDate: _selectedDate,
+          firstDate: DateTime(1900),
+          lastDate: DateTime(2101));
+      if (picked != null && picked != _selectedDate) {
+        setState(() {
+          _selectedDate = picked;
+          isDateSelected = true;
+        });
+      }
+    }
+
 
   @override
   void initState() {
     super.initState();
+    stateListViewModel.fetchStateList(context).then( (_){
+      setState(() {
+
+      });
+    });
     security_controller = TextEditingController();
     address1_controller = TextEditingController();
     address2_controller = TextEditingController();
@@ -35,6 +77,17 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
   @override
   Widget build(BuildContext context) {
+    // if(stateListViewModel.loading == "success") {
+    //   for (int i = 0; i < globalStateDataModel!.data!.length; i++) {
+    //     list[i] = globalStateDataModel!.data![i].state.toString();
+    //     print(globalStateDataModel!.data!.length);
+    //   }
+    // }
+    final completeProfile1VM = Provider.of<CompleteProfile1ViewModel>(context);
+    _dateController.text = isDateSelected ? _selectedDate.day.toString() : "DD";
+      _monthController.text = isDateSelected ? _selectedDate.month.toString() : "MM";
+      _yearController.text = isDateSelected ? _selectedDate.year.toString() : "YYYY";
+
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
     ScreenUtil.init(context, designSize: Size(screenWidth, screenHeight));
@@ -672,129 +725,14 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                         ),
 
-                      Row(
-                        children: [
-                          Container(
-                            width:85,
-                            margin:
-                            EdgeInsets.only(top: 20.h, left: 15.h,right: 0.h),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              border: Border.all(color: black, width: 1),
-                            ),
-                            child:Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                      maxLines: 1,
-                                      autofocus: false,
-                                      enabled: false,
-                                      cursorColor: black,
-                                      style: TextStyle(
-                                        fontSize: 18.sp,
-                                        color: black,
-                                        fontFamily: "nunit_regular",
-                                      ),
-                                      onEditingComplete: () {
-                                        // focusChange();
-                                      },
-                                      decoration: InputDecoration(
-                                        focusedBorder: border,
-                                        border: border,
-                                        enabledBorder: border,
-                                        disabledBorder: border,
-                                        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                                        hintText: "MM",
-                                        hintStyle: TextStyle(
-                                          fontSize: 18.sp,
-                                          color: gray,
-                                          fontFamily: "nunit_regular",
-                                        ),
-                                        suffixIconConstraints:BoxConstraints(
-                                            maxHeight: 20,
-                                            maxWidth: 30) ,
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-
-                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                          },
-                                          child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  right: 5),
-                                              child:  Image.asset(
-                                                'assets/down_arrow.png',
-                                              )
-                                          ),
-                                        ),
-                                      )),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width:85,
-                            margin:
-                            EdgeInsets.only(top: 20.h, left: 15.h,right: 0.h),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              border: Border.all(color: black, width: 1),
-                            ),
-                            child:Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                      maxLines: 1,
-                                      autofocus: false,
-                                      enabled: false,
-                                      cursorColor: black,
-                                      style: TextStyle(
-                                        fontSize: 18.sp,
-                                        color: black,
-                                        fontFamily: "nunit_regular",
-                                      ),
-                                      onEditingComplete: () {
-                                        // focusChange();
-                                      },
-                                      decoration: InputDecoration(
-                                        focusedBorder: border,
-                                        border: border,
-                                        enabledBorder: border,
-                                        disabledBorder: border,
-                                        contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                                        hintText: "DD",
-                                        hintStyle: TextStyle(
-                                          fontSize: 18.sp,
-                                          color: gray,
-                                          fontFamily: "nunit_regular",
-                                        ),
-                                        suffixIconConstraints:BoxConstraints(
-                                            maxHeight: 20,
-                                            maxWidth: 30) ,
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-
-                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                          },
-                                          child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  right: 5),
-                                              child:  Image.asset(
-                                                'assets/down_arrow.png',
-
-                                              )
-
-                                          ),
-                                        ),
-                                      )),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          Expanded(
-                            child: Container(
+                      GestureDetector(
+                        onTap: () {_selectDate(context);},
+                        child: Row(
+                          children: [
+                            Container(
+                              width:85,
                               margin:
-                              EdgeInsets.only(top: 20.h, left: 15.h,right: 15.h),
+                              EdgeInsets.only(top: 20.h, left: 15.h,right: 0.h),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
                                 border: Border.all(color: black, width: 1),
@@ -803,6 +741,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 children: [
                                   Expanded(
                                     child: TextField(
+                                      controller: _monthController,
                                         maxLines: 1,
                                         autofocus: false,
                                         enabled: false,
@@ -821,7 +760,66 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                           enabledBorder: border,
                                           disabledBorder: border,
                                           contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                                          hintText: "YYYY",
+                                          hintText: "MM",
+                                          hintStyle: TextStyle(
+                                            fontSize: 18.sp,
+                                            color: gray,
+                                            fontFamily: "nunit_regular",
+                                          ),
+                                          suffixIconConstraints:BoxConstraints(
+                                              maxHeight: 20,
+                                              maxWidth: 30) ,
+                                          suffixIcon: GestureDetector(
+                                            onTap: () {
+
+                                              //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                            },
+                                            child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    right: 5),
+                                                child:  Image.asset(
+                                                  'assets/down_arrow.png',
+                                                )
+                                            ),
+                                          ),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width:85,
+                              margin:
+                              EdgeInsets.only(top: 20.h, left: 15.h,right: 0.h),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                border: Border.all(color: black, width: 1),
+                              ),
+                              child:Row(
+                                children: [
+                                  Expanded(
+                                    child: TextField(
+                                      controller: _dateController,
+                                        keyboardType: TextInputType.number,
+                                        maxLines: 1,
+                                        autofocus: false,
+                                        enabled: false,
+                                        cursorColor: black,
+                                        style: TextStyle(
+                                          fontSize: 18.sp,
+                                          color: black,
+                                          fontFamily: "nunit_regular",
+                                        ),
+                                        onEditingComplete: () {
+                                          // focusChange();
+                                        },
+                                        decoration: InputDecoration(
+                                          focusedBorder: border,
+                                          border: border,
+                                          enabledBorder: border,
+                                          disabledBorder: border,
+                                          contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                                          hintText: "DD",
                                           hintStyle: TextStyle(
                                             fontSize: 18.sp,
                                             color: gray,
@@ -850,9 +848,71 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 ],
                               ),
                             ),
-                          ),
 
-                        ],
+                            Expanded(
+                              child: Container(
+                                margin:
+                                EdgeInsets.only(top: 20.h, left: 15.h,right: 15.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  border: Border.all(color: black, width: 1),
+                                ),
+                                child:Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextField(
+                                        controller: _yearController,
+                                          maxLines: 1,
+                                          autofocus: false,
+                                          enabled: false,
+                                          cursorColor: black,
+                                          style: TextStyle(
+                                            fontSize: 18.sp,
+                                            color: black,
+                                            fontFamily: "nunit_regular",
+                                          ),
+                                          onEditingComplete: () {
+                                            // focusChange();
+                                          },
+                                          decoration: InputDecoration(
+                                            focusedBorder: border,
+                                            border: border,
+                                            enabledBorder: border,
+                                            disabledBorder: border,
+                                            contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                                            hintText: "YYYY",
+                                            hintStyle: TextStyle(
+                                              fontSize: 18.sp,
+                                              color: gray,
+                                              fontFamily: "nunit_regular",
+                                            ),
+                                            suffixIconConstraints:BoxConstraints(
+                                                maxHeight: 20,
+                                                maxWidth: 30) ,
+                                            suffixIcon: GestureDetector(
+                                              onTap: () {
+
+                                                //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                              },
+                                              child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      right: 5),
+                                                  child:  Image.asset(
+                                                    'assets/down_arrow.png',
+
+                                                  )
+
+                                              ),
+                                            ),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
                       ),
                       Container(
                         margin:
@@ -927,7 +987,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 borderRadius: BorderRadius.circular(25),
                                 border: Border.all(color: black, width: 1),
                               ),
-                              child:Row(
+                              child:
+                              Row(
                                 children: [
                                   Expanded(
                                     child: TextField(
@@ -958,9 +1019,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                           suffixIconConstraints:BoxConstraints(
                                               maxHeight: 20,
                                               maxWidth: 30) ,
-                                          suffixIcon: GestureDetector(
+                                          suffixIcon:
+                                          GestureDetector(
                                             onTap: () {
-
                                               //loginController.pass_secure.value = !loginController.pass_secure.value;
                                             },
                                             child: Padding(
@@ -977,6 +1038,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                   ),
                                 ],
                               ),
+
                             ),
                           ),
 
@@ -1008,14 +1070,26 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                           Container(
-                                margin: EdgeInsets.only(top:3,left: 0.h,right: 20.h),
-                                child: Image.asset(
-                                  'assets/right.png',
-                                  width: 25.h,
-                                  height: 25.h,
-                                  fit: BoxFit.contain,
+                                margin: EdgeInsets.only(top:3,left: 0.h,right: 5.h),
+                                child:  InkWell(
+                                  onTap: _toggleCheck,
+                                  child: Center(
+                                    child: Container(
+                                        width: 25.h,
+                                        height: 25.h,
+                                        margin: EdgeInsets.only(
+                                            left: 0.h, right: 10.h),
+                                        decoration: BoxDecoration(
+                                            color: check ? Color(0xFF0075B2) : Colors.white,
+                                            borderRadius: BorderRadius.circular(5),
+                                            border: check ? null :Border.all(color: Colors.grey)
+                                        ),
+                                        child: Icon(Icons.check, size: 20, color: Colors.white,)
+                                    ),
+                                  ),
                                 ),
-                              ),
+
+                          ),
 
                             Expanded(
                               child: Container(
@@ -1037,13 +1111,38 @@ class _ProfileInfoState extends State<ProfileInfo> {
 
                       Container(
                         child: Center(
-                          child: CommonButtonWithPadding(
+                          child:
+                              completeProfile1VM.loading ?
+                         CircularProgressIndicator():
+                          CommonButtonWithPadding(
                               label: 'NEXT',
                               onPressed: () async {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => W9Form()));
+                                Map data = {
+                                  "user_id":"224",
+                                  "social_security_number":"123322",
+                                  "birth_date": _dateController.text,
+                                  "birth_month": _monthController.text,
+                                  "birth_year": _yearController.text,
+                                  "address_line1": address1_controller.text.toString(),
+                                  "address_line2": address2_controller.text.toString(),
+                                  "city": city_controller.text.toString(),
+                                  "state":"LA",
+                                  "zipcode": zip_controller.text,
+                                  "profile_chk": check
+                                };
+                                if(_dateController.value.text.isNotEmpty && _monthController.value.text.isNotEmpty  && _yearController.value.text.isNotEmpty && address1_controller.value.text.isNotEmpty  && address2_controller.value.text.isNotEmpty && city_controller.value.text.isNotEmpty && zip_controller.value.text.isNotEmpty) {
+                                  await completeProfile1VM.postCompleteProfile1Api(data, context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => W9Form()));
+                                } else if(!check) {
+                                  Utils.showSnackBar(
+                                      context, "Agree with terms & conditions!", Colors.red);
+                                } else {
+                                  Utils.showSnackBar(
+                                      context, "Some fields are empty!", Colors.red);
+                                }
                               },
                               border: 35.h,
                               height: 50.h,

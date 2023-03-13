@@ -944,7 +944,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             SizedBox(
                               width: 20.w,
                             ),
-                            context.watch<profileViewModel>().isLoading
+                            context.watch<ProfileViewModel>().isLoading
                                 ? Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -965,7 +965,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                         //       routeAcNoCtrl.value.text,
                                         // );
                                         context
-                                            .read<profileViewModel>()
+                                            .read<ProfileViewModel>()
                                             .bankDetailsUploadlWIthData(
                                               context,
                                               nameCtrl.value.text,

@@ -334,7 +334,7 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                           label: 'DONE',
                           onPressed: () async {
                             context
-                                .read<profileViewModel>()
+                                .read<ProfileViewModel>()
                                 .documentUpload(file!, context);
                             // Navigator.push(
                             //   context,

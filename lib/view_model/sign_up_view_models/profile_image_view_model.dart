@@ -9,7 +9,7 @@ import '../../Utils/utils.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class PrfileViewModel with ChangeNotifier {
+class ProfilePicViewModel with ChangeNotifier {
   final _myRepo = ProfileRepository();
   bool _isChecked = false;
   bool _isLoading = false;
@@ -120,7 +120,6 @@ class PrfileViewModel with ChangeNotifier {
   //   //   print('Error submitting form');
   //   // }
   // }
-
 
   //---------------------------------
 }

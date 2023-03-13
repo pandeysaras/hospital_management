@@ -1045,7 +1045,7 @@ class _UploadLicenseState extends State<UploadLicense> {
                             SizedBox(
                               width: 20.w,
                             ),
-                            context.watch<profileViewModel>().isLoading
+                            context.watch<ProfileViewModel>().isLoading
                                 ? Expanded(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -1056,7 +1056,7 @@ class _UploadLicenseState extends State<UploadLicense> {
                                     label: 'NEXT',
                                     onPressed: () async {
                                       await context
-                                          .read<profileViewModel>()
+                                          .read<ProfileViewModel>()
                                           .updateLicence(file!, context);
                                       Navigator.push(
                                         context,

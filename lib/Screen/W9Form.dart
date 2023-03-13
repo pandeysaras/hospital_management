@@ -7,6 +7,11 @@ import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
 import 'package:medteam/Screen/SignatureCapture.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:provider/provider.dart';
+
+import '../Utils/utils.dart';
+import '../view_model/complete_profile_view_models/complete_profile_1_view_model.dart';
+import '../view_model/complete_profile_view_models/complete_profile_2_view_model.dart';
 
 class W9Form extends StatefulWidget {
   @override
@@ -16,9 +21,15 @@ class W9Form extends StatefulWidget {
 class _W9FormState extends State<W9Form> {
   late double screenWidth, screenHeight;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
-
   late TextEditingController mobile_controller;
   late FocusNode mobile_focusnode;
+  bool check = false;
+  void _toggleCheck () {
+    setState(() {
+      check = !check;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +39,7 @@ class _W9FormState extends State<W9Form> {
 
   @override
   Widget build(BuildContext context) {
+    final completeProfile2VM = Provider.of<CompleteProfile2ViewModel>(context);
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
     ScreenUtil.init(context, designSize: Size(screenWidth, screenHeight));
@@ -640,14 +652,24 @@ class _W9FormState extends State<W9Form> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(top:3,left: 20.h,right: 20.h),
-                                  child: Image.asset(
-                                    'assets/right.png',
-                                    width: 25.h,
-                                    height: 25.h,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
+                                  margin: EdgeInsets.only(top:3,left: 20.h,right: 5.h),
+                                  child:InkWell(
+                                    onTap: _toggleCheck,
+                                    child: Center(
+                                      child: Container(
+                                          width: 25.h,
+                                          height: 25.h,
+                                          margin: EdgeInsets.only(
+                                              left: 0.h, right: 10.h),
+                                          decoration: BoxDecoration(
+                                              color: check ? Color(0xFF0075B2) : Colors.white,
+                                              borderRadius: BorderRadius.circular(5),
+                                              border: check ? null :Border.all(color: Colors.grey)
+                                          ),
+                                          child: Icon(Icons.check, size: 20, color: Colors.white,)
+                                      ),
+                                    ),
+                                  )),
 
                                 Expanded(
                                   child: Container(
@@ -695,13 +717,26 @@ class _W9FormState extends State<W9Form> {
                             ),
                           ),
                               Container(
-                                child: CommonButton(
+                                child: completeProfile2VM.loading ? CircularProgressIndicator() : CommonButton(
                                     label: 'AGREE & SIGN',
                                     onPressed: () async {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => SignatureCapture()));
+                                    Map data =   {
+                                        "user_id":224,
+                                      "w9_form_chk":1
+                                      };
+                                    if (check){
+                                        await completeProfile2VM
+                                            .postCompleteProfile2Api(
+                                                data, context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SignatureCapture()));
+                                      } else {
+                                      Utils.showSnackBar(
+                                          context, "Agree with terms & conditions!", Colors.red);
+                                    }
                                     },
                                     border: 35.h,
                                     height: 50.h,

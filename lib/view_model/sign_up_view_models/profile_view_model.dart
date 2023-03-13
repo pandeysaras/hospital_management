@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 
 import '../../model/bank_details_model.dart';
 
-class profileViewModel with ChangeNotifier {
+class ProfileViewModel with ChangeNotifier {
   final _myRepo = ProfileRepository();
   bool _isChecked = false;
   bool _isLoading = false;
