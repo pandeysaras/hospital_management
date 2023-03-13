@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:medteam/Screen/ProfileInfo.dart';
 import 'package:medteam/Screen/ProfilePhoto.dart';
+import 'package:medteam/view_model/complete_profile_view_models/complete_profile_1_view_model.dart';
+import 'package:medteam/view_model/complete_profile_view_models/complete_profile_2_view_model.dart';
+import 'package:medteam/view_model/complete_profile_view_models/complete_profile_3_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/enter_name_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/hear_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/industry_data_view_model.dart';
@@ -59,10 +63,13 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => IndustryDataViewModel()),
         ChangeNotifierProvider(create: (_) => SpecAndSubSpecViewModel()),
         ChangeNotifierProvider(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider(create: (_) => CompleteProfile1ViewModel()),
+        ChangeNotifierProvider(create: (_) => CompleteProfile2ViewModel()),
+        ChangeNotifierProvider(create: (_) => CompleteProfile3ViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: ProfileInfo(),
       ),
     );
   }

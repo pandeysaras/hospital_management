@@ -26,4 +26,8 @@ class AppUrl {
   static var specialityIdEndPoint = "$baseUrl/api/getSpecialityData?id=";
   static var subSpecialityIdEndPoint = "$baseUrl/api/getSubSpecialityData?id=";
   static var loginEndPoint = "$baseUrl/api/login";
+  static var completeProfileInfo1EndPoint = "https://clickandstaff.com/api/profile_info_step_1";
+  static var completeProfileInfo2EndPoint = "$baseUrl/api/profile_info_step_2";
+  static var completeProfileInfo3EndPoint = "$baseUrl/api/profile_info_step_3";
+  static var stateListEndPoint = "$baseUrl/api/get_state_list";
 }

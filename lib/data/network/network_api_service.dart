@@ -41,7 +41,7 @@ class NetworkApiService extends BaseApiServices {
         Uri.parse(url),
         body: json.encode(data),
         headers: {
-
+          "Authorization": "Bearer 15|RwugLsdQVMpFhdTa8H7LuRtFAS9CSSc9VYraopxy",
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*",
           'Accept': '*/*',
