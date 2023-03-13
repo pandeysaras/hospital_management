@@ -14,8 +14,6 @@ class NetworkApiService extends BaseApiServices {
     dynamic responseJson;
     try {
       final response = await http.get(Uri.parse(url), headers: {
-        //TODO: api key to be stored in server (for security)
-        // "APIKey": "5567GGH67225HYVGG",
         "Accept": "application/json",
         "Access-Control-Allow-Origin": "*",
         'Accept': '*/*'
@@ -41,7 +39,6 @@ class NetworkApiService extends BaseApiServices {
         Uri.parse(url),
         body: json.encode(data),
         headers: {
-
           "Accept": "application/json",
           "Access-Control-Allow-Origin": "*",
           'Accept': '*/*',

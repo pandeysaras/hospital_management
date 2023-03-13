@@ -1043,23 +1043,24 @@ class _UploadLicenseState extends State<UploadLicense> {
                               width: 20.w,
                             ),
                             CommonButton(
-                                label: 'NEXT',
-                                onPressed: () {
-                                  context
-                                      .read<UploadFilesViewModel>()
-                                      .updateLicence(file!, context);
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => PaymentMethod(),
-                                  //   ),
-                                  // );
-                                },
-                                border: 35.h,
-                                height: 50.h,
-                                fontSize: 18,
-                                textColor: white,
-                                backgroundColor: black),
+                              label: 'NEXT',
+                              onPressed: () {
+                                context
+                                    .read<UploadFilesViewModel>()
+                                    .updateLicence(file!, context);
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => PaymentMethod(),
+                                //   ),
+                                // );
+                              },
+                              border: 35.h,
+                              height: 50.h,
+                              fontSize: 18,
+                              textColor: white,
+                              backgroundColor: black,
+                            ),
                           ],
                         ),
                       ),

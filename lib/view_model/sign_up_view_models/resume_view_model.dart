@@ -72,12 +72,13 @@ class UploadFilesViewModel with ChangeNotifier {
       setLoading();
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse(AppUrl.uploadResumeEndPoint),
+        Uri.parse(AppUrl.uploadLicence),
       );
 
       // Add headers to the request
       request.headers['Authorization'] =
           'Bearer 15|RwugLsdQVMpFhdTa8H7LuRtFAS9CSSc9VYraopxy';
+
       request.headers['Content-Type'] = 'multipart/form-data';
       request.headers['Accept'] = 'application/json';
 
