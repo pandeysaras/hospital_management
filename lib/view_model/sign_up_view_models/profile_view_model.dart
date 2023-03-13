@@ -147,7 +147,7 @@ class profileViewModel with ChangeNotifier {
 
     await _myRepo.bankDetails(data).then((value) async {
       gloabalbankDetailsModel = BankDetailsModel.fromJson(value);
-      Navigator.of(context).pop();  
+
       // print(value);
 
       // if (hearAboutUsModel.status == true) {
