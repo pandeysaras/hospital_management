@@ -22,46 +22,51 @@ class ProfileInfo extends StatefulWidget {
 class _ProfileInfoState extends State<ProfileInfo> {
   late double screenWidth, screenHeight;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
-  late TextEditingController security_controller,address1_controller,address2_controller,city_controller,zip_controller;
-  late FocusNode security_focusnode,address1_focusnode,address2_focusnode,city_focusnode,zip_focusnode;
+  late TextEditingController security_controller,
+      address1_controller,
+      address2_controller,
+      city_controller,
+      zip_controller;
+  late FocusNode security_focusnode,
+      address1_focusnode,
+      address2_focusnode,
+      city_focusnode,
+      zip_focusnode;
   TextEditingController _dateController = TextEditingController();
   TextEditingController _monthController = TextEditingController();
   TextEditingController _yearController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   bool isDateSelected = false;
-  late int  _selectedIndex;
+  late int _selectedIndex;
   bool check = false;
   String dropdownValue = "State";
-  List<String> list = [ ];
+  List<String> list = [];
   StateListViewModel stateListViewModel = StateListViewModel();
-  void _toggleCheck () {
+  void _toggleCheck() {
     setState(() {
       check = !check;
     });
   }
 
-    Future<void> _selectDate(BuildContext context) async {
-      final DateTime? picked = await showDatePicker(
-          context: context,
-          initialDate: _selectedDate,
-          firstDate: DateTime(1900),
-          lastDate: DateTime(2101));
-      if (picked != null && picked != _selectedDate) {
-        setState(() {
-          _selectedDate = picked;
-          isDateSelected = true;
-        });
-      }
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        isDateSelected = true;
+      });
     }
-
+  }
 
   @override
   void initState() {
     super.initState();
-    stateListViewModel.fetchStateList(context).then( (_){
-      setState(() {
-
-      });
+    stateListViewModel.fetchStateList(context).then((_) {
+      setState(() {});
     });
     security_controller = TextEditingController();
     address1_controller = TextEditingController();
@@ -85,8 +90,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
     // }
     final completeProfile1VM = Provider.of<CompleteProfile1ViewModel>(context);
     _dateController.text = isDateSelected ? _selectedDate.day.toString() : "DD";
-      _monthController.text = isDateSelected ? _selectedDate.month.toString() : "MM";
-      _yearController.text = isDateSelected ? _selectedDate.year.toString() : "YYYY";
+    _monthController.text =
+        isDateSelected ? _selectedDate.month.toString() : "MM";
+    _yearController.text =
+        isDateSelected ? _selectedDate.year.toString() : "YYYY";
 
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
@@ -116,18 +123,19 @@ class _ProfileInfoState extends State<ProfileInfo> {
       drawer: Drawer(
         child: Container(
           decoration: new BoxDecoration(
-            gradient: LinearGradient(colors: [Color(0xFF0075B2),Color(0xFF3BA9E2)]),
+            gradient:
+                LinearGradient(colors: [Color(0xFF0075B2), Color(0xFF3BA9E2)]),
           ),
           child: Column(
             children: [
               InkWell(
-                onTap: (){
+                onTap: () {
                   _key.currentState?.closeDrawer();
                 },
                 child: Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    margin: EdgeInsets.only(top:35,left: 5,right: 5),
+                    margin: EdgeInsets.only(top: 35, left: 5, right: 5),
                     height: 30,
                     width: 30,
                     child: Image.asset(
@@ -139,7 +147,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
               ),
               ClipRect(
                 child: Container(
-                  margin: EdgeInsets.only(top:5,left: 5,right: 5),
+                  margin: EdgeInsets.only(top: 5, left: 5, right: 5),
                   height: 100,
                   width: 100,
                   child: Image.asset(
@@ -148,7 +156,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   ),
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Expanded(
                 child: Container(
                   color: white,
@@ -158,14 +168,17 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     padding: EdgeInsets.zero,
                     children: <Widget>[
                       InkWell(
-                        onTap:(){
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 0,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 0,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -176,9 +189,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -198,7 +213,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -207,16 +221,21 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 1,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 1,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -227,9 +246,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -249,7 +270,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -258,17 +278,21 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 2,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 2,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -279,9 +303,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -301,7 +327,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -310,16 +335,21 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 3,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 3,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -330,9 +360,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -352,7 +384,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -361,10 +392,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ),
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -375,9 +407,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -397,7 +431,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -405,10 +438,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -419,9 +453,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -441,7 +477,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -449,10 +484,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -463,9 +499,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -485,7 +523,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -493,10 +530,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -507,9 +545,11 @@ class _ProfileInfoState extends State<ProfileInfo> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -529,16 +569,16 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
@@ -554,444 +594,298 @@ class _ProfileInfoState extends State<ProfileInfo> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 15),
-                      Row(
-                        children: [
-                           Container(
-                             height:18.h,
-                              decoration: BoxDecoration(
-                                color: gradient_color_light,
-                                  borderRadius: BorderRadius.circular(5),
-                                border: Border.all(color: gradient_color_light, width: 1),
-                              ),
-                              margin: EdgeInsets.only(
-                                  left: 20.h, top: 0.h,right: 10.h),
-                              padding: EdgeInsets.only(left: 3,right: 3),
-                              child:  Center(
-                                child: Text(
-                                  '1',
-                                  style: TextStyle(
-                                    color: white,
-                                    fontSize: 12.sp,
-                                    fontFamily:
-                                    'nunit_bold',
-                                  ),
-                                ),
-                              ),
-
-                            ),
-                          Text(
-                            'Personal Details',
-                            style: TextStyle(
-                              color: black,
-                              fontSize: 16.sp,
-                              fontFamily:
-                              'nunit_bold',
-                            ),
+                    child: Column(
+                  children: [
+                    SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Container(
+                          height: 18.h,
+                          decoration: BoxDecoration(
+                            color: gradient_color_light,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: gradient_color_light, width: 1),
                           ),
-                          Container(
-                            height:18.h,
-                            decoration: BoxDecoration(
-                              color: white,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: gradient_color_light, width: 1),
-                            ),
-                            margin: EdgeInsets.only(
-                                left: 10.h, top: 0.h,right: 10.h),
-                            padding: EdgeInsets.only(left: 3,right: 3),
-                            child:  Center(
-                              child: Text(
-                                '2',
-                                style: TextStyle(
-                                  color: gradient_color_light,
-                                  fontSize: 12.sp,
-                                  fontFamily:
-                                  'nunit_bold',
-                                ),
-                              ),
-                            ),
-
-                          ),
-                          Container(
-                            height:18.h,
-                            decoration: BoxDecoration(
-                              color: white,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: gradient_color_light, width: 1),
-                            ),
-                            margin: EdgeInsets.only(
-                                left: 10.h, top: 0.h,right: 10.h),
-                            padding: EdgeInsets.only(left: 3,right: 3),
-                            child:  Center(
-                              child: Text(
-                                '3',
-                                style: TextStyle(
-                                  color: gradient_color_light,
-                                  fontSize: 12.sp,
-                                  fontFamily:
-                                  'nunit_bold',
-                                ),
-                              ),
-                            ),
-
-                          ),
-                          Container(
-                            height:18.h,
-                            decoration: BoxDecoration(
-                              color: white,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: gradient_color_light, width: 1),
-                            ),
-                            margin: EdgeInsets.only(
-                                left: 10.h, top: 0.h,right: 10.h),
-                            padding: EdgeInsets.only(left: 3,right: 3),
-                            child:  Center(
-                              child: Text(
-                                '4',
-                                style: TextStyle(
-                                  color: gradient_color_light,
-                                  fontSize: 12.sp,
-                                  fontFamily:
-                                  'nunit_bold',
-                                ),
-                              ),
-                            ),
-
-                          ),
-                          Container(
-                            height:18.h,
-                            decoration: BoxDecoration(
-                              color: white,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: gradient_color_light, width: 1),
-                            ),
-                            margin: EdgeInsets.only(
-                                left: 10.h, top: 0.h,right: 10.h),
-                            padding: EdgeInsets.only(left: 3,right: 3),
-                            child:  Center(
-                              child: Text(
-                                '5',
-                                style: TextStyle(
-                                  color: gradient_color_light,
-                                  fontSize: 12.sp,
-                                  fontFamily:
-                                  'nunit_bold',
-                                ),
-                              ),
-                            ),
-
-                          ),
-
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      Divider(
-                        color: black,
-                      ),
-
-                      Container(
-                        margin:
-                        EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                        child: CommonTextField(
-                            thecontroller: security_controller,
-                            label: "Social Security Number",
-                            type: TextInputType.number,
-                            action: TextInputAction.next,
-                            lines: 1,
-                            secure: false,
-                            focusChange: () {
-                              security_focusnode.unfocus();
-                            },
-                            fontSize: 18.sp,
-                            focusNode: security_focusnode,
-                            text_color: black,
-                            hint_color:gray
-                        ),
-
-                      ),
-                       Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            margin: EdgeInsets.only(left: 15,right: 15,top: 15),
+                          margin: EdgeInsets.only(
+                              left: 20.h, top: 0.h, right: 10.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
                             child: Text(
-                              'Date of Birth',
+                              '1',
                               style: TextStyle(
-                                  color: black,
-                                  fontSize: 13.sp,
-                                  fontFamily: 'nunit_bold'),
+                                color: white,
+                                fontSize: 12.sp,
+                                fontFamily: 'nunit_bold',
+                              ),
                             ),
                           ),
                         ),
-
-                      GestureDetector(
-                        onTap: () {_selectDate(context);},
-                        child: Row(
-                          children: [
-                            Container(
-                              width:85,
-                              margin:
-                              EdgeInsets.only(top: 20.h, left: 15.h,right: 0.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                border: Border.all(color: black, width: 1),
-                              ),
-                              child:Row(
-                                children: [
-                                  Expanded(
-                                    child: TextField(
-                                      controller: _monthController,
-                                        maxLines: 1,
-                                        autofocus: false,
-                                        enabled: false,
-                                        cursorColor: black,
-                                        style: TextStyle(
-                                          fontSize: 18.sp,
-                                          color: black,
-                                          fontFamily: "nunit_regular",
-                                        ),
-                                        onEditingComplete: () {
-                                          // focusChange();
-                                        },
-                                        decoration: InputDecoration(
-                                          focusedBorder: border,
-                                          border: border,
-                                          enabledBorder: border,
-                                          disabledBorder: border,
-                                          contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                                          hintText: "MM",
-                                          hintStyle: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: gray,
-                                            fontFamily: "nunit_regular",
-                                          ),
-                                          suffixIconConstraints:BoxConstraints(
-                                              maxHeight: 20,
-                                              maxWidth: 30) ,
-                                          suffixIcon: GestureDetector(
-                                            onTap: () {
-
-                                              //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                            },
-                                            child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    right: 5),
-                                                child:  Image.asset(
-                                                  'assets/down_arrow.png',
-                                                )
-                                            ),
-                                          ),
-                                        )),
-                                  ),
-                                ],
+                        Text(
+                          'Personal Details',
+                          style: TextStyle(
+                            color: black,
+                            fontSize: 16.sp,
+                            fontFamily: 'nunit_bold',
+                          ),
+                        ),
+                        Container(
+                          height: 18.h,
+                          decoration: BoxDecoration(
+                            color: white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: gradient_color_light, width: 1),
+                          ),
+                          margin: EdgeInsets.only(
+                              left: 10.h, top: 0.h, right: 10.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
+                            child: Text(
+                              '2',
+                              style: TextStyle(
+                                color: gradient_color_light,
+                                fontSize: 12.sp,
+                                fontFamily: 'nunit_bold',
                               ),
                             ),
-                            Container(
-                              width:85,
-                              margin:
-                              EdgeInsets.only(top: 20.h, left: 15.h,right: 0.h),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                border: Border.all(color: black, width: 1),
-                              ),
-                              child:Row(
-                                children: [
-                                  Expanded(
-                                    child: TextField(
-                                      controller: _dateController,
-                                        keyboardType: TextInputType.number,
-                                        maxLines: 1,
-                                        autofocus: false,
-                                        enabled: false,
-                                        cursorColor: black,
-                                        style: TextStyle(
-                                          fontSize: 18.sp,
-                                          color: black,
-                                          fontFamily: "nunit_regular",
-                                        ),
-                                        onEditingComplete: () {
-                                          // focusChange();
-                                        },
-                                        decoration: InputDecoration(
-                                          focusedBorder: border,
-                                          border: border,
-                                          enabledBorder: border,
-                                          disabledBorder: border,
-                                          contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                                          hintText: "DD",
-                                          hintStyle: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: gray,
-                                            fontFamily: "nunit_regular",
-                                          ),
-                                          suffixIconConstraints:BoxConstraints(
-                                              maxHeight: 20,
-                                              maxWidth: 30) ,
-                                          suffixIcon: GestureDetector(
-                                            onTap: () {
-
-                                              //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                            },
-                                            child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    right: 5),
-                                                child:  Image.asset(
-                                                  'assets/down_arrow.png',
-
-                                                )
-
-                                            ),
-                                          ),
-                                        )),
-                                  ),
-                                ],
+                          ),
+                        ),
+                        Container(
+                          height: 18.h,
+                          decoration: BoxDecoration(
+                            color: white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: gradient_color_light, width: 1),
+                          ),
+                          margin: EdgeInsets.only(
+                              left: 10.h, top: 0.h, right: 10.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
+                            child: Text(
+                              '3',
+                              style: TextStyle(
+                                color: gradient_color_light,
+                                fontSize: 12.sp,
+                                fontFamily: 'nunit_bold',
                               ),
                             ),
-
-                            Expanded(
-                              child: Container(
-                                margin:
-                                EdgeInsets.only(top: 20.h, left: 15.h,right: 15.h),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  border: Border.all(color: black, width: 1),
-                                ),
-                                child:Row(
-                                  children: [
-                                    Expanded(
-                                      child: TextField(
-                                        controller: _yearController,
-                                          maxLines: 1,
-                                          autofocus: false,
-                                          enabled: false,
-                                          cursorColor: black,
-                                          style: TextStyle(
-                                            fontSize: 18.sp,
-                                            color: black,
-                                            fontFamily: "nunit_regular",
-                                          ),
-                                          onEditingComplete: () {
-                                            // focusChange();
-                                          },
-                                          decoration: InputDecoration(
-                                            focusedBorder: border,
-                                            border: border,
-                                            enabledBorder: border,
-                                            disabledBorder: border,
-                                            contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                                            hintText: "YYYY",
-                                            hintStyle: TextStyle(
-                                              fontSize: 18.sp,
-                                              color: gray,
-                                              fontFamily: "nunit_regular",
-                                            ),
-                                            suffixIconConstraints:BoxConstraints(
-                                                maxHeight: 20,
-                                                maxWidth: 30) ,
-                                            suffixIcon: GestureDetector(
-                                              onTap: () {
-
-                                                //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                              },
-                                              child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      right: 5),
-                                                  child:  Image.asset(
-                                                    'assets/down_arrow.png',
-
-                                                  )
-
-                                              ),
-                                            ),
-                                          )),
-                                    ),
-                                  ],
-                                ),
+                          ),
+                        ),
+                        Container(
+                          height: 18.h,
+                          decoration: BoxDecoration(
+                            color: white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: gradient_color_light, width: 1),
+                          ),
+                          margin: EdgeInsets.only(
+                              left: 10.h, top: 0.h, right: 10.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
+                            child: Text(
+                              '4',
+                              style: TextStyle(
+                                color: gradient_color_light,
+                                fontSize: 12.sp,
+                                fontFamily: 'nunit_bold',
                               ),
                             ),
-
-                          ],
+                          ),
+                        ),
+                        Container(
+                          height: 18.h,
+                          decoration: BoxDecoration(
+                            color: white,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: gradient_color_light, width: 1),
+                          ),
+                          margin: EdgeInsets.only(
+                              left: 10.h, top: 0.h, right: 10.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
+                            child: Text(
+                              '5',
+                              style: TextStyle(
+                                color: gradient_color_light,
+                                fontSize: 12.sp,
+                                fontFamily: 'nunit_bold',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Divider(
+                      color: black,
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
+                      child: CommonTextField(
+                          thecontroller: security_controller,
+                          label: "Social Security Number",
+                          type: TextInputType.number,
+                          action: TextInputAction.next,
+                          lines: 1,
+                          secure: false,
+                          focusChange: () {
+                            security_focusnode.unfocus();
+                          },
+                          fontSize: 18.sp,
+                          focusNode: security_focusnode,
+                          text_color: black,
+                          hint_color: gray),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+                        child: Text(
+                          'Date of Birth',
+                          style: TextStyle(
+                              color: black,
+                              fontSize: 13.sp,
+                              fontFamily: 'nunit_bold'),
                         ),
                       ),
-                      Container(
-                        margin:
-                        EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                        child: CommonTextField(
-                            thecontroller: address1_controller,
-                            label: "Address Line 1",
-                            type: TextInputType.emailAddress,
-                            action: TextInputAction.next,
-                            lines: 1,
-                            secure: false,
-                            focusChange: () {
-                              address1_focusnode.unfocus();
-                            },
-                            fontSize: 18.sp,
-                            focusNode: address1_focusnode,
-                            text_color: black,
-                            hint_color:gray
-                        ),
-
-                      ),
-                      Container(
-                        margin:
-                        EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                        child: CommonTextField(
-                            thecontroller: address2_controller,
-                            label: "Address Line 2",
-                            type: TextInputType.emailAddress,
-                            action: TextInputAction.next,
-                            lines: 1,
-                            secure: false,
-                            focusChange: () {
-                              address2_focusnode.unfocus();
-                            },
-                            fontSize: 18.sp,
-                            focusNode: address2_focusnode,
-                            text_color: black,
-                            hint_color:gray
-                        ),
-
-                      ),
-
-                      Row(
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _selectDate(context);
+                      },
+                      child: Row(
                         children: [
-                          Expanded(
-                            child: Container(
-                              margin:
-                              EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                              child: CommonTextField(
-                                  thecontroller: city_controller,
-                                  label: "City",
-                                  type: TextInputType.emailAddress,
-                                  action: TextInputAction.next,
-                                  lines: 1,
-                                  secure: false,
-                                  focusChange: () {
-                                    city_focusnode.unfocus();
-                                  },
-                                  fontSize: 18.sp,
-                                  focusNode: city_focusnode,
-                                  text_color: black,
-                                  hint_color:gray
-                              ),
-
+                          Container(
+                            width: 85,
+                            margin: EdgeInsets.only(
+                                top: 20.h, left: 15.h, right: 0.h),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(color: black, width: 1),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                      controller: _monthController,
+                                      maxLines: 1,
+                                      autofocus: false,
+                                      enabled: false,
+                                      cursorColor: black,
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        color: black,
+                                        fontFamily: "nunit_regular",
+                                      ),
+                                      onEditingComplete: () {
+                                        // focusChange();
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedBorder: border,
+                                        border: border,
+                                        enabledBorder: border,
+                                        disabledBorder: border,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0.0, horizontal: 10.0),
+                                        hintText: "MM",
+                                        hintStyle: TextStyle(
+                                          fontSize: 18.sp,
+                                          color: gray,
+                                          fontFamily: "nunit_regular",
+                                        ),
+                                        suffixIconConstraints: BoxConstraints(
+                                            maxHeight: 20, maxWidth: 30),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                          },
+                                          child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              child: Image.asset(
+                                                'assets/down_arrow.png',
+                                              )),
+                                        ),
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: 85,
+                            margin: EdgeInsets.only(
+                                top: 20.h, left: 15.h, right: 0.h),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(color: black, width: 1),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                      controller: _dateController,
+                                      keyboardType: TextInputType.number,
+                                      maxLines: 1,
+                                      autofocus: false,
+                                      enabled: false,
+                                      cursorColor: black,
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        color: black,
+                                        fontFamily: "nunit_regular",
+                                      ),
+                                      onEditingComplete: () {
+                                        // focusChange();
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedBorder: border,
+                                        border: border,
+                                        enabledBorder: border,
+                                        disabledBorder: border,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0.0, horizontal: 10.0),
+                                        hintText: "DD",
+                                        hintStyle: TextStyle(
+                                          fontSize: 18.sp,
+                                          color: gray,
+                                          fontFamily: "nunit_regular",
+                                        ),
+                                        suffixIconConstraints: BoxConstraints(
+                                            maxHeight: 20, maxWidth: 30),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                          },
+                                          child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              child: Image.asset(
+                                                'assets/down_arrow.png',
+                                              )),
+                                        ),
+                                      )),
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(
                             child: Container(
-                              margin:
-                              EdgeInsets.only(top: 20.h, left: 15.h,right: 30.h),
+                              margin: EdgeInsets.only(
+                                  top: 20.h, left: 15.h, right: 15.h),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
                                 border: Border.all(color: black, width: 1),
                               ),
-                              child:
-                              Row(
+                              child: Row(
                                 children: [
                                   Expanded(
                                     child: TextField(
+                                        controller: _yearController,
                                         maxLines: 1,
                                         autofocus: false,
                                         enabled: false,
@@ -1009,153 +903,278 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                           border: border,
                                           enabledBorder: border,
                                           disabledBorder: border,
-                                          contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
-                                          hintText: "State",
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 0.0, horizontal: 10.0),
+                                          hintText: "YYYY",
                                           hintStyle: TextStyle(
                                             fontSize: 18.sp,
                                             color: gray,
                                             fontFamily: "nunit_regular",
                                           ),
-                                          suffixIconConstraints:BoxConstraints(
-                                              maxHeight: 20,
-                                              maxWidth: 30) ,
-                                          suffixIcon:
-                                          GestureDetector(
+                                          suffixIconConstraints: BoxConstraints(
+                                              maxHeight: 20, maxWidth: 30),
+                                          suffixIcon: GestureDetector(
                                             onTap: () {
                                               //loginController.pass_secure.value = !loginController.pass_secure.value;
                                             },
                                             child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    right: 5),
-                                                child:  Image.asset(
+                                                padding:
+                                                    EdgeInsets.only(right: 5),
+                                                child: Image.asset(
                                                   'assets/down_arrow.png',
-
-                                                )
-
-                                            ),
+                                                )),
                                           ),
                                         )),
                                   ),
                                 ],
                               ),
-
                             ),
                           ),
-
                         ],
                       ),
-                      Container(
-                        margin:
-                        EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-                        child: CommonTextField(
-                            thecontroller: zip_controller,
-                            label: "Zipcode",
-                            type: TextInputType.emailAddress,
-                            action: TextInputAction.next,
-                            lines: 1,
-                            secure: false,
-                            focusChange: () {
-                              zip_focusnode.unfocus();
-                            },
-                            fontSize: 18.sp,
-                            focusNode: zip_focusnode,
-                            text_color: black,
-                            hint_color:gray
-                        ),
-
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top:20.h,left: 20.h,right: 20.h),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                          Container(
-                                margin: EdgeInsets.only(top:3,left: 0.h,right: 5.h),
-                                child:  InkWell(
-                                  onTap: _toggleCheck,
-                                  child: Center(
-                                    child: Container(
-                                        width: 25.h,
-                                        height: 25.h,
-                                        margin: EdgeInsets.only(
-                                            left: 0.h, right: 10.h),
-                                        decoration: BoxDecoration(
-                                            color: check ? Color(0xFF0075B2) : Colors.white,
-                                            borderRadius: BorderRadius.circular(5),
-                                            border: check ? null :Border.all(color: Colors.grey)
-                                        ),
-                                        child: Icon(Icons.check, size: 20, color: Colors.white,)
-                                    ),
-                                  ),
-                                ),
-
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
+                      child: CommonTextField(
+                          thecontroller: address1_controller,
+                          label: "Address Line 1",
+                          type: TextInputType.emailAddress,
+                          action: TextInputAction.next,
+                          lines: 1,
+                          secure: false,
+                          focusChange: () {
+                            address1_focusnode.unfocus();
+                          },
+                          fontSize: 18.sp,
+                          focusNode: address1_focusnode,
+                          text_color: black,
+                          hint_color: gray),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
+                      child: CommonTextField(
+                          thecontroller: address2_controller,
+                          label: "Address Line 2",
+                          type: TextInputType.emailAddress,
+                          action: TextInputAction.next,
+                          lines: 1,
+                          secure: false,
+                          focusChange: () {
+                            address2_focusnode.unfocus();
+                          },
+                          fontSize: 18.sp,
+                          focusNode: address2_focusnode,
+                          text_color: black,
+                          hint_color: gray),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                top: 20.h, left: 30.h, right: 30.h),
+                            child: CommonTextField(
+                                thecontroller: city_controller,
+                                label: "City",
+                                type: TextInputType.emailAddress,
+                                action: TextInputAction.next,
+                                lines: 1,
+                                secure: false,
+                                focusChange: () {
+                                  city_focusnode.unfocus();
+                                },
+                                fontSize: 18.sp,
+                                focusNode: city_focusnode,
+                                text_color: black,
+                                hint_color: gray),
                           ),
-
-                            Expanded(
-                              child: Container(
-                                child: Text(
-                                  'To meet facilities’ background check requirements for working a shift there, I hereby authorize Click & Staff to use my personally identifiable date(name, SSN,DOB, and address) through its agents, to conduct an appropriate background investigation of me and prepare a consumer report or investigative consumer report, which will be used solely as a factor for facilities to determine my eligibility for working a shift as governed by the Fair Credit Reporting Act Public Law 91-508',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                      color: gray,
-                                      fontSize: 14.sp,
-                                      fontFamily: 'nunit_regular'),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                top: 20.h, left: 15.h, right: 30.h),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(color: black, width: 1),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                      maxLines: 1,
+                                      autofocus: false,
+                                      enabled: false,
+                                      cursorColor: black,
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        color: black,
+                                        fontFamily: "nunit_regular",
+                                      ),
+                                      onEditingComplete: () {
+                                        // focusChange();
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedBorder: border,
+                                        border: border,
+                                        enabledBorder: border,
+                                        disabledBorder: border,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0.0, horizontal: 15.0),
+                                        hintText: "State",
+                                        hintStyle: TextStyle(
+                                          fontSize: 18.sp,
+                                          color: gray,
+                                          fontFamily: "nunit_regular",
+                                        ),
+                                        suffixIconConstraints: BoxConstraints(
+                                            maxHeight: 20, maxWidth: 30),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                          },
+                                          child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              child: Image.asset(
+                                                'assets/down_arrow.png',
+                                              )),
+                                        ),
+                                      )),
                                 ),
-
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
+                      child: CommonTextField(
+                          thecontroller: zip_controller,
+                          label: "Zipcode",
+                          type: TextInputType.emailAddress,
+                          action: TextInputAction.next,
+                          lines: 1,
+                          secure: false,
+                          focusChange: () {
+                            zip_focusnode.unfocus();
+                          },
+                          fontSize: 18.sp,
+                          focusNode: zip_focusnode,
+                          text_color: black,
+                          hint_color: gray),
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 20.h, left: 20.h, right: 20.h),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin:
+                                EdgeInsets.only(top: 3, left: 0.h, right: 5.h),
+                            child: InkWell(
+                              onTap: _toggleCheck,
+                              child: Center(
+                                child: Container(
+                                    width: 25.h,
+                                    height: 25.h,
+                                    margin:
+                                        EdgeInsets.only(left: 0.h, right: 10.h),
+                                    decoration: BoxDecoration(
+                                        color: check
+                                            ? Color(0xFF0075B2)
+                                            : Colors.white,
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: check
+                                            ? null
+                                            : Border.all(color: Colors.grey)),
+                                    child: Icon(
+                                      Icons.check,
+                                      size: 20,
+                                      color: Colors.white,
+                                    )),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Text(
+                                'To meet facilities’ background check requirements for working a shift there, I hereby authorize Click & Staff to use my personally identifiable date(name, SSN,DOB, and address) through its agents, to conduct an appropriate background investigation of me and prepare a consumer report or investigative consumer report, which will be used solely as a factor for facilities to determine my eligibility for working a shift as governed by the Fair Credit Reporting Act Public Law 91-508',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    color: gray,
+                                    fontSize: 14.sp,
+                                    fontFamily: 'nunit_regular'),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 20,),
-
-                      Container(
-                        child: Center(
-                          child:
-                              completeProfile1VM.loading ?
-                         CircularProgressIndicator():
-                          CommonButtonWithPadding(
-                              label: 'NEXT',
-                              onPressed: () async {
-                                Map data = {
-                                  "user_id":"224",
-                                  "social_security_number":"123322",
-                                  "birth_date": _dateController.text,
-                                  "birth_month": _monthController.text,
-                                  "birth_year": _yearController.text,
-                                  "address_line1": address1_controller.text.toString(),
-                                  "address_line2": address2_controller.text.toString(),
-                                  "city": city_controller.text.toString(),
-                                  "state":"LA",
-                                  "zipcode": zip_controller.text,
-                                  "profile_chk": check
-                                };
-                                if(_dateController.value.text.isNotEmpty && _monthController.value.text.isNotEmpty  && _yearController.value.text.isNotEmpty && address1_controller.value.text.isNotEmpty  && address2_controller.value.text.isNotEmpty && city_controller.value.text.isNotEmpty && zip_controller.value.text.isNotEmpty) {
-                                  await completeProfile1VM.postCompleteProfile1Api(data, context);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => W9Form()));
-                                } else if(!check) {
-                                  Utils.showSnackBar(
-                                      context, "Agree with terms & conditions!", Colors.red);
-                                } else {
-                                  Utils.showSnackBar(
-                                      context, "Some fields are empty!", Colors.red);
-                                }
-                              },
-                              border: 35.h,
-                              height: 50.h,
-                              fontSize: 18,
-                              textColor: white,
-                              backgroundColor: black),
-                        ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      child: Center(
+                        child: completeProfile1VM.loading
+                            ? CircularProgressIndicator()
+                            : CommonButtonWithPadding(
+                                label: 'NEXT',
+                                onPressed: () async {
+                                  Map data = {
+                                    "user_id": "224",
+                                    "social_security_number": "123322",
+                                    "birth_date": _dateController.text,
+                                    "birth_month": _monthController.text,
+                                    "birth_year": _yearController.text,
+                                    "address_line1":
+                                        address1_controller.text.toString(),
+                                    "address_line2":
+                                        address2_controller.text.toString(),
+                                    "city": city_controller.text.toString(),
+                                    "state": "LA",
+                                    "zipcode": zip_controller.text,
+                                    "profile_chk": check
+                                  };
+                                  if (_dateController.value.text.isNotEmpty &&
+                                      _monthController.value.text.isNotEmpty &&
+                                      _yearController.value.text.isNotEmpty &&
+                                      address1_controller
+                                          .value.text.isNotEmpty &&
+                                      address2_controller
+                                          .value.text.isNotEmpty &&
+                                      city_controller.value.text.isNotEmpty &&
+                                      zip_controller.value.text.isNotEmpty) {
+                                    await completeProfile1VM
+                                        .postCompleteProfile1Api(data, context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => W9Form()));
+                                  } else if (!check) {
+                                    Utils.showSnackBar(
+                                        context,
+                                        "Agree with terms & conditions!",
+                                        Colors.red);
+                                  } else {
+                                    Utils.showSnackBar(context,
+                                        "Some fields are empty!", Colors.red);
+                                  }
+                                },
+                                border: 35.h,
+                                height: 50.h,
+                                fontSize: 18,
+                                textColor: white,
+                                backgroundColor: black),
                       ),
-
-                      SizedBox(height: 30.h),
-                    ],
-                  )
-                ),
+                    ),
+                    SizedBox(height: 30.h),
+                  ],
+                )),
               ),
             ],
           ),

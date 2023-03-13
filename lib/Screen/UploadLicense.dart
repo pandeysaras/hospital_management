@@ -21,17 +21,24 @@ class UploadLicense extends StatefulWidget {
 class _UploadLicenseState extends State<UploadLicense> {
   late double screenWidth, screenHeight;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
-  late TextEditingController mobile_controller, license_no_controller;
-  late FocusNode mobile_focusnode, license_no_focusnode;
+  TextEditingController licensedByController = TextEditingController();
+  TextEditingController license_no_controller = TextEditingController();
+
+  TextEditingController expdateCtrlr = TextEditingController();
+  TextEditingController issuedateCtrlr = TextEditingController();
+
+  FocusNode mobile_focusnode = FocusNode();
+  FocusNode license_no_focusnode = FocusNode();
+
   String gender = "male";
 
   @override
   void initState() {
     super.initState();
-    mobile_controller = TextEditingController();
-    license_no_controller = TextEditingController();
-    mobile_focusnode = FocusNode();
-    license_no_focusnode = FocusNode();
+    // licensedBy = TextEditingController();
+    // license_no_controller = TextEditingController();
+    // mobile_focusnode = FocusNode();
+    // license_no_focusnode = FocusNode();
   }
 
 //---------------upload-------------
@@ -51,7 +58,42 @@ class _UploadLicenseState extends State<UploadLicense> {
   }
 
   //---------------------------
+  DateTime _selectedDate = DateTime.now();
 
+  DateTime _eselectedDate = DateTime.now();
+  bool isDateSelected = false;
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        issuedateCtrlr.text = _selectedDate.toString().substring(1, 11);
+        _selectedDate = picked;
+        isDateSelected = true;
+      });
+    }
+  }
+
+  Future<void> _expselectDate(BuildContext context) async {
+    DateTime? epicked = await showDatePicker(
+        context: context,
+        initialDate: _eselectedDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2101));
+    if (epicked != null && epicked != _eselectedDate) {
+      setState(() {
+        expdateCtrlr.text = _eselectedDate.toString().substring(1, 11);
+        _eselectedDate = epicked;
+        isDateSelected = true;
+      });
+    }
+  }
+
+//-----------------
   @override
   Widget build(BuildContext context) {
     screenWidth = MediaQuery.of(context).size.width;
@@ -775,45 +817,47 @@ class _UploadLicenseState extends State<UploadLicense> {
                                 margin:
                                     EdgeInsets.only(left: 20.h, right: 20.w),
                                 child: TextField(
-                                    maxLines: 1,
-                                    autofocus: false,
-                                    enabled: false,
-                                    cursorColor: black,
-                                    style: TextStyle(
+                                  maxLines: 1,
+                                  autofocus: false,
+                                  enabled: false,
+                                  cursorColor: black,
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    color: black,
+                                    fontFamily: "nunit_regular",
+                                  ),
+                                  onEditingComplete: () {
+                                    // focusChange();
+                                  },
+                                  decoration: InputDecoration(
+                                    focusedBorder: border,
+                                    border: border,
+                                    enabledBorder: border,
+                                    disabledBorder: border,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 0.0, horizontal: 0.0),
+                                    hintText: "State",
+                                    hintStyle: TextStyle(
                                       fontSize: 18.sp,
-                                      color: black,
+                                      color: gray,
                                       fontFamily: "nunit_regular",
                                     ),
-                                    onEditingComplete: () {
-                                      // focusChange();
-                                    },
-                                    decoration: InputDecoration(
-                                      focusedBorder: border,
-                                      border: border,
-                                      enabledBorder: border,
-                                      disabledBorder: border,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 0.0),
-                                      hintText: "State",
-                                      hintStyle: TextStyle(
-                                        fontSize: 18.sp,
-                                        color: gray,
-                                        fontFamily: "nunit_regular",
+                                    suffixIconConstraints: BoxConstraints(
+                                        maxHeight: 20, maxWidth: 30),
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.only(right: 5),
+                                        child: Image.asset(
+                                          'assets/down_arrow.png',
+                                          color: black,
+                                        ),
                                       ),
-                                      suffixIconConstraints: BoxConstraints(
-                                          maxHeight: 20, maxWidth: 30),
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                        },
-                                        child: Padding(
-                                            padding: EdgeInsets.only(right: 5),
-                                            child: Image.asset(
-                                              'assets/down_arrow.png',
-                                              color: black,
-                                            )),
-                                      ),
-                                    )),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ],
@@ -823,75 +867,19 @@ class _UploadLicenseState extends State<UploadLicense> {
                         margin:
                             EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
                         child: CommonTextField(
-                            thecontroller: license_no_controller,
-                            label: "License Number",
-                            type: TextInputType.text,
-                            action: TextInputAction.next,
-                            lines: 1,
-                            secure: false,
-                            focusChange: () {
-                              license_no_focusnode.unfocus();
-                            },
-                            fontSize: 18.sp,
-                            focusNode: license_no_focusnode,
-                            text_color: black,
-                            hint_color: gray),
-                      ),
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          border: Border.all(color: black, width: 1),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                margin:
-                                    EdgeInsets.only(left: 20.h, right: 20.w),
-                                child: TextField(
-                                    maxLines: 1,
-                                    autofocus: false,
-                                    enabled: false,
-                                    cursorColor: black,
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: black,
-                                      fontFamily: "nunit_regular",
-                                    ),
-                                    onEditingComplete: () {
-                                      // focusChange();
-                                    },
-                                    decoration: InputDecoration(
-                                      focusedBorder: border,
-                                      border: border,
-                                      enabledBorder: border,
-                                      disabledBorder: border,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 0.0),
-                                      hintText: "License Issue Date",
-                                      hintStyle: TextStyle(
-                                        fontSize: 18.sp,
-                                        color: gray,
-                                        fontFamily: "nunit_regular",
-                                      ),
-                                      suffixIconConstraints: BoxConstraints(
-                                          maxHeight: 20, maxWidth: 30),
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                        },
-                                        child: Padding(
-                                            padding: EdgeInsets.only(right: 5),
-                                            child: Image.asset(
-                                              'assets/calender.png',
-                                            )),
-                                      ),
-                                    )),
-                              ),
-                            ),
-                          ],
+                          thecontroller: license_no_controller,
+                          label: "License Number",
+                          type: TextInputType.text,
+                          action: TextInputAction.next,
+                          lines: 1,
+                          secure: false,
+                          focusChange: () {
+                            // license_no_focusnode.unfocus();
+                          },
+                          fontSize: 18.sp,
+                          focusNode: license_no_focusnode,
+                          text_color: black,
+                          hint_color: gray,
                         ),
                       ),
                       Container(
@@ -904,48 +892,119 @@ class _UploadLicenseState extends State<UploadLicense> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: Container(
-                                margin:
-                                    EdgeInsets.only(left: 20.h, right: 20.w),
-                                child: TextField(
-                                    maxLines: 1,
-                                    autofocus: false,
-                                    enabled: false,
-                                    cursorColor: black,
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: black,
-                                      fontFamily: "nunit_regular",
-                                    ),
-                                    onEditingComplete: () {
-                                      // focusChange();
-                                    },
-                                    decoration: InputDecoration(
-                                      focusedBorder: border,
-                                      border: border,
-                                      enabledBorder: border,
-                                      disabledBorder: border,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 0.0),
-                                      hintText: "Expiration Date",
-                                      hintStyle: TextStyle(
+                              child: InkWell(
+                                onTap: () {
+                                  _selectDate(context);
+                                },
+                                child: Container(
+                                  margin:
+                                      EdgeInsets.only(left: 20.h, right: 20.w),
+                                  child: TextField(
+                                      controller: issuedateCtrlr,
+                                      maxLines: 1,
+                                      autofocus: false,
+                                      enabled: false,
+                                      cursorColor: black,
+                                      style: TextStyle(
                                         fontSize: 18.sp,
-                                        color: gray,
+                                        color: black,
                                         fontFamily: "nunit_regular",
                                       ),
-                                      suffixIconConstraints: BoxConstraints(
-                                          maxHeight: 20, maxWidth: 30),
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                        },
-                                        child: Padding(
-                                            padding: EdgeInsets.only(right: 5),
-                                            child: Image.asset(
-                                              'assets/calender.png',
-                                            )),
+                                      onEditingComplete: () {
+                                        // focusChange();
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedBorder: border,
+                                        border: border,
+                                        enabledBorder: border,
+                                        disabledBorder: border,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0.0, horizontal: 0.0),
+                                        hintText: "License Issue Date",
+                                        hintStyle: TextStyle(
+                                          fontSize: 18.sp,
+                                          color: gray,
+                                          fontFamily: "nunit_regular",
+                                        ),
+                                        suffixIconConstraints: BoxConstraints(
+                                            maxHeight: 20, maxWidth: 30),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                          },
+                                          child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              child: Image.asset(
+                                                'assets/calender.png',
+                                              )),
+                                        ),
+                                      )),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          border: Border.all(color: black, width: 1),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {
+                                  _expselectDate(context);
+                                },
+                                child: Container(
+                                  margin:
+                                      EdgeInsets.only(left: 20.h, right: 20.w),
+                                  child: TextField(
+                                      maxLines: 1,
+                                      controller: expdateCtrlr,
+                                      autofocus: false,
+                                      enabled: false,
+                                      cursorColor: black,
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        color: black,
+                                        fontFamily: "nunit_regular",
                                       ),
-                                    )),
+                                      onEditingComplete: () {
+                                        // focusChange();
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedBorder: border,
+                                        border: border,
+                                        enabledBorder: border,
+                                        disabledBorder: border,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0.0, horizontal: 0.0),
+                                        hintText: "Expiration Date",
+                                        hintStyle: TextStyle(
+                                          fontSize: 18.sp,
+                                          color: gray,
+                                          fontFamily: "nunit_regular",
+                                        ),
+                                        suffixIconConstraints: BoxConstraints(
+                                            maxHeight: 20, maxWidth: 30),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                          },
+                                          child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              child: Image.asset(
+                                                'assets/calender.png',
+                                              )),
+                                        ),
+                                      )),
+                                ),
                               ),
                             ),
                           ],
@@ -955,14 +1014,14 @@ class _UploadLicenseState extends State<UploadLicense> {
                         margin:
                             EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
                         child: CommonTextField(
-                            thecontroller: mobile_controller,
+                            thecontroller: licensedByController,
                             label: "Licensed By",
                             type: TextInputType.emailAddress,
                             action: TextInputAction.next,
                             lines: 1,
                             secure: false,
                             focusChange: () {
-                              mobile_focusnode.unfocus();
+                              // mobile_focusnode.unfocus();
                             },
                             fontSize: 18.sp,
                             focusNode: mobile_focusnode,
