@@ -10,8 +10,11 @@ import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
 import 'package:medteam/Screen/PaymentMethod.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/Utils/dropDown.dart';
 import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
 import 'package:provider/provider.dart';
+
+import '../model/licence_list_model.dart';
 
 class UploadLicense extends StatefulWidget {
   @override
@@ -35,11 +38,46 @@ class _UploadLicenseState extends State<UploadLicense> {
   @override
   void initState() {
     super.initState();
+    // fillList();
+    context.read<ProfileViewModel>().listOfLicesnesAPI(context);
     // licensedBy = TextEditingController();
     // license_no_controller = TextEditingController();
     // mobile_focusnode = FocusNode();
     // license_no_focusnode = FocusNode();
   }
+
+  // List<String> listOfLicenseTypes = [];
+
+  // void fillList() async {
+  //   await context.read<ProfileViewModel>().listOfLicesnesAPI(context);
+  //   for (int i = 1; i < globalLicenseListModel!.data!.length - 1; i++) {
+  //     listOfLicenseTypes[i] = globalLicenseListModel!.data![i].name.toString();
+  //     // context.read<ProfileViewModel>().notifyListeners();
+  //   }
+  //   context.read<ProfileViewModel>().notifyListeners();
+  // }
+
+  //---------------drop down
+
+  String _selectedOption = 'opt';
+// List<String> _options = ['Option 1', 'Option 2', 'Option 3'];
+
+  // Widget dpOpen(BuildContext context) {
+  //   return DropdownButton<String>(
+  //     value: _selectedOption,
+  //     onChanged: (newValue) {
+  //       setState(() {
+  //         _selectedOption = newValue!;
+  //       });
+  //     },
+  //     items: listOfLicenseTypes.map((option) {
+  //       return DropdownMenuItem<String>(
+  //         value: option,
+  //         child: Text(option),
+  //       );
+  //     }).toList(),
+  //   );
+  // }
 
 //---------------upload-------------
   File? file;
@@ -96,6 +134,7 @@ class _UploadLicenseState extends State<UploadLicense> {
 //-----------------
   @override
   Widget build(BuildContext context) {
+    // print(listOfLicenseTypes[1]);
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
     ScreenUtil.init(context, designSize: Size(screenWidth, screenHeight));
@@ -754,54 +793,83 @@ class _UploadLicenseState extends State<UploadLicense> {
                         ),
                         child: Row(
                           children: [
-                            Expanded(
-                              child: Container(
-                                margin:
-                                    EdgeInsets.only(left: 20.h, right: 20.w),
-                                child: TextField(
-                                    maxLines: 1,
-                                    autofocus: false,
-                                    enabled: false,
-                                    cursorColor: black,
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: black,
-                                      fontFamily: "nunit_regular",
-                                    ),
-                                    onEditingComplete: () {
-                                      // focusChange();
-                                    },
-                                    decoration: InputDecoration(
-                                      focusedBorder: border,
-                                      border: border,
-                                      enabledBorder: border,
-                                      disabledBorder: border,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 0.0),
-                                      hintText: "License Type",
-                                      hintStyle: TextStyle(
-                                        fontSize: 18.sp,
-                                        color: gray,
-                                        fontFamily: "nunit_regular",
-                                      ),
-                                      suffixIconConstraints: BoxConstraints(
-                                          maxHeight: 20, maxWidth: 30),
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                        },
-                                        child: Padding(
-                                            padding: EdgeInsets.only(right: 5),
-                                            child: Image.asset(
-                                              'assets/down_arrow.png',
-                                              color: black,
-                                            )),
-                                      ),
-                                    )),
-                              ),
-                            ),
+                            context
+                                    .watch<ProfileViewModel>()
+                                    .listOfLicenseTypes
+                                    .isEmpty
+                                ? const SizedBox()
+                                : DropdownButtonExample(
+                                    list: context
+                                        .read<ProfileViewModel>()
+                                        .listOfLicenseTypes,
+                                  ),
+                            // Image.asset(
+                            //   'assets/down_arrow.png',
+                            //   color: black,
+                            // ),
                           ],
                         ),
+                        // child: Row(
+                        //   children: [
+
+                        //     // Expanded(
+                        //     //   child: InkWell(
+                        //     //     onTap: () {
+                        //     //       // dpOpen(context);
+                        //     //       // print("tapped");
+                        //     //       // setState(() {});
+                        //     //     },
+                        //     //     child: Container(
+                        //     //       margin:
+                        //     //           EdgeInsets.only(left: 20.h, right: 20.w),
+                        //     //       child: TextField(
+                        //     //         maxLines: 1,
+                        //     //         autofocus: false,
+                        //     //         enabled: false,
+                        //     //         cursorColor: black,
+                        //     //         style: TextStyle(
+                        //     //           fontSize: 18.sp,
+                        //     //           color: black,
+                        //     //           fontFamily: "nunit_regular",
+                        //     //         ),
+                        //     //         onEditingComplete: () {
+                        //     //           // focusChange();
+                        //     //         },
+                        //     //         decoration: InputDecoration(
+                        //     //           focusedBorder: border,
+                        //     //           border: border,
+                        //     //           enabledBorder: border,
+                        //     //           disabledBorder: border,
+                        //     //           contentPadding: EdgeInsets.symmetric(
+                        //     //               vertical: 0.0, horizontal: 0.0),
+                        //     //           hintText: "License Type",
+                        //     //           hintStyle: TextStyle(
+                        //     //             fontSize: 18.sp,
+                        //     //             color: gray,
+                        //     //             fontFamily: "nunit_regular",
+                        //     //           ),
+                        //     //           suffixIconConstraints: BoxConstraints(
+                        //     //               maxHeight: 20, maxWidth: 30),
+                        //     //           suffixIcon: GestureDetector(
+                        //     //             onTap: () {
+                        //     //               //loginController.pass_secure.value = !loginController.pass_secure.value;
+                        //     //             },
+                        //     //             child: Padding(
+                        //     //                 padding: EdgeInsets.only(right: 5),
+                        //     //                 child: Image.asset(
+                        //     //                   'assets/down_arrow.png',
+                        //     //                   color: black,
+                        //     //                 )),
+                        //     //           ),
+                        //     //         ),
+                        //     //       ),
+                        //     //     ),
+
+                        //     //   ),
+                        //     // ),
+                        //     //-------------type
+                        //   ],
+                        // ),
                       ),
                       Container(
                         margin:

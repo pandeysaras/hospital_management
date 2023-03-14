@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:medteam/model/licence_list_model.dart';
 import 'package:medteam/repository/profile_repo.dart';
 import 'package:medteam/resources/app_url.dart';
 
@@ -180,7 +181,8 @@ class ProfileViewModel with ChangeNotifier {
 
 //------------doc upload
 
-  Future<void> documentUpload(File file, BuildContext context) async {
+  Future<void> documentUpload(File file, BuildContext context,
+      String licseneceNo, String expdate, String issuedate) async {
     setLoading();
     try {
       var request = http.MultipartRequest(
@@ -199,9 +201,9 @@ class ProfileViewModel with ChangeNotifier {
         'user_id': "224",
         "document_id": "Government Issued ID",
         "document_name": "20",
-        "licence_number": "225533333",
-        "licence_issue_date": "2014-2-12",
-        "licence_expiry": "2014-3-12",
+        "licence_number": "$licseneceNo",
+        "licence_issue_date": "$issuedate",
+        "licence_expiry": "$expdate",
       });
       // if (file == null || file == "") {
       // } else {
@@ -221,5 +223,52 @@ class ProfileViewModel with ChangeNotifier {
       setLoading();
       throw Exception("Failed to create");
     }
+  }
+
+  //----------------------------//
+
+  List<String> listOfLicenseTypes = [];
+
+  Future<void> listOfLicesnesAPI(BuildContext context) async {
+    //-------register api call-----------//
+
+    await _myRepo.listOflicenseAPI().then((value) async {
+      // refModel refObj = refModel.fromJson(value);
+      globalLicenseListModel = LicenseListModel.fromJson(value);
+
+      for (int i = 0; i <= globalLicenseListModel!.data!.length - 1; i++) {
+        listOfLicenseTypes
+            .add(globalLicenseListModel!.data![i].name.toString());
+        // globalLicenseListModel!.data![i].name.toString();
+        notifyListeners();
+      }
+
+      // print(value);
+
+      // if (hearAboutUsModel.status == true) {
+      // Utils.showSnackBar(context, licenseListModel.message.toString(), Colors.blue);
+      // selectBoxesHearList = globalhearAboutUsModel!.data!;
+      notifyListeners();
+
+      // print(listOfLicenseTypes[1]);
+
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => FindWork()),
+      // );
+
+      // if (kDebugMode) {
+      //   print(value.toString());
+      // }
+    }).onError((error, stackTrace) async {
+      _isLoading = false;
+      notifyListeners();
+      throw {
+        if (kDebugMode)
+          {
+            print(error.toString()),
+          }
+      };
+    });
   }
 }

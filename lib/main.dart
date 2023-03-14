@@ -3,6 +3,7 @@ import 'package:medteam/Screen/Profile.dart';
 import 'package:medteam/Screen/ProfileInfo.dart';
 import 'package:medteam/Screen/ProfilePhoto.dart';
 import 'package:medteam/Screen/UploadLicense.dart';
+import 'package:medteam/Screen/UploadedDocuments.dart';
 import 'package:medteam/view_model/complete_profile_view_models/complete_profile_1_view_model.dart';
 import 'package:medteam/view_model/complete_profile_view_models/complete_profile_2_view_model.dart';
 import 'package:medteam/view_model/complete_profile_view_models/complete_profile_3_view_model.dart';

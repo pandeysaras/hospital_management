@@ -7,14 +7,21 @@ class ProfileRepository {
 
   Future<dynamic> bankDetails(dynamic data) async {
     try {
-      dynamic response =
-          await _apiServices.getPostApiResponse(AppUrl.bankdetailEndPoint, data);
+      dynamic response = await _apiServices.getPostApiResponse(
+          AppUrl.bankdetailEndPoint, data);
       return response;
     } catch (e) {
       rethrow;
     }
   }
 
-
-  
+  Future<dynamic> listOflicenseAPI() async {
+    try {
+      dynamic response = await _apiServices.getGetApiResponse(
+          AppUrl.licenseListEndPoint);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

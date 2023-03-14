@@ -22,14 +22,14 @@ class UploadedDocuments extends StatefulWidget {
 class _UploadedDocumentsState extends State<UploadedDocuments> {
   late double screenWidth, screenHeight;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
-  late TextEditingController mobile_controller;
+  TextEditingController licenseNumberController = TextEditingController();
   late FocusNode mobile_focusnode;
   String gender = "male";
 
   @override
   void initState() {
     super.initState();
-    mobile_controller = TextEditingController();
+
     mobile_focusnode = FocusNode();
   }
 
@@ -50,6 +50,47 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
   }
 
   //---------------------------
+
+  //---------------------------
+  DateTime _selectedDate = DateTime.now();
+
+  DateTime _eselectedDate = DateTime.now();
+  bool isDateSelected = false;
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        issuedateCtrlr.text = _selectedDate.toString().substring(1, 11);
+        _selectedDate = picked;
+        isDateSelected = true;
+      });
+    }
+  }
+
+  Future<void> _expselectDate(BuildContext context) async {
+    DateTime? epicked = await showDatePicker(
+      context: context,
+      initialDate: _eselectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2101),
+    );
+    if (epicked != null && epicked != _eselectedDate) {
+      setState(() {
+        expdateCtrlr.text = _eselectedDate.toString().substring(1, 11);
+        _eselectedDate = epicked;
+        isDateSelected = true;
+      });
+    }
+  }
+
+  TextEditingController expdateCtrlr = TextEditingController();
+  TextEditingController issuedateCtrlr = TextEditingController();
+//-----------------
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +188,7 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                         margin:
                             EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
                         child: CommonTextField(
-                            thecontroller: mobile_controller,
+                            thecontroller: licenseNumberController,
                             label: "License Number",
                             type: TextInputType.text,
                             action: TextInputAction.done,
@@ -171,47 +212,54 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: Container(
-                                margin:
-                                    EdgeInsets.only(left: 20.h, right: 20.w),
-                                child: TextField(
-                                    autofocus: false,
-                                    enabled: false,
-                                    cursorColor: black,
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: black,
-                                      fontFamily: "nunit_regular",
-                                    ),
-                                    onEditingComplete: () {
-                                      // focusChange();
-                                    },
-                                    decoration: InputDecoration(
-                                      focusedBorder: border,
-                                      border: border,
-                                      enabledBorder: border,
-                                      disabledBorder: border,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 10.0),
-                                      hintText: "Issuing or Test Date",
-                                      hintStyle: TextStyle(
+                              child: InkWell(
+                                onTap: () {
+                                  _selectDate(context);
+                                },
+                                child: Container(
+                                  margin:
+                                      EdgeInsets.only(left: 20.h, right: 20.w),
+                                  child: TextField(
+                                      controller: issuedateCtrlr,
+                                      autofocus: false,
+                                      enabled: false,
+                                      cursorColor: black,
+                                      style: TextStyle(
                                         fontSize: 18.sp,
-                                        color: gray,
+                                        color: black,
                                         fontFamily: "nunit_regular",
                                       ),
-                                      suffixIconConstraints: BoxConstraints(
-                                          maxHeight: 20, maxWidth: 30),
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                        },
-                                        child: Padding(
-                                            padding: EdgeInsets.only(right: 5),
-                                            child: Image.asset(
-                                              'assets/calender.png',
-                                            )),
-                                      ),
-                                    )),
+                                      onEditingComplete: () {
+                                        // focusChange();
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedBorder: border,
+                                        border: border,
+                                        enabledBorder: border,
+                                        disabledBorder: border,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0.0, horizontal: 10.0),
+                                        hintText: "Issuing or Test Date",
+                                        hintStyle: TextStyle(
+                                          fontSize: 18.sp,
+                                          color: gray,
+                                          fontFamily: "nunit_regular",
+                                        ),
+                                        suffixIconConstraints: BoxConstraints(
+                                            maxHeight: 20, maxWidth: 30),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                          },
+                                          child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              child: Image.asset(
+                                                'assets/calender.png',
+                                              )),
+                                        ),
+                                      )),
+                                ),
                               ),
                             ),
                           ],
@@ -227,47 +275,54 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: Container(
-                                margin:
-                                    EdgeInsets.only(left: 20.h, right: 20.w),
-                                child: TextField(
-                                    autofocus: false,
-                                    enabled: false,
-                                    cursorColor: black,
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: black,
-                                      fontFamily: "nunit_regular",
-                                    ),
-                                    onEditingComplete: () {
-                                      // focusChange();
-                                    },
-                                    decoration: InputDecoration(
-                                      focusedBorder: border,
-                                      border: border,
-                                      enabledBorder: border,
-                                      disabledBorder: border,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 0.0, horizontal: 10.0),
-                                      hintText: "Expiration Date(Optional)",
-                                      hintStyle: TextStyle(
+                              child: InkWell(
+                                onTap: () {
+                                  _expselectDate(context);
+                                },
+                                child: Container(
+                                  margin:
+                                      EdgeInsets.only(left: 20.h, right: 20.w),
+                                  child: TextField(
+                                      autofocus: false,
+                                      enabled: false,
+                                      controller: expdateCtrlr,
+                                      cursorColor: black,
+                                      style: TextStyle(
                                         fontSize: 18.sp,
-                                        color: gray,
+                                        color: black,
                                         fontFamily: "nunit_regular",
                                       ),
-                                      suffixIconConstraints: BoxConstraints(
-                                          maxHeight: 20, maxWidth: 30),
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                        },
-                                        child: Padding(
-                                            padding: EdgeInsets.only(right: 5),
-                                            child: Image.asset(
-                                              'assets/calender.png',
-                                            )),
-                                      ),
-                                    )),
+                                      onEditingComplete: () {
+                                        // focusChange();
+                                      },
+                                      decoration: InputDecoration(
+                                        focusedBorder: border,
+                                        border: border,
+                                        enabledBorder: border,
+                                        disabledBorder: border,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 0.0, horizontal: 10.0),
+                                        hintText: "Expiration Date(Optional)",
+                                        hintStyle: TextStyle(
+                                          fontSize: 18.sp,
+                                          color: gray,
+                                          fontFamily: "nunit_regular",
+                                        ),
+                                        suffixIconConstraints: BoxConstraints(
+                                            maxHeight: 20, maxWidth: 30),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                          },
+                                          child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(right: 5),
+                                              child: Image.asset(
+                                                'assets/calender.png',
+                                              )),
+                                        ),
+                                      )),
+                                ),
                               ),
                             ),
                           ],
@@ -333,9 +388,15 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                       CommonButton(
                           label: 'DONE',
                           onPressed: () async {
-                            context
-                                .read<ProfileViewModel>()
-                                .documentUpload(file!, context);
+                            if (issuedateCtrlr.text.isNotEmpty &&
+                                licenseNumberController.text.isNotEmpty &&
+                                file!.path.isNotEmpty)
+                              context.read<ProfileViewModel>().documentUpload(
+                                  file!,
+                                  context,
+                                  licenseNumberController.value.text,
+                                  expdateCtrlr.value.text,
+                                  issuedateCtrlr.value.text);
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
