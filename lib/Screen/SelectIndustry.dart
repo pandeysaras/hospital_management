@@ -22,12 +22,8 @@ class _SelectIndustryState extends State<SelectIndustry> {
   late double screenWidth, screenHeight;
   IndustryDataViewModel industryDataViewModel = IndustryDataViewModel();
 
-  int _selectedIndex = -1;
-  void _onSelected (int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  List<int> _selectedIndices = [];
+  List<String> _sendIndex = [];
 
   @override
   void initState() {
@@ -131,15 +127,54 @@ class _SelectIndustryState extends State<SelectIndustry> {
                                   ) :ListView.builder(
                                       itemCount: value.industryData.data!.data!.length,
                                       itemBuilder: (context, index) {
-                                        return selectIndustryCard(() {
-                                          _onSelected(index);
-                                          print(index);
-                                          // Navigator.push(
-                                          //     context,
-                                          //     MaterialPageRoute(
-                                          //         builder: (context) =>
-                                          //             DescribeYou()));
-                                        }, value.industryData.data!.data![index].name.toString());
+                                        return InkWell(
+                                          onTap: (){
+                                            setState(() {
+                                              if (_selectedIndices.contains(index)) {
+                                                _selectedIndices.remove(index);
+                                                _sendIndex.remove(value.industryData.data!.data![index].id.toString());
+
+                                              } else {
+                                                _selectedIndices.add(index);
+                                                _sendIndex.add(value.industryData.data!.data![index].id.toString());
+                                              }
+                                            print(_selectedIndices);
+                                              print(_sendIndex);
+                                            });
+                                          },
+                                          child: Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color:  _selectedIndices.contains(index)  ? app_text_color : Colors.white,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(20))),
+                                              margin: EdgeInsets.only(
+                                                  left: 40.h, top: 10.h),
+                                              padding: EdgeInsets.only(
+                                                  left: 13.h,
+                                                  right: 13.h,
+                                                  top: 3.h,
+                                                  bottom: 3.h),
+                                              child: Text(
+                                                value.industryData.data!.data![index].name.toString(),
+                                                style: TextStyle(
+                                                  color: _selectedIndices.contains(index) ? Colors.white : Colors.black,
+                                                  fontSize: 18.sp,
+                                                  fontFamily: 'nunit_bold',
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+
+
+                                        //
+                                        //   SelectIndustryCard(text: value.industryData.data!.data![index].name.toString(), func: (){
+                                        //   _onSelected(index);
+                                        //   print(index);
+                                        //
+                                        // },);
                                       }),
                                 );
                               default:
@@ -153,7 +188,7 @@ class _SelectIndustryState extends State<SelectIndustry> {
                             label: 'NEXT',
                             onPressed: () async {
                               Map data = {
-                                "industry": _selectedIndex,
+                                "industry": _sendIndex,
                                 "user_id":224
                               };
                              await industryDataViewModel.postSelectIndustryApi(data, context);
@@ -235,4 +270,59 @@ Widget selectIndustryCard (VoidCallback onPress, String text){
       ),
     ),
   );
+}
+
+class SelectIndustryCard extends StatefulWidget {
+  //final VoidCallback onPress;
+  final String text;
+  final Function func;
+
+  const SelectIndustryCard({Key? key, required this.text, required this.func}) : super(key: key);
+
+  @override
+  State<SelectIndustryCard> createState() => _SelectIndustryCardState();
+}
+
+class _SelectIndustryCardState extends State<SelectIndustryCard> {
+  bool _active = false;
+
+  void _handleTap() {
+    setState(() {
+      _active = !_active;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: (){
+        _handleTap();
+        widget.func;
+      },
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Container(
+          decoration: BoxDecoration(
+              color: _active ? app_text_color : Colors.white,
+              borderRadius: BorderRadius.all(
+                  Radius.circular(20))),
+          margin: EdgeInsets.only(
+              left: 40.h, top: 10.h),
+          padding: EdgeInsets.only(
+              left: 13.h,
+              right: 13.h,
+              top: 3.h,
+              bottom: 3.h),
+          child: Text(
+            widget.text,
+            style: TextStyle(
+              color: _active ? Colors.white : Colors.black,
+              fontSize: 18.sp,
+              fontFamily: 'nunit_bold',
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
