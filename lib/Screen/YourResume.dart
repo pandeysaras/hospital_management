@@ -715,7 +715,7 @@ class _YourResumeState extends State<YourResume> {
                                     onChanged: (value) {
                                       // print(value);
 
-                                      certi 
+                                      // certi 
                                       // licenseType = value.toString();
                                     },
                                     // selectedItem: context
