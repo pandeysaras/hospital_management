@@ -25,11 +25,7 @@ class _DescribeYouState extends State<DescribeYou> {
   SelectSkillSetSubcatViewModel selectSkillSetSubcatViewModel = SelectSkillSetSubcatViewModel();
 
   int _selectedIndex = -1;
-  void _onSelected (int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  String _sendIndex = "";
 
   @override
   void initState() {
@@ -113,22 +109,53 @@ class _DescribeYouState extends State<DescribeYou> {
                               case Status.completed:
                                 return SizedBox(
                                   width: double.infinity,
-                                  height: 200,
+                                  height: 250,
                                   child:  value.specialityData.data!.data!.isEmpty ?
                                   Center(
                                     child: Text("Sorry For Inconvenience!"),
                                   ) :ListView.builder(
                                       itemCount: value.specialityData.data!.data!.length,
                                       itemBuilder: (context, index) {
-                                        return selectSkillSetCard(() {
-                                          _onSelected(index);
-                                          print(index);
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SkillSetSubCatScreen()));
-                                        }, value.specialityData.data!.data![index].name.toString());
+                                        return InkWell(
+                                          onTap: (){
+                                            setState(() {
+                                              _selectedIndex = index;
+                                              _sendIndex = value.specialityData.data!.data![index].id.toString();
+                                              print(_selectedIndex);
+                                              print(_sendIndex);
+                                            });
+                                          },
+                                          child: Align(
+                                            alignment:Alignment.topLeft,
+                                            child: Container(
+                                              width: screenWidth,
+                                              color:  index == _selectedIndex ? app_text_color : Colors.white,
+                                              margin: EdgeInsets.only(
+                                                  left: 40.h, top: 5.h, right: 40.h),
+                                              padding: EdgeInsets.only(left:10.h,right:0.h,top: 3.h,bottom: 3.h),
+                                              child:  Text(
+                                                  value.specialityData.data!.data![index].name.toString(),
+                                                style: TextStyle(
+                                                  color: index == _selectedIndex ? Colors.white : Colors.black,
+                                                  fontSize: 18.sp,
+                                                  fontFamily:
+                                                  'nunit_regular',
+                                                ),
+                                              ),
+
+                                            ),
+                                          ),
+                                        );
+
+                                        //   selectSkillSetCard(() {
+                                        //   _onSelected(index);
+                                        //   print(index);
+                                        //   Navigator.push(
+                                        //       context,
+                                        //       MaterialPageRoute(
+                                        //           builder: (context) =>
+                                        //               SkillSetSubCatScreen()));
+                                        // }, value.specialityData.data!.data![index].name.toString());
                                       }),
                                 );
                               default:
@@ -156,7 +183,7 @@ class _DescribeYouState extends State<DescribeYou> {
                                   label: 'NEXT',
                                   onPressed: () async {
                                     Map data = {
-                                      "speciality_id": _selectedIndex,
+                                      "speciality_id": _sendIndex,
                                       "user_id":224
                                     };
                                     selectSkillSetSubcatViewModel.postSelectSkillSetApi(data, context);

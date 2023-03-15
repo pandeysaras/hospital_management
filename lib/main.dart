@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:medteam/Screen/CreateAccount.dart';
+import 'package:medteam/Screen/Login.dart';
 import 'package:medteam/Screen/Profile.dart';
 import 'package:medteam/Screen/ProfileInfo.dart';
 import 'package:medteam/Screen/ProfilePhoto.dart';
+import 'package:medteam/Screen/SelectIndustry.dart';
 import 'package:medteam/Screen/UploadLicense.dart';
 import 'package:medteam/Screen/UploadedDocuments.dart';
 import 'package:medteam/Screen/YourResume.dart';
@@ -18,6 +21,7 @@ import 'package:medteam/view_model/sign_up_view_models/profile_image_view_model.
 import 'package:medteam/view_model/sign_up_view_models/refral_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
 import 'package:medteam/view_model/spec_and_subspec_view_model.dart';
+import 'package:medteam/view_model/state_list_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:medteam/Screen/Splash.dart';
 import 'package:medteam/view_model/sign_up_view_models/auth_view_model.dart';
@@ -59,10 +63,11 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => CompleteProfile2ViewModel()),
         ChangeNotifierProvider(create: (_) => CompleteProfile3ViewModel()),
         ChangeNotifierProvider(create: (_) => ProfileViewModel()),
+        ChangeNotifierProvider(create: (_) => StateListViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: YourResume(),
+        home: SplashScreen(),
       ),
     );
   }

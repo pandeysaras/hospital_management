@@ -126,14 +126,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                     thecontroller: email_controller,
                                     label: "Email ID",
                                     type: TextInputType.emailAddress,
-                                    action: TextInputAction.next,
                                     lines: 1,
                                     secure: false,
-                                    focusChange: () {
-                                      email_focusnode.unfocus();
-                                    },
                                     fontSize: 18.sp,
-                                    focusNode: email_focusnode,
                                     text_color: black,
                                     hint_color: gray),
                               ),
@@ -144,14 +139,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                     thecontroller: cemail_controller,
                                     label: "Confirm Email ID",
                                     type: TextInputType.emailAddress,
-                                    action: TextInputAction.next,
                                     lines: 1,
                                     secure: false,
-                                    focusChange: () {
-                                      cemail_focusnode.unfocus();
-                                    },
                                     fontSize: 18.sp,
-                                    focusNode: cemail_focusnode,
                                     text_color: black,
                                     hint_color: gray),
                               ),

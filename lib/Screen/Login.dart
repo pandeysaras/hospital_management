@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medteam/Components/CommonButton.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/CreateAccount.dart';
+import 'package:medteam/Screen/FindWork.dart';
 import 'package:medteam/Utils/colors.dart';
 import 'package:medteam/view_model/sign_up_view_models/login_view_model.dart';
 import 'package:provider/provider.dart';
@@ -97,14 +98,10 @@ class _LoginState extends State<Login> {
                                 thecontroller: email_controller,
                                 label: "Enter Email",
                                 type: TextInputType.text,
-                                action: TextInputAction.next,
                                 lines: 1,
                                 secure: false,
-                                focusChange: () {
-                                  email_focusnode.unfocus();
-                                },
+
                                 fontSize: 18.sp,
-                                focusNode: email_focusnode,
                                 text_color: black,
                                 hint_color: gray),
                             SizedBox(
@@ -114,14 +111,9 @@ class _LoginState extends State<Login> {
                                 thecontroller: password_controller,
                                 label: "Password",
                                 type: TextInputType.visiblePassword,
-                                action: TextInputAction.done,
                                 lines: 1,
                                 secure: true,
-                                focusChange: () {
-                                  password_focusnode.unfocus();
-                                },
                                 fontSize: 18.sp,
-                                focusNode: password_focusnode,
                                 text_color: black,
                                 hint_color: gray),
                             SizedBox(height: 5.h),
@@ -149,14 +141,15 @@ class _LoginState extends State<Login> {
                                 label: 'SIGN IN',
                                 onPressed: () async {
                                     Map data = {
-                                      "email":"mili@mailinator.com",
-                                      "password":123456
+                                      "email": email_controller.text,
+                                      "password":password_controller.text
                                     };
+                                    if(email_controller.value.text.isNotEmpty && password_controller.value.text.isNotEmpty)
                                     loginViewModel.postLoginApi(data, context);
-                                  /* Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => OrderDetail()));*/
+                                   // Navigator.push(
+                                   //      context,
+                                   //      MaterialPageRoute(
+                                   //          builder: (context) => FindWork()));
                                 },
                                 border: 35,
                                 height: 50,

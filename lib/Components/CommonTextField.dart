@@ -6,12 +6,9 @@ import 'package:medteam/Utils/colors.dart';
 class CommonTextField extends StatelessWidget {
   TextEditingController thecontroller;
   String label;
-  Function focusChange;
-  TextInputAction action;
   TextInputType type;
   bool secure;
   int lines;
-  FocusNode focusNode;
   double fontSize;
   bool enable;
   String font_family;
@@ -22,12 +19,9 @@ class CommonTextField extends StatelessWidget {
       {required this.thecontroller,
       required this.label,
       required this.type,
-      required this.action,
       this.secure = false,
-      required this.focusChange,
       this.lines = 1,
       required this.fontSize,
-      required this.focusNode,
       this.enable = true,
       this.font_family = 'nunit_regular',
       required this.text_color,
@@ -46,7 +40,6 @@ class CommonTextField extends StatelessWidget {
             child: TextField(
                 maxLines: lines,
                 keyboardType: type,
-                textInputAction: action,
                 obscureText: secure,
                 autofocus: false,
                 enabled: enable,
@@ -57,10 +50,6 @@ class CommonTextField extends StatelessWidget {
                   fontFamily: font_family,
                 ),
                 controller: thecontroller,
-                focusNode: focusNode,
-                onEditingComplete: () {
-                  focusChange();
-                },
                 decoration: InputDecoration(
                   focusedBorder: border,
                   border: border,

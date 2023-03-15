@@ -662,17 +662,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                           "Account Holder Name",
                                                       type: TextInputType
                                                           .emailAddress,
-                                                      action:
-                                                          TextInputAction.next,
+
                                                       lines: 1,
                                                       secure: false,
-                                                      focusChange: () {
-                                                        mobile_focusnode
-                                                            .unfocus();
-                                                      },
                                                       fontSize: 18.sp,
-                                                      focusNode:
-                                                          mobile_focusnode,
                                                       text_color: black,
                                                       hint_color: gray),
                                                 ),
@@ -748,17 +741,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                       label: "Account Number",
                                                       type:
                                                           TextInputType.number,
-                                                      action:
-                                                          TextInputAction.next,
                                                       lines: 1,
                                                       secure: false,
-                                                      focusChange: () {
-                                                        mobile_focusnode
-                                                            .unfocus();
-                                                      },
+
                                                       fontSize: 18.sp,
-                                                      focusNode:
-                                                          mobile_focusnode,
+
                                                       text_color: black,
                                                       hint_color: gray),
                                                 ),
@@ -773,17 +760,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                           "Confirm Account Number",
                                                       type:
                                                           TextInputType.number,
-                                                      action:
-                                                          TextInputAction.next,
+
                                                       lines: 1,
                                                       secure: false,
-                                                      focusChange: () {
-                                                        mobile_focusnode
-                                                            .unfocus();
-                                                      },
                                                       fontSize: 18.sp,
-                                                      focusNode:
-                                                          mobile_focusnode,
                                                       text_color: black,
                                                       hint_color: gray),
                                                 ),
@@ -799,17 +779,11 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                           "Routing Account Number",
                                                       type:
                                                           TextInputType.number,
-                                                      action:
-                                                          TextInputAction.done,
                                                       lines: 1,
                                                       secure: false,
-                                                      focusChange: () {
-                                                        mobile_focusnode
-                                                            .unfocus();
-                                                      },
+
                                                       fontSize: 18.sp,
-                                                      focusNode:
-                                                          mobile_focusnode,
+
                                                       text_color: black,
                                                       hint_color: gray),
                                                 ),
@@ -975,12 +949,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                             );
                                       }
 
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => UploadedDocuments(),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => UploadedDocuments(),
+                                        ),
+                                      );
                                     },
                                     border: 35.h,
                                     height: 50.h,

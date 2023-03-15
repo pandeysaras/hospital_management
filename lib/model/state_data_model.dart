@@ -1,18 +1,17 @@
-StateDataModel? globalStateDataModel ;
 class StateDataModel {
   bool? status;
   String? message;
-  List<Data>? data;
+  List<States>? states;
 
-  StateDataModel({this.status, this.message, this.data});
+  StateDataModel({this.status, this.message, this.states});
 
   StateDataModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      states = <States>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        states!.add(new States.fromJson(v));
       });
     }
   }
@@ -21,22 +20,22 @@ class StateDataModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    if (this.states != null) {
+      data['data'] = this.states!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Data {
+class States {
   int? id;
   String? state;
   String? status;
   String? stateCode;
 
-  Data({this.id, this.state, this.status, this.stateCode});
+  States({this.id, this.state, this.status, this.stateCode});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  States.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     state = json['state'];
     status = json['status'];

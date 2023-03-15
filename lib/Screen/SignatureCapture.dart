@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medteam/Components/CommonButton.dart';
@@ -7,6 +9,10 @@ import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
 import 'package:medteam/Screen/YourResume.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:provider/provider.dart';
+import 'package:signature/signature.dart';
+
+import '../view_model/complete_profile_view_models/complete_profile_3_view_model.dart';
 
 class SignatureCapture extends StatefulWidget {
   @override
@@ -19,19 +25,51 @@ class _SignatureCaptureState extends State<SignatureCapture> {
 
   late TextEditingController mobile_controller;
   late FocusNode mobile_focusnode;
+
+  final SignatureController _controller = SignatureController(
+    penStrokeWidth: 5,
+    penColor: Colors.black,
+    exportBackgroundColor: Colors.white,
+  );
+
+// INITIALIZE. RESULT IS A WIDGET, SO IT CAN BE DIRECTLY USED IN BUILD METHOD
+
+
+
   @override
   void initState() {
     super.initState();
+    _controller.addListener(() { });
     mobile_controller = TextEditingController();
     mobile_focusnode = FocusNode();
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  // final Uint8List? data =
+  //     await _controller.toPngBytes(height: 1000, width: 1000);
+  // if (data == null) {
+  // return;
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final completeProfile3VM = Provider.of<CompleteProfile3ViewModel>(context);
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
+
     ScreenUtil.init(context, designSize: Size(screenWidth, screenHeight));
+
+    var _signatureCanvas = Signature(
+      controller: _controller,
+      width: screenWidth,
+      height: screenHeight/2.5,
+      backgroundColor: Colors.white,
+    );
 
     return Scaffold(
       key: _key,
@@ -641,14 +679,19 @@ class _SignatureCaptureState extends State<SignatureCapture> {
                         fit: BoxFit.fill,
                       ),
                     ),*/
-                    SizedBox(height: screenHeight/3,),
-                    Text(
-                      'CLEAR',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: app_text_color,
-                          fontSize: 25.sp,
-                          fontFamily: 'nunit_bold'),
+                    _signatureCanvas,
+                    GestureDetector(
+                      onTap: () {
+                        _controller.clear();
+                      },
+                      child: Text(
+                        'CLEAR',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: app_text_color,
+                            fontSize: 25.sp,
+                            fontFamily: 'nunit_bold'),
+                      ),
                     ),
 
                     Expanded(
@@ -656,7 +699,7 @@ class _SignatureCaptureState extends State<SignatureCapture> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
 
-                          SizedBox(height: 30,),
+                          // SizedBox(height: 30,),
 
                           Container(
                             margin: EdgeInsets.only(left: 40.h,right: 40.h),
@@ -671,9 +714,26 @@ class _SignatureCaptureState extends State<SignatureCapture> {
                                     fontSize: 18,
                                     textColor: app_text_color,
                                     backgroundColor: black),
-                                CommonButton(
+                               completeProfile3VM.loading ? CircularProgressIndicator() : CommonButton(
                                     label: 'NEXT',
                                     onPressed: () async {
+                                      try{
+                                        final Uint8List? imageFile =
+                                        await _controller.toPngBytes();
+
+                                        print("=================================${imageFile}=============");
+                                        // File file = File.fromRawPath(imageFile!);
+                                        // await file.writeAsBytes(imageFile);
+                                        print("======================================${Image.memory(imageFile!)}");
+                                        completeProfile3VM.postCompleteProfile3Api(imageFile, context);
+                                      } catch(e) {
+                                        print(e.toString());
+                                      }
+
+                                      // Map data = {
+                                      //   "user_id" :   224,
+                                      //   "signature_file" : imageFile
+                                      // };
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(

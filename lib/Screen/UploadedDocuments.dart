@@ -191,14 +191,9 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                             thecontroller: licenseNumberController,
                             label: "License Number",
                             type: TextInputType.text,
-                            action: TextInputAction.done,
                             lines: 1,
                             secure: false,
-                            focusChange: () {
-                              // mobile_focusnode.unfocus();
-                            },
                             fontSize: 18.sp,
-                            focusNode: mobile_focusnode,
                             text_color: black,
                             hint_color: gray),
                       ),
@@ -403,6 +398,13 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                             //     builder: (cont ext) => FindWorkBySort(),
                             //   ),
                             // );
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FindWorkBySort(),
+                              ),
+                            );
                           },
                           border: 35.h,
                           height: 50.h,

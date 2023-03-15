@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:medteam/Components/CommonButton.dart';
 import 'package:medteam/Components/CommonButtonWithPadding.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
@@ -65,9 +63,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
   @override
   void initState() {
     super.initState();
-    stateListViewModel.fetchStateList(context).then((_) {
-      setState(() {});
-    });
+    stateListViewModel.fetchStateList(context);
     security_controller = TextEditingController();
     address1_controller = TextEditingController();
     address2_controller = TextEditingController();
@@ -730,14 +726,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           thecontroller: security_controller,
                           label: "Social Security Number",
                           type: TextInputType.number,
-                          action: TextInputAction.next,
                           lines: 1,
                           secure: false,
-                          focusChange: () {
-                            security_focusnode.unfocus();
-                          },
                           fontSize: 18.sp,
-                          focusNode: security_focusnode,
                           text_color: black,
                           hint_color: gray),
                     ),
@@ -940,14 +931,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           thecontroller: address1_controller,
                           label: "Address Line 1",
                           type: TextInputType.emailAddress,
-                          action: TextInputAction.next,
                           lines: 1,
                           secure: false,
-                          focusChange: () {
-                            address1_focusnode.unfocus();
-                          },
                           fontSize: 18.sp,
-                          focusNode: address1_focusnode,
                           text_color: black,
                           hint_color: gray),
                     ),
@@ -958,14 +944,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           thecontroller: address2_controller,
                           label: "Address Line 2",
                           type: TextInputType.emailAddress,
-                          action: TextInputAction.next,
                           lines: 1,
                           secure: false,
-                          focusChange: () {
-                            address2_focusnode.unfocus();
-                          },
                           fontSize: 18.sp,
-                          focusNode: address2_focusnode,
                           text_color: black,
                           hint_color: gray),
                     ),
@@ -979,18 +960,15 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 thecontroller: city_controller,
                                 label: "City",
                                 type: TextInputType.emailAddress,
-                                action: TextInputAction.next,
                                 lines: 1,
                                 secure: false,
-                                focusChange: () {
-                                  city_focusnode.unfocus();
-                                },
+
                                 fontSize: 18.sp,
-                                focusNode: city_focusnode,
                                 text_color: black,
                                 hint_color: gray),
                           ),
                         ),
+
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(
@@ -1056,14 +1034,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                           thecontroller: zip_controller,
                           label: "Zipcode",
                           type: TextInputType.emailAddress,
-                          action: TextInputAction.next,
                           lines: 1,
                           secure: false,
-                          focusChange: () {
-                            zip_focusnode.unfocus();
-                          },
+
                           fontSize: 18.sp,
-                          focusNode: zip_focusnode,
                           text_color: black,
                           hint_color: gray),
                     ),
