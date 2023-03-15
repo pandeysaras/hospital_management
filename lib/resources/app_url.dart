@@ -46,4 +46,6 @@ class AppUrl {
       "$baseUrl/api/get_professional_licence?id=23";
 
   static var stateEndPoint = "$baseUrl/api/get_state_list";
+
+  static var getSUbspltyEndPoint = "$baseUrl/api/getSubSpecialityData?";
 }

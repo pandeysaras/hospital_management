@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -55,8 +56,10 @@ class _YourResumeState extends State<YourResume> {
   @override
   void initState() {
     super.initState();
+    context.read<ProfileViewModel>().subSlAPI(context);
     mobile_controller = TextEditingController();
     mobile_focusnode = FocusNode();
+
     // FlutterFileView.init();
   }
 
@@ -687,56 +690,90 @@ class _YourResumeState extends State<YourResume> {
                       ),
                       child: Row(
                         children: [
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.only(left: 20.h, right: 20.w),
-                              child: TextField(
-                                  maxLines: 1,
-                                  keyboardType: TextInputType.text,
-                                  textInputAction: TextInputAction.done,
-                                  obscureText: true,
-                                  autofocus: false,
-                                  enabled: true,
-                                  cursorColor: black,
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    color: black,
-                                    fontFamily: "nunit_regular",
+                          context.watch<ProfileViewModel>().listCerti.isEmpty
+                              ? Expanded(
+                                  child: const LinearProgressIndicator(),
+                                )
+                              : Expanded(
+                                  // width: 300,
+                                  child: DropdownSearch<String>(
+                                    popupProps: PopupProps.menu(
+                                      showSelectedItems: true,
+                                      disabledItemFn: (String s) =>
+                                          s.startsWith('I'),
+                                    ),
+                                    items: context
+                                        .watch<ProfileViewModel>()
+                                        .listCerti,
+                                    dropdownDecoratorProps:
+                                        DropDownDecoratorProps(
+                                      dropdownSearchDecoration: InputDecoration(
+                                        // labelText: "Menu mode",
+                                        hintText: "Extra Certificate",
+                                      ),
+                                    ),
+                                    onChanged: (value) {
+                                      // print(value);
+
+                                      certi 
+                                      // licenseType = value.toString();
+                                    },
+                                    // selectedItem: context
+                                    //     .read<ProfileViewModel>()
+                                    //     .listOfLicenseTypes
+                                    //     .first,
                                   ),
-                                  controller: mobile_controller,
-                                  focusNode: mobile_focusnode,
-                                  onEditingComplete: () {
-                                    // focusChange();
-                                  },
-                                  decoration: InputDecoration(
-                                    focusedBorder: border,
-                                    border: border,
-                                    enabledBorder: border,
-                                    disabledBorder: border,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 0.0, horizontal: 10.0),
-                                    hintText: "Extra Certificate",
-                                    hintStyle: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: gray,
-                                      fontFamily: "nunit_regular",
-                                    ),
-                                    suffixIconConstraints: BoxConstraints(
-                                        maxHeight: 20, maxWidth: 30),
-                                    suffixIcon: GestureDetector(
-                                      onTap: () {
-                                        //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                      },
-                                      child: Padding(
-                                          padding: EdgeInsets.only(right: 5),
-                                          child: Image.asset(
-                                            'assets/down_arrow.png',
-                                            color: black,
-                                          )),
-                                    ),
-                                  )),
-                            ),
-                          ),
+                                ),
+                          // Expanded(
+                          //   child: Container(
+                          //     margin: EdgeInsets.only(left: 20.h, right: 20.w),
+                          //     child: TextField(
+                          //         maxLines: 1,
+                          //         keyboardType: TextInputType.text,
+                          //         textInputAction: TextInputAction.done,
+                          //         obscureText: true,
+                          //         autofocus: false,
+                          //         enabled: true,
+                          //         cursorColor: black,
+                          //         style: TextStyle(
+                          //           fontSize: 18.sp,
+                          //           color: black,
+                          //           fontFamily: "nunit_regular",
+                          //         ),
+                          //         controller: mobile_controller,
+                          //         focusNode: mobile_focusnode,
+                          //         onEditingComplete: () {
+                          //           // focusChange();
+                          //         },
+                          //         decoration: InputDecoration(
+                          //           focusedBorder: border,
+                          //           border: border,
+                          //           enabledBorder: border,
+                          //           disabledBorder: border,
+                          //           contentPadding: EdgeInsets.symmetric(
+                          //               vertical: 0.0, horizontal: 10.0),
+                          //           hintText: "Extra Certificate",
+                          //           hintStyle: TextStyle(
+                          //             fontSize: 18.sp,
+                          //             color: gray,
+                          //             fontFamily: "nunit_regular",
+                          //           ),
+                          //           suffixIconConstraints: BoxConstraints(
+                          //               maxHeight: 20, maxWidth: 30),
+                          //           suffixIcon: GestureDetector(
+                          //             onTap: () {
+                          //               //loginController.pass_secure.value = !loginController.pass_secure.value;
+                          //             },
+                          //             child: Padding(
+                          //                 padding: EdgeInsets.only(right: 5),
+                          //                 child: Image.asset(
+                          //                   'assets/down_arrow.png',
+                          //                   color: black,
+                          //                 )),
+                          //           ),
+                          //         )),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),

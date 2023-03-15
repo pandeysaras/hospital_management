@@ -34,4 +34,14 @@ class ProfileRepository {
       rethrow;
     }
   }
+
+  Future<dynamic> subspAPI() async {
+    try {
+      dynamic response = await _apiServices
+          .getGetApiResponse("${AppUrl.getSUbspltyEndPoint}id=23");
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

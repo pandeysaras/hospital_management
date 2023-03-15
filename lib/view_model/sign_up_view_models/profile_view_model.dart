@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 
 import '../../model/bank_details_model.dart';
 import '../../model/state_list_model.dart';
+import '../../model/subspeciality_data_model.dart';
 
 class ProfileViewModel with ChangeNotifier {
   final _myRepo = ProfileRepository();
@@ -35,7 +36,7 @@ class ProfileViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUserResume(File file, BuildContext context) async {
+  Future<void> updateUserResume(File file, BuildContext context,) async {
     setLoading();
     try {
       // setLoading();
@@ -327,4 +328,53 @@ class ProfileViewModel with ChangeNotifier {
       };
     });
   }
+
+  //-------------------------sub it
+  List<String> listCerti = [];
+
+  Future<void> subSlAPI(BuildContext context) async {
+    //-------register api call-----------//
+
+    await _myRepo.subspAPI().then((value) async {
+      // refModel refObj = refModel.fromJson(value);
+      globalSubSpecialityDataModel = SubSpecialityDataModel.fromJson(value); //
+
+      for (int i = 0;
+          i <= globalSubSpecialityDataModel!.data!.length - 1;
+          i++) {
+        listCerti.add(globalSubSpecialityDataModel!.data![i].name.toString());
+        // globalLicenseListModel!.data![i].name.toString();
+        notifyListeners();
+      }
+
+      // print(value);
+
+      // if (hearAboutUsModel.status == true) {
+      // Utils.showSnackBar(context, licenseListModel.message.toString(), Colors.blue);
+      // selectBoxesHearList = globalhearAboutUsModel!.data!;
+      notifyListeners();
+
+      // print(listOfLicenseTypes[1]);
+
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => FindWork()),
+      // );
+
+      // if (kDebugMode) {
+      //   print(value.toString());
+      // }
+    }).onError((error, stackTrace) async {
+      _isLoading = false;
+      notifyListeners();
+      throw {
+        if (kDebugMode)
+          {
+            print(error.toString()),
+          }
+      };
+    });
+  }
+
+  //------------
 }

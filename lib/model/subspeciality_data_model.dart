@@ -1,3 +1,5 @@
+SubSpecialityDataModel? globalSubSpecialityDataModel;
+
 class SubSpecialityDataModel {
   bool? status;
   String? message;
