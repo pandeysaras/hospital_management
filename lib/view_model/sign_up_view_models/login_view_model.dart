@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../Screen/FindWork.dart';
 import '../../Utils/utils.dart';
 import '../../repository/auth_repo.dart';
 
@@ -20,6 +21,10 @@ class LoginViewModel with ChangeNotifier{
     setLoading(true);
     _authRepo.loginApi(data).then((value) {
       setLoading(false);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => FindWork()));
       Utils.showSnackBar(
           context, value["message"], Colors.blue);
     }).onError((error, stackTrace) {

@@ -148,7 +148,7 @@ class _ProfileState extends State<Profile> {
               style: TextStyle(
                   color: black,
                   fontSize: 15.sp,
-                  fontFamily: 'nunit_extrabold'),
+                fontFamily: 'nunit_extrabold'),
             ),
             SizedBox(height: 10,),
             Text(

@@ -26,11 +26,12 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
   bool check1 = false, check2 = false, isLoading = false;
   File? profilePic;
   String? imageUrl;
+
   final _picker = ImagePicker();
 
   Future getImage(ImageSource imageSource) async {
     final pickedFile =
-    await _picker.pickImage(source: imageSource, imageQuality: 80);
+        await _picker.pickImage(source: imageSource, imageQuality: 80);
     if (pickedFile == null) return;
     setState(() {
       if (pickedFile != null) {
@@ -40,48 +41,15 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
     });
   }
 
-  PrfileViewModel prfileViewModel = PrfileViewModel();
-  // Future<void> updateUserProfilePic(File image) async {
-  //   try {
-  //     isLoading = true;
-  //     var request = http.MultipartRequest('POST', Uri.parse('${AppUrl.uploadProfile}'));
-  //     request.fields.addAll({
-  //       'user_id': "224",
-  //     });
-  //
-  //     if(image == null || image == "") {} else {
-  //       request.files.add(await http.MultipartFile.fromPath('profile_picture', image.path));
-  //     }
-  //
-  //
-  //     http.StreamedResponse response = await request.send();
-  //     if (response.statusCode == 200) {
-  //       isLoading = false;
-  //       Utils.showSnackBar(
-  //           context, "Step 4 Created Successfully", Colors.blue);
-  //     }
-  //     else {
-  //       isLoading = false;
-  //       print(response.reasonPhrase);
-  //       throw Exception("Failed to create");
-  //     }
-  //
-  //   } catch (error){
-  //     isLoading = false;
-  //     throw Exception("Failed to create");
-  //   }
-  //
-  //
-  // }
+  ProfilePicViewModel prfileViewModel = ProfilePicViewModel();
 
-
-
-  void _toggleCheck1 () {
+  void _toggleCheck1() {
     setState(() {
       check1 = !check1;
     });
   }
-  void _toggleCheck2 () {
+
+  void _toggleCheck2() {
     setState(() {
       check2 = !check2;
     });
@@ -160,15 +128,22 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                             margin: EdgeInsets.only(
                                                 left: 0.h, right: 10.h),
                                             decoration: BoxDecoration(
-                                                color: check1 ? Color(0xFF0075B2) : Colors.white,
-                                                borderRadius: BorderRadius.circular(5),
-                                                border: check1 ? null :Border.all(color: Colors.grey)
-                                            ),
-                                            child: Icon(Icons.check, size: 20, color: Colors.white,)
-                                        ),
+                                                color: check1
+                                                    ? Color(0xFF0075B2)
+                                                    : Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                border: check1
+                                                    ? null
+                                                    : Border.all(
+                                                        color: Colors.grey)),
+                                            child: Icon(
+                                              Icons.check,
+                                              size: 20,
+                                              color: Colors.white,
+                                            )),
                                       ),
                                     ),
-
                                     Expanded(
                                       child: Container(
                                         child: Text(
@@ -198,12 +173,20 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                             margin: EdgeInsets.only(
                                                 left: 0.h, right: 10.h),
                                             decoration: BoxDecoration(
-                                                color: check2 ? Color(0xFF0075B2) : Colors.white,
-                                                borderRadius: BorderRadius.circular(5),
-                                                border: check2 ? null :Border.all(color: Colors.grey)
-                                            ),
-                                            child: Icon(Icons.check, size: 20, color: Colors.white,)
-                                        ),
+                                                color: check2
+                                                    ? Color(0xFF0075B2)
+                                                    : Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                border: check2
+                                                    ? null
+                                                    : Border.all(
+                                                        color: Colors.grey)),
+                                            child: Icon(
+                                              Icons.check,
+                                              size: 20,
+                                              color: Colors.white,
+                                            )),
                                       ),
                                     ),
                                     Expanded(
@@ -225,16 +208,19 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                 child: Container(
                                   margin: EdgeInsets.only(
                                       top: 20.h, left: 0.h, right: 20.h),
-                                  child:
-                                  profilePic != null ? Image.file(profilePic!, width: 105.h,
-                                    height: 105.h,
-                                    fit: BoxFit.contain,) :
-                                  Image.asset(
-                                    'assets/user.png',
-                                    width: 105.h,
-                                    height: 105.h,
-                                    fit: BoxFit.contain,
-                                  ),
+                                  child: profilePic != null
+                                      ? Image.file(
+                                          profilePic!,
+                                          width: 105.h,
+                                          height: 105.h,
+                                          fit: BoxFit.contain,
+                                        )
+                                      : Image.asset(
+                                          'assets/user.png',
+                                          width: 105.h,
+                                          height: 105.h,
+                                          fit: BoxFit.contain,
+                                        ),
                                 ),
                               ),
                               Container(
@@ -285,23 +271,28 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
                                       child: Container(
                                         margin: EdgeInsets.only(right: 65.h),
                                         child: Center(
-                                          child: prfileViewModel.isLoading  ? CircularProgressIndicator() : CommonButtonWhite(
-                                              label:  'NEXT',
-                                              onPressed: () async {
-                                                await  prfileViewModel.updateUserProfilePic(profilePic!, context);
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SelectIndustry(),
-                                                  ),
-                                                );
-                                              },
-                                              border: 35.h,
-                                              height: 50.h,
-                                              fontSize: 18,
-                                              textColor: app_text_color,
-                                              backgroundColor: black),
+                                          child: prfileViewModel.isLoading
+                                              ? CircularProgressIndicator()
+                                              : CommonButtonWhite(
+                                                  label: 'NEXT',
+                                                  onPressed: () async {
+                                                    await prfileViewModel
+                                                        .updateUserProfilePic(
+                                                            profilePic!,
+                                                            context);
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SelectIndustry(),
+                                                      ),
+                                                    );
+                                                  },
+                                                  border: 35.h,
+                                                  height: 50.h,
+                                                  fontSize: 18,
+                                                  textColor: app_text_color,
+                                                  backgroundColor: black),
                                         ),
                                       ),
                                     ),
@@ -322,8 +313,3 @@ class _ProfilePhotoScreenState extends State<ProfilePhotoScreen> {
         ));
   }
 }
-
-
-
-
-

@@ -22,8 +22,8 @@ class _SelectIndustryState extends State<SelectIndustry> {
   late double screenWidth, screenHeight;
   IndustryDataViewModel industryDataViewModel = IndustryDataViewModel();
 
-  List<int> _selectedIndices = [];
-  List<String> _sendIndex = [];
+   int _selectedIndex = -1;
+    String _sendIndex = "";
 
   @override
   void initState() {
@@ -130,15 +130,9 @@ class _SelectIndustryState extends State<SelectIndustry> {
                                         return InkWell(
                                           onTap: (){
                                             setState(() {
-                                              if (_selectedIndices.contains(index)) {
-                                                _selectedIndices.remove(index);
-                                                _sendIndex.remove(value.industryData.data!.data![index].id.toString());
-
-                                              } else {
-                                                _selectedIndices.add(index);
-                                                _sendIndex.add(value.industryData.data!.data![index].id.toString());
-                                              }
-                                            print(_selectedIndices);
+                                               _selectedIndex = index;
+                                               _sendIndex = value.industryData.data!.data![index].id.toString();
+                                            print(_selectedIndex);
                                               print(_sendIndex);
                                             });
                                           },
@@ -146,7 +140,7 @@ class _SelectIndustryState extends State<SelectIndustry> {
                                             alignment: Alignment.topLeft,
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color:  _selectedIndices.contains(index)  ? app_text_color : Colors.white,
+                                                  color:  index == _selectedIndex  ? app_text_color : Colors.white,
                                                   borderRadius: BorderRadius.all(
                                                       Radius.circular(20))),
                                               margin: EdgeInsets.only(
@@ -159,7 +153,7 @@ class _SelectIndustryState extends State<SelectIndustry> {
                                               child: Text(
                                                 value.industryData.data!.data![index].name.toString(),
                                                 style: TextStyle(
-                                                  color: _selectedIndices.contains(index) ? Colors.white : Colors.black,
+                                                  color: index == _selectedIndex ? Colors.white : Colors.black,
                                                   fontSize: 18.sp,
                                                   fontFamily: 'nunit_bold',
                                                 ),

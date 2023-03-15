@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medteam/Components/CommonButton.dart';
@@ -6,7 +9,10 @@ import 'package:medteam/Components/CommonButtonWithPadding.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/AddLicense.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
+import 'package:medteam/Screen/UploadLicense.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
+import 'package:provider/provider.dart';
 
 class YourResume extends StatefulWidget {
   @override
@@ -19,13 +25,40 @@ class _YourResumeState extends State<YourResume> {
   late TextEditingController mobile_controller;
   late FocusNode mobile_focusnode;
 
+//----------------------
+  File? file;
+  String? fileName;
+  bool fileChoosed = false;
+
+  void pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      print("---------------------picked");
+      file = File(
+        result.files.single.path!,
+      );
+      fileName = result.files.single.name.toString();
+      setState(() {
+        fileChoosed = true;
+      });
+    } else {
+      print("No file");
+      // User canceled the picker
+    }
+  }
+
+  //---------------------------------
+
+  //------------------------------------
+
   @override
   void initState() {
     super.initState();
     mobile_controller = TextEditingController();
     mobile_focusnode = FocusNode();
+    // FlutterFileView.init();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,18 +90,19 @@ class _YourResumeState extends State<YourResume> {
       drawer: Drawer(
         child: Container(
           decoration: new BoxDecoration(
-            gradient: LinearGradient(colors: [Color(0xFF0075B2),Color(0xFF3BA9E2)]),
+            gradient:
+                LinearGradient(colors: [Color(0xFF0075B2), Color(0xFF3BA9E2)]),
           ),
           child: Column(
             children: [
               InkWell(
-                onTap: (){
+                onTap: () {
                   _key.currentState?.closeDrawer();
                 },
                 child: Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    margin: EdgeInsets.only(top:35,left: 5,right: 5),
+                    margin: EdgeInsets.only(top: 35, left: 5, right: 5),
                     height: 30,
                     width: 30,
                     child: Image.asset(
@@ -80,7 +114,7 @@ class _YourResumeState extends State<YourResume> {
               ),
               ClipRect(
                 child: Container(
-                  margin: EdgeInsets.only(top:5,left: 5,right: 5),
+                  margin: EdgeInsets.only(top: 5, left: 5, right: 5),
                   height: 100,
                   width: 100,
                   child: Image.asset(
@@ -89,7 +123,9 @@ class _YourResumeState extends State<YourResume> {
                   ),
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Expanded(
                 child: Container(
                   color: white,
@@ -99,14 +135,17 @@ class _YourResumeState extends State<YourResume> {
                     padding: EdgeInsets.zero,
                     children: <Widget>[
                       InkWell(
-                        onTap:(){
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 0,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 0,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -117,9 +156,11 @@ class _YourResumeState extends State<YourResume> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -139,7 +180,6 @@ class _YourResumeState extends State<YourResume> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -148,16 +188,21 @@ class _YourResumeState extends State<YourResume> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 1,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 1,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -168,9 +213,11 @@ class _YourResumeState extends State<YourResume> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -190,7 +237,6 @@ class _YourResumeState extends State<YourResume> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -199,17 +245,21 @@ class _YourResumeState extends State<YourResume> {
                           ),
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 2,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 2,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -220,9 +270,11 @@ class _YourResumeState extends State<YourResume> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -242,7 +294,6 @@ class _YourResumeState extends State<YourResume> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -251,16 +302,21 @@ class _YourResumeState extends State<YourResume> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 3,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 3,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -271,9 +327,11 @@ class _YourResumeState extends State<YourResume> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -293,7 +351,6 @@ class _YourResumeState extends State<YourResume> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -302,10 +359,11 @@ class _YourResumeState extends State<YourResume> {
                           ),
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -316,9 +374,11 @@ class _YourResumeState extends State<YourResume> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -338,7 +398,6 @@ class _YourResumeState extends State<YourResume> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -346,10 +405,11 @@ class _YourResumeState extends State<YourResume> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -360,9 +420,11 @@ class _YourResumeState extends State<YourResume> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -382,7 +444,6 @@ class _YourResumeState extends State<YourResume> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -390,10 +451,11 @@ class _YourResumeState extends State<YourResume> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -404,9 +466,11 @@ class _YourResumeState extends State<YourResume> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -426,7 +490,6 @@ class _YourResumeState extends State<YourResume> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -434,10 +497,11 @@ class _YourResumeState extends State<YourResume> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -448,9 +512,11 @@ class _YourResumeState extends State<YourResume> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -470,16 +536,16 @@ class _YourResumeState extends State<YourResume> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
@@ -500,260 +566,266 @@ class _YourResumeState extends State<YourResume> {
                     Row(
                       children: [
                         Container(
-                          height:18.h,
-                          margin: EdgeInsets.only(
-                              left: 20.h, top: 0.h,right: 0.h),
-                          padding: EdgeInsets.only(left: 3,right: 3),
-                          child:  Center(
+                          height: 18.h,
+                          margin:
+                              EdgeInsets.only(left: 20.h, top: 0.h, right: 0.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
                               child: Image.asset(
-                                'assets/green_check_icon.png',
-                              )
-                          ),
+                            'assets/green_check_icon.png',
+                          )),
                         ),
                         Container(
-                          height:18.h,
-                          margin: EdgeInsets.only(
-                              left: 10.h, top: 0.h,right: 0.h),
-                          padding: EdgeInsets.only(left: 3,right: 3),
-                          child:  Center(
+                          height: 18.h,
+                          margin:
+                              EdgeInsets.only(left: 10.h, top: 0.h, right: 0.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
                               child: Image.asset(
-                                'assets/green_check_icon.png',
-                              )
-                          ),
+                            'assets/green_check_icon.png',
+                          )),
                         ),
                         Container(
-                          height:18.h,
+                          height: 18.h,
                           decoration: BoxDecoration(
                             color: gradient_color_light,
                             borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: gradient_color_light, width: 1),
+                            border: Border.all(
+                                color: gradient_color_light, width: 1),
                           ),
                           margin: EdgeInsets.only(
-                              left: 10.h, top: 0.h,right: 10.h),
-                          padding: EdgeInsets.only(left: 3,right: 3),
-                          child:  Center(
+                              left: 10.h, top: 0.h, right: 10.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
                             child: Text(
                               '3',
                               style: TextStyle(
                                 color: white,
                                 fontSize: 12.sp,
-                                fontFamily:
-                                'nunit_bold',
+                                fontFamily: 'nunit_bold',
                               ),
                             ),
                           ),
-
                         ),
                         Text(
                           'Your Resume',
                           style: TextStyle(
                             color: black,
                             fontSize: 16.sp,
-                            fontFamily:
-                            'nunit_bold',
+                            fontFamily: 'nunit_bold',
                           ),
                         ),
                         Container(
-                          height:18.h,
+                          height: 18.h,
                           decoration: BoxDecoration(
                             color: white,
                             borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: gradient_color_light, width: 1),
+                            border: Border.all(
+                                color: gradient_color_light, width: 1),
                           ),
                           margin: EdgeInsets.only(
-                              left: 10.h, top: 0.h,right: 10.h),
-                          padding: EdgeInsets.only(left: 3,right: 3),
-                          child:  Center(
+                              left: 10.h, top: 0.h, right: 10.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
                             child: Text(
                               '4',
                               style: TextStyle(
                                 color: gradient_color_light,
                                 fontSize: 12.sp,
-                                fontFamily:
-                                'nunit_bold',
+                                fontFamily: 'nunit_bold',
                               ),
                             ),
                           ),
-
                         ),
-
                         Container(
-                          height:18.h,
+                          height: 18.h,
                           decoration: BoxDecoration(
                             color: white,
                             borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: gradient_color_light, width: 1),
+                            border: Border.all(
+                                color: gradient_color_light, width: 1),
                           ),
                           margin: EdgeInsets.only(
-                              left: 10.h, top: 0.h,right: 10.h),
-                          padding: EdgeInsets.only(left: 3,right: 3),
-                          child:  Center(
+                              left: 10.h, top: 0.h, right: 10.h),
+                          padding: EdgeInsets.only(left: 3, right: 3),
+                          child: Center(
                             child: Text(
                               '5',
                               style: TextStyle(
                                 color: gradient_color_light,
                                 fontSize: 12.sp,
-                                fontFamily:
-                                'nunit_bold',
+                                fontFamily: 'nunit_bold',
                               ),
                             ),
                           ),
-
                         ),
-
-
                       ],
                     ),
                     SizedBox(height: 8),
                     Divider(
                       color: black,
                     ),
-
-                Center(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 20),
-                    child: Image.asset(
-                      'assets/resume.png',
-                      width: 236.h,
-                      height: 180.h,
-                      fit: BoxFit.contain,
+                    Center(
+                        child: Container(
+                      padding: EdgeInsets.only(top: 20),
+                      child: Image.asset(
+                        'assets/resume.png',
+                        width: 236.h,
+                        height: 180.h,
+                        fit: BoxFit.contain,
+                      ),
+                    )),
+                    SizedBox(
+                      height: 10,
                     ),
-                  )),
-
-                    SizedBox(height: 10,),
-
-
-            Container(
-              margin:
-              EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(color: black, width: 1),
-              ),
-              child:Row(
-                children: [
-              Expanded(
-              child: Container(
-              margin: EdgeInsets.only(left: 20.h,right: 20.w),
-              child: TextField(
-                  maxLines: 1,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.done,
-                  obscureText: true,
-                  autofocus: false,
-                  enabled: true,
-                  cursorColor: black,
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    color: black,
-                    fontFamily: "nunit_regular",
-                  ),
-                  controller: mobile_controller,
-                  focusNode: mobile_focusnode,
-                  onEditingComplete: () {
-                    // focusChange();
-                  },
-                  decoration: InputDecoration(
-                    focusedBorder: border,
-                    border: border,
-                    enabledBorder: border,
-                    disabledBorder: border,
-                    contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    hintText: "Extra Certificate",
-                    hintStyle: TextStyle(
-                      fontSize: 18.sp,
-                      color: gray,
-                      fontFamily: "nunit_regular",
-                    ),
-                    suffixIconConstraints:BoxConstraints(
-                        maxHeight: 20,
-                        maxWidth: 30) ,
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-
-                        //loginController.pass_secure.value = !loginController.pass_secure.value;
-                      },
-                      child: Padding(
-                          padding: EdgeInsets.only(
-                              right: 5),
-                          child:  Image.asset(
-                            'assets/down_arrow.png',
-                            color: black,
-                          )
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        border: Border.all(color: black, width: 1),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 20.h, right: 20.w),
+                              child: TextField(
+                                  maxLines: 1,
+                                  keyboardType: TextInputType.text,
+                                  textInputAction: TextInputAction.done,
+                                  obscureText: true,
+                                  autofocus: false,
+                                  enabled: true,
+                                  cursorColor: black,
+                                  style: TextStyle(
+                                    fontSize: 18.sp,
+                                    color: black,
+                                    fontFamily: "nunit_regular",
+                                  ),
+                                  controller: mobile_controller,
+                                  focusNode: mobile_focusnode,
+                                  onEditingComplete: () {
+                                    // focusChange();
+                                  },
+                                  decoration: InputDecoration(
+                                    focusedBorder: border,
+                                    border: border,
+                                    enabledBorder: border,
+                                    disabledBorder: border,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 0.0, horizontal: 10.0),
+                                    hintText: "Extra Certificate",
+                                    hintStyle: TextStyle(
+                                      fontSize: 18.sp,
+                                      color: gray,
+                                      fontFamily: "nunit_regular",
+                                    ),
+                                    suffixIconConstraints: BoxConstraints(
+                                        maxHeight: 20, maxWidth: 30),
+                                    suffixIcon: GestureDetector(
+                                      onTap: () {
+                                        //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                      },
+                                      child: Padding(
+                                          padding: EdgeInsets.only(right: 5),
+                                          child: Image.asset(
+                                            'assets/down_arrow.png',
+                                            color: black,
+                                          )),
+                                    ),
+                                  )),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  )),
-            ),
-        ),
-                ],
-              ),
-            ),
-
-          SizedBox(height: 25.h,),
-
-          Container(
-            height: 50.h,
-            decoration: new BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 3.0,
-                  ),
-                ],
-                gradient: LinearGradient(colors: [Color(0xFF0075B2),Color(0xFF3BA9E2)]),
-                borderRadius: BorderRadius.circular(35)
-            ),
-            child:Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 15,right: 0),
-                  height:30.h,
-                  width: 30.h,
-                  child: Image.asset(
-                    'assets/round_up_arrow.png',
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.transparent, shadowColor: Colors.transparent),
-                  onPressed: (){},
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 0,right: 15),
-                    child: Text(
-                      'Upload your Resume',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: white,
-                          fontSize: 18,
-                          fontFamily: 'nunit_extrabold',
-                          shadows: <Shadow>[
-                            Shadow(
-                              blurRadius: 10.0,
-                              color: Colors.black,
-                              offset: Offset(3.0, 3.0),
-                            ),]),
-
+                    SizedBox(
+                      height: 25.h,
                     ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-            SizedBox(height: 15.h,),
-                    Text(
-                      'View',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+                    fileChoosed ? Divider() : SizedBox(),
+                    fileChoosed ? Text(fileName.toString()) : SizedBox(),
+                    fileChoosed ? Divider() : SizedBox(),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    Container(
+                      height: 50.h,
+                      decoration: new BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 3.0,
+                            ),
+                          ],
+                          gradient: LinearGradient(
+                              colors: [Color(0xFF0075B2), Color(0xFF3BA9E2)]),
+                          borderRadius: BorderRadius.circular(35)),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 15, right: 0),
+                            height: 30.h,
+                            width: 30.h,
+                            child: Image.asset(
+                              'assets/round_up_arrow.png',
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.transparent,
+                                shadowColor: Colors.transparent),
+                            onPressed: () {
+                              pickFile();
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 0, right: 15),
+                              child: Text(
+                                'Upload your Resume',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: white,
+                                  fontSize: 18,
+                                  fontFamily: 'nunit_extrabold',
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      blurRadius: 10.0,
+                                      color: Colors.black,
+                                      offset: Offset(3.0, 3.0),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        // FileView(
+                        //   controller: FileViewController.asset('$file'),
+                        // );
+                      },
+                      child: Text(
+                        'View',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
                           color: black,
                           fontSize: 20.sp,
-                          fontFamily: 'nunit_bold'),
+                          fontFamily: 'nunit_bold',
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-
                           Container(
-                            margin: EdgeInsets.only(left: 40.h,right: 40.h),
+                            margin: EdgeInsets.only(left: 40.h, right: 40.h),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -765,27 +837,41 @@ class _YourResumeState extends State<YourResume> {
                                     fontSize: 18,
                                     textColor: app_text_color,
                                     backgroundColor: black),
-                                CommonButton(
-                                    label: 'NEXT',
-                                    onPressed: () async {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Addlicense()));
-                                    },
-                                    border: 35.h,
-                                    height: 50.h,
-                                    fontSize: 18,
-                                    textColor: white,
-                                    backgroundColor: black),
+                                context.watch<ProfileViewModel>().isLoading
+                                    ? Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: LinearProgressIndicator(),
+                                        ),
+                                      )
+                                    : CommonButton(
+                                        label: 'NEXT',
+                                        onPressed: () async {
+                                          if (fileChoosed == true) {
+                                            await context
+                                                .read<ProfileViewModel>()
+                                                .updateUserResume(
+                                                    file!, context);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    UploadLicense(),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        border: 35.h,
+                                        height: 50.h,
+                                        fontSize: 18,
+                                        textColor: white,
+                                        backgroundColor: black),
                               ],
                             ),
                           ),
                         ],
                       ),
                     ),
-
-
                   ],
                 ),
               ),

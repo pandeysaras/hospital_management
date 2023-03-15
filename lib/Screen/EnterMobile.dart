@@ -93,14 +93,9 @@ class _EnterMobileScreenState extends State<EnterMobileScreen> {
                               thecontroller: mobile_controller,
                               label: "Enter Your Mobile Number",
                               type: TextInputType.number,
-                              action: TextInputAction.done,
                               lines: 1,
                               secure: false,
-                              focusChange: () {
-                                mobile_focusnode.unfocus();
-                              },
                               fontSize: 18.sp,
-                              focusNode: mobile_focusnode,
                               text_color: black,
                               hint_color: gray),
                         ),

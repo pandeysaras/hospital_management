@@ -736,14 +736,9 @@ class _FindWorkBySortState extends State<FindWorkBySort> {
                                                             thecontroller: mobile_controller,
                                                             label: "",
                                                             type: TextInputType.emailAddress,
-                                                            action: TextInputAction.next,
                                                             lines: 1,
                                                             secure: false,
-                                                            focusChange: () {
-                                                              mobile_focusnode.unfocus();
-                                                            },
                                                             fontSize: 18.sp,
-                                                            focusNode: mobile_focusnode,
                                                             text_color: black,
                                                             hint_color:gray
                                                         ),
@@ -768,14 +763,9 @@ class _FindWorkBySortState extends State<FindWorkBySort> {
                                                             thecontroller: mobile_controller,
                                                             label: "",
                                                             type: TextInputType.emailAddress,
-                                                            action: TextInputAction.next,
                                                             lines: 1,
                                                             secure: false,
-                                                            focusChange: () {
-                                                              mobile_focusnode.unfocus();
-                                                            },
                                                             fontSize: 18.sp,
-                                                            focusNode: mobile_focusnode,
                                                             text_color: black,
                                                             hint_color:gray
                                                         ),
@@ -961,14 +951,9 @@ class _FindWorkBySortState extends State<FindWorkBySort> {
                                                       thecontroller: mobile_controller,
                                                       label: "30 Miles",
                                                       type: TextInputType.emailAddress,
-                                                      action: TextInputAction.next,
                                                       lines: 1,
                                                       secure: false,
-                                                      focusChange: () {
-                                                        mobile_focusnode.unfocus();
-                                                      },
                                                       fontSize: 18.sp,
-                                                      focusNode: mobile_focusnode,
                                                       text_color: black,
                                                       hint_color:gray
                                                   ),

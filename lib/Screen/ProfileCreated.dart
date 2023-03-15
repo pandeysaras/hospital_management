@@ -20,14 +20,12 @@ class _ProfileCreatedState extends State<ProfileCreated> {
   late FocusNode mobile_focusnode;
   String gender = "male";
 
-
   @override
   void initState() {
     super.initState();
     mobile_controller = TextEditingController();
     mobile_focusnode = FocusNode();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,18 +57,19 @@ class _ProfileCreatedState extends State<ProfileCreated> {
       drawer: Drawer(
         child: Container(
           decoration: new BoxDecoration(
-            gradient: LinearGradient(colors: [Color(0xFF0075B2),Color(0xFF3BA9E2)]),
+            gradient:
+                LinearGradient(colors: [Color(0xFF0075B2), Color(0xFF3BA9E2)]),
           ),
           child: Column(
             children: [
               InkWell(
-                onTap: (){
+                onTap: () {
                   _key.currentState?.closeDrawer();
                 },
                 child: Align(
                   alignment: Alignment.topRight,
                   child: Container(
-                    margin: EdgeInsets.only(top:35,left: 5,right: 5),
+                    margin: EdgeInsets.only(top: 35, left: 5, right: 5),
                     height: 30,
                     width: 30,
                     child: Image.asset(
@@ -82,7 +81,7 @@ class _ProfileCreatedState extends State<ProfileCreated> {
               ),
               ClipRect(
                 child: Container(
-                  margin: EdgeInsets.only(top:5,left: 5,right: 5),
+                  margin: EdgeInsets.only(top: 5, left: 5, right: 5),
                   height: 100,
                   width: 100,
                   child: Image.asset(
@@ -91,7 +90,9 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                   ),
                 ),
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Expanded(
                 child: Container(
                   color: white,
@@ -101,14 +102,17 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                     padding: EdgeInsets.zero,
                     children: <Widget>[
                       InkWell(
-                        onTap:(){
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 0,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 0,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -119,9 +123,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -141,7 +147,6 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -150,16 +155,21 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 1,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 1,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -170,9 +180,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -192,7 +204,6 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -201,17 +212,21 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ),
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 2,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 2,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -222,9 +237,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -244,7 +261,6 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -253,16 +269,21 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => BottomMenuBar(current_index: 3,)),
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenuBar(
+                                      current_index: 3,
+                                    )),
                           );
                         },
                         child: Container(
-                          padding: EdgeInsets.only(top:8,bottom: 8),
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(right: 30),
                           decoration: BoxDecoration(
                             color: color_box_bg_gray,
@@ -273,9 +294,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ),
                           child: Row(
                             children: [
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               Container(
-                                margin: EdgeInsets.only(left: 5,right: 30),
+                                margin: EdgeInsets.only(left: 5, right: 30),
                                 height: 35,
                                 width: 35,
                                 child: Image.asset(
@@ -295,7 +318,6 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                           color: black,
                                           fontSize: 15.sp,
                                           fontFamily: 'nunit_extrabold'),
-
                                     ),
                                   ),
                                 ),
@@ -304,10 +326,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ),
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -318,9 +341,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -340,7 +365,6 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -348,10 +372,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -362,9 +387,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -384,7 +411,6 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -392,10 +418,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -406,9 +433,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -428,7 +457,6 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
@@ -436,10 +464,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Container(
-                        padding: EdgeInsets.only(top:8,bottom: 8),
+                        padding: EdgeInsets.only(top: 8, bottom: 8),
                         margin: EdgeInsets.only(right: 30),
                         decoration: BoxDecoration(
                           color: color_box_bg_gray,
@@ -450,9 +479,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                         ),
                         child: Row(
                           children: [
-                            SizedBox(width: 15,),
+                            SizedBox(
+                              width: 15,
+                            ),
                             Container(
-                              margin: EdgeInsets.only(left: 5,right: 30),
+                              margin: EdgeInsets.only(left: 5, right: 30),
                               height: 35,
                               width: 35,
                               child: Image.asset(
@@ -472,16 +503,16 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                         color: black,
                                         fontSize: 15.sp,
                                         fontFamily: 'nunit_extrabold'),
-
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
@@ -500,13 +531,14 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                   child: Column(
                     children: [
                       SizedBox(height: 25),
-
                       Image.asset(
                         'assets/right_green.png',
                         height: 100,
                         width: 100,
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Text(
                         'Thank You!',
                         style: TextStyle(
@@ -521,25 +553,24 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                             fontSize: 15.sp,
                             fontFamily: 'nunit_regular'),
                       ),
-                       Container(
-                          padding: EdgeInsets.only(top: 20,left: 40,right: 40),
-                          child: Text(
-                            'You can view the shifts now. However,many shifts may require other credential documents such as:',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                color: black,
-                                fontSize: 15.sp,
-                                fontFamily: 'nunit_regular'),
-                          ),
+                      Container(
+                        padding: EdgeInsets.only(top: 20, left: 40, right: 40),
+                        child: Text(
+                          'You can view the shifts now. However,many shifts may require other credential documents such as:',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              color: black,
+                              fontSize: 15.sp,
+                              fontFamily: 'nunit_regular'),
                         ),
-
-
-                      SizedBox(height: 15.h,),
+                      ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
                       Container(
                         width: screenWidth,
                         margin: EdgeInsets.only(left: 25, right: 25),
-                        padding: EdgeInsets.all(
-                            10),
+                        padding: EdgeInsets.all(10),
                         decoration: new BoxDecoration(
                           color: box_bg_color_dark,
                           borderRadius: BorderRadius.circular(25),
@@ -549,13 +580,14 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                           children: [
                             SizedBox(height: 10),
                             Container(
-                              margin: EdgeInsets.only(left: 20,right: 20),
+                              margin: EdgeInsets.only(left: 20, right: 20),
                               child: Row(
                                 children: [
-                                    Expanded (
-                                    flex:1,
+                                  Expanded(
+                                    flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Text(
                                         '1.',
                                         textAlign: TextAlign.left,
@@ -566,10 +598,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-                                  Expanded (
-                                    flex:4,
+                                  Expanded(
+                                    flex: 4,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Text(
                                         'BLS-Basic Life Support',
                                         textAlign: TextAlign.left,
@@ -580,10 +613,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-                                  Expanded (
-                                    flex:1,
+                                  Expanded(
+                                    flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Image.asset(
                                         'assets/edit_black.png',
                                         height: 15,
@@ -591,18 +625,19 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-
-                                ],),
+                                ],
+                              ),
                             ),
-                              SizedBox(height: 15),
+                            SizedBox(height: 15),
                             Container(
-                              margin: EdgeInsets.only(left: 20,right: 20),
+                              margin: EdgeInsets.only(left: 20, right: 20),
                               child: Row(
                                 children: [
-                                  Expanded (
-                                    flex:1,
+                                  Expanded(
+                                    flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Text(
                                         '2.',
                                         textAlign: TextAlign.left,
@@ -613,10 +648,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-                                  Expanded (
-                                    flex:4,
+                                  Expanded(
+                                    flex: 4,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Text(
                                         'TB or Chest-XRay',
                                         textAlign: TextAlign.left,
@@ -627,10 +663,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-                                  Expanded (
-                                    flex:1,
+                                  Expanded(
+                                    flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Image.asset(
                                         'assets/edit_black.png',
                                         height: 15,
@@ -638,18 +675,19 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-
-                                ],),
+                                ],
+                              ),
                             ),
                             SizedBox(height: 15),
                             Container(
-                              margin: EdgeInsets.only(left: 20,right: 20),
+                              margin: EdgeInsets.only(left: 20, right: 20),
                               child: Row(
                                 children: [
-                                  Expanded (
-                                    flex:1,
+                                  Expanded(
+                                    flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Text(
                                         '3.',
                                         textAlign: TextAlign.left,
@@ -660,10 +698,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-                                  Expanded (
-                                    flex:4,
+                                  Expanded(
+                                    flex: 4,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Text(
                                         'Flu Shots or Declinations',
                                         textAlign: TextAlign.left,
@@ -674,10 +713,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-                                  Expanded (
-                                    flex:1,
+                                  Expanded(
+                                    flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Image.asset(
                                         'assets/edit_black.png',
                                         height: 15,
@@ -685,19 +725,19 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-
-                                ],),
+                                ],
+                              ),
                             ),
                             SizedBox(height: 15),
-
                             Container(
-                              margin: EdgeInsets.only(left: 20,right: 20),
+                              margin: EdgeInsets.only(left: 20, right: 20),
                               child: Row(
                                 children: [
-                                  Expanded (
-                                    flex:1,
+                                  Expanded(
+                                    flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Text(
                                         '4.',
                                         textAlign: TextAlign.left,
@@ -708,10 +748,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-                                  Expanded (
-                                    flex:4,
+                                  Expanded(
+                                    flex: 4,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Text(
                                         'CPR Card',
                                         textAlign: TextAlign.left,
@@ -722,10 +763,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-                                  Expanded (
-                                    flex:1,
+                                  Expanded(
+                                    flex: 1,
                                     child: Container(
-                                      padding: EdgeInsets.only(top: 0,left: 0,right: 0),
+                                      padding: EdgeInsets.only(
+                                          top: 0, left: 0, right: 0),
                                       child: Image.asset(
                                         'assets/edit_black.png',
                                         height: 15,
@@ -733,18 +775,18 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                                       ),
                                     ),
                                   ),
-
-                                ],),
+                                ],
+                              ),
                             ),
                             SizedBox(height: 10),
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 15.h,),
-
+                      SizedBox(
+                        height: 15.h,
+                      ),
                       Container(
-                        margin: EdgeInsets.only(left: 40,right: 40),
+                        margin: EdgeInsets.only(left: 40, right: 40),
                         child: Text(
                           'Please click an item on the list above to upload.Click FINISH below to find shifts near You.',
                           textAlign: TextAlign.left,
@@ -754,24 +796,27 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                               fontFamily: 'nunit_regular'),
                         ),
                       ),
-                      SizedBox(height: 35.h,),
-
+                      SizedBox(
+                        height: 35.h,
+                      ),
                       CommonButton(
                           label: 'FINISH',
                           onPressed: () async {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => UploadedDocuments()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UploadedDocuments(),
+                              ),
+                            );
                           },
                           border: 35.h,
                           height: 50.h,
                           fontSize: 18,
                           textColor: white,
                           backgroundColor: black),
-                      SizedBox(height: 35.h,),
-
-
+                      SizedBox(
+                        height: 35.h,
+                      ),
                     ],
                   ),
                 ),

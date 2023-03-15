@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medteam/Components/CommonButton.dart';
@@ -6,8 +9,10 @@ import 'package:medteam/Components/CommonButtonWithPadding.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/FindWorkBySort.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
 import 'dart:math';
 
+import 'package:provider/provider.dart';
 
 class UploadedDocuments extends StatefulWidget {
   @override
@@ -21,7 +26,6 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
   late FocusNode mobile_focusnode;
   String gender = "male";
 
-
   @override
   void initState() {
     super.initState();
@@ -29,6 +33,23 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
     mobile_focusnode = FocusNode();
   }
 
+  //---------------upload-------------
+  File? file;
+
+  void pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      print("---------------------picked");
+      file = File(
+        result.files.single.path!,
+      );
+    } else {
+      print("No pi");
+      // User canceled the picker
+    }
+  }
+
+  //---------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +78,6 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
               ),
             ),
           )),
-
       body: SafeArea(
         child: Container(
           color: white,
@@ -71,47 +91,38 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                       Row(
                         children: [
                           Container(
-                            height:18.h,
+                            height: 18.h,
                             margin: EdgeInsets.only(
-                                left: 20.h, top: 0.h,right: 10.h),
-                            padding: EdgeInsets.only(left: 3,right: 3),
-                            child:  Center(
+                                left: 20.h, top: 0.h, right: 10.h),
+                            padding: EdgeInsets.only(left: 3, right: 3),
+                            child: Center(
                                 child: Image.asset(
-                                  'assets/green_check_icon.png',
-                                )
-                            ),
+                              'assets/green_check_icon.png',
+                            )),
                           ),
-
-
                           Expanded(
                             child: Text(
                               'Uploaded Credentials',
                               style: TextStyle(
                                 color: black,
                                 fontSize: 16.sp,
-                                fontFamily:
-                                'nunit_bold',
+                                fontFamily: 'nunit_bold',
                               ),
                             ),
                           ),
-
                           Container(
-                            height:18.h,
+                            height: 18.h,
                             margin: EdgeInsets.only(
-                                left: 20.h, top: 0.h,right: 10.h),
-                            padding: EdgeInsets.only(left: 3,right: 3),
-                            child:  Center(
+                                left: 20.h, top: 0.h, right: 10.h),
+                            padding: EdgeInsets.only(left: 3, right: 3),
+                            child: Center(
                                 child: Transform.rotate(
-                                  angle: 180 * pi/180,
-                                  child: Image.asset(
-                                    'assets/back_arrow.png',
-
-                                  ),
-                                )
-                            ),
+                              angle: 180 * pi / 180,
+                              child: Image.asset(
+                                'assets/back_arrow.png',
+                              ),
+                            )),
                           ),
-
-
                         ],
                       ),
                       SizedBox(height: 8),
@@ -121,51 +132,43 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                       SizedBox(height: 15),
                       Center(
                           child: Container(
-                            padding: EdgeInsets.only(top: 20),
-                            child: Image.asset(
-                              'assets/resume.png',
-                              width: 236.h,
-                              height: 180.h,
-                              fit: BoxFit.contain,
-                            ),
-                          )),
-
-
-                      SizedBox(height: 5,),
-
+                        padding: EdgeInsets.only(top: 20),
+                        child: Image.asset(
+                          'assets/resume.png',
+                          width: 236.h,
+                          height: 180.h,
+                          fit: BoxFit.contain,
+                        ),
+                      )),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Container(
                         margin:
-                        EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
+                            EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
                         child: CommonTextField(
                             thecontroller: mobile_controller,
                             label: "License Number",
                             type: TextInputType.text,
-                            action: TextInputAction.done,
                             lines: 1,
                             secure: false,
-                            focusChange: () {
-                              mobile_focusnode.unfocus();
-                            },
                             fontSize: 18.sp,
-                            focusNode: mobile_focusnode,
                             text_color: black,
-                            hint_color:gray
-                        ),
-
+                            hint_color: gray),
                       ),
-
                       Container(
                         margin:
-                        EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
+                            EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           border: Border.all(color: black, width: 1),
                         ),
-                        child:Row(
+                        child: Row(
                           children: [
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(left: 20.h,right: 20.w),
+                                margin:
+                                    EdgeInsets.only(left: 20.h, right: 20.w),
                                 child: TextField(
                                     autofocus: false,
                                     enabled: false,
@@ -183,51 +186,46 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                                       border: border,
                                       enabledBorder: border,
                                       disabledBorder: border,
-                                      contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 0.0, horizontal: 10.0),
                                       hintText: "Issuing or Test Date",
                                       hintStyle: TextStyle(
                                         fontSize: 18.sp,
                                         color: gray,
                                         fontFamily: "nunit_regular",
                                       ),
-                                      suffixIconConstraints:BoxConstraints(
-                                          maxHeight: 20,
-                                          maxWidth: 30) ,
+                                      suffixIconConstraints: BoxConstraints(
+                                          maxHeight: 20, maxWidth: 30),
                                       suffixIcon: GestureDetector(
                                         onTap: () {
-
                                           //loginController.pass_secure.value = !loginController.pass_secure.value;
                                         },
                                         child: Padding(
-                                            padding: EdgeInsets.only(
-                                                right: 5),
-                                            child:  Image.asset(
+                                            padding: EdgeInsets.only(right: 5),
+                                            child: Image.asset(
                                               'assets/calender.png',
-                                            )
-                                        ),
+                                            )),
                                       ),
                                     )),
                               ),
                             ),
-
-
                           ],
                         ),
                       ),
                       Container(
                         margin:
-                        EdgeInsets.only(top: 20.h, left: 30.h,right: 30.h),
+                            EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           border: Border.all(color: black, width: 1),
                         ),
-                        child:Row(
+                        child: Row(
                           children: [
                             Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(left: 20.h,right: 20.w),
+                                margin:
+                                    EdgeInsets.only(left: 20.h, right: 20.w),
                                 child: TextField(
-
                                     autofocus: false,
                                     enabled: false,
                                     cursorColor: black,
@@ -244,40 +242,35 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                                       border: border,
                                       enabledBorder: border,
                                       disabledBorder: border,
-                                      contentPadding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 0.0, horizontal: 10.0),
                                       hintText: "Expiration Date(Optional)",
                                       hintStyle: TextStyle(
                                         fontSize: 18.sp,
                                         color: gray,
                                         fontFamily: "nunit_regular",
                                       ),
-                                      suffixIconConstraints:BoxConstraints(
-                                          maxHeight: 20,
-                                          maxWidth: 30) ,
+                                      suffixIconConstraints: BoxConstraints(
+                                          maxHeight: 20, maxWidth: 30),
                                       suffixIcon: GestureDetector(
                                         onTap: () {
-
                                           //loginController.pass_secure.value = !loginController.pass_secure.value;
                                         },
                                         child: Padding(
-                                            padding: EdgeInsets.only(
-                                                right: 5),
-                                            child:  Image.asset(
+                                            padding: EdgeInsets.only(right: 5),
+                                            child: Image.asset(
                                               'assets/calender.png',
-                                            )
-                                        ),
+                                            )),
                                       ),
                                     )),
                               ),
                             ),
-
-
                           ],
                         ),
                       ),
-
-
-                      SizedBox(height: 25.h,),
+                      SizedBox(
+                        height: 25.h,
+                      ),
                       Container(
                         height: 50.h,
                         decoration: new BoxDecoration(
@@ -286,25 +279,29 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                                 blurRadius: 3.0,
                               ),
                             ],
-                            gradient: LinearGradient(colors: [Color(0xFF0075B2),Color(0xFF3BA9E2)]),
-                            borderRadius: BorderRadius.circular(35)
-                        ),
-                        child:Row(
+                            gradient: LinearGradient(
+                                colors: [Color(0xFF0075B2), Color(0xFF3BA9E2)]),
+                            borderRadius: BorderRadius.circular(35)),
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(left: 15,right: 0),
-                              height:30.h,
+                              margin: EdgeInsets.only(left: 15, right: 0),
+                              height: 30.h,
                               width: 30.h,
                               child: Image.asset(
                                 'assets/round_up_arrow.png',
                               ),
                             ),
                             ElevatedButton(
-                              style: ElevatedButton.styleFrom(primary: Colors.transparent, shadowColor: Colors.transparent),
-                              onPressed: (){},
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.transparent,
+                                  shadowColor: Colors.transparent),
+                              onPressed: () {
+                                pickFile();
+                              },
                               child: Padding(
-                                padding: EdgeInsets.only(left: 0,right: 15),
+                                padding: EdgeInsets.only(left: 0, right: 15),
                                 child: Text(
                                   'Upload Documents',
                                   textAlign: TextAlign.center,
@@ -317,32 +314,38 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                                           blurRadius: 10.0,
                                           color: Colors.black,
                                           offset: Offset(3.0, 3.0),
-                                        ),]),
-
+                                        ),
+                                      ]),
                                 ),
                               ),
                             ),
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 30.h,),
-
+                      SizedBox(
+                        height: 30.h,
+                      ),
                       CommonButton(
                           label: 'DONE',
                           onPressed: () async {
+                            context
+                                .read<ProfileViewModel>()
+                                .documentUpload(file!, context);
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => FindWorkBySort()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FindWorkBySort(),
+                              ),
+                            );
                           },
                           border: 35.h,
                           height: 50.h,
                           fontSize: 18,
                           textColor: white,
                           backgroundColor: black),
-                      SizedBox(height: 20.h,),
-
+                      SizedBox(
+                        height: 20.h,
+                      ),
                     ],
                   ),
                 ),

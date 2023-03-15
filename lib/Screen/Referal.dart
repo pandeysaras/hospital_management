@@ -83,14 +83,10 @@ class _ReferalState extends State<Referal> {
                                 thecontroller: referral_controller,
                                 label: "Referral code",
                                 type: TextInputType.text,
-                                action: TextInputAction.done,
                                 lines: 1,
                                 secure: false,
-                                focusChange: () {
-                                  referral_focusnode.unfocus();
-                                },
+
                                 fontSize: 18.sp,
-                                focusNode: referral_focusnode,
                                 text_color: black,
                                 hint_color:gray
                             ),

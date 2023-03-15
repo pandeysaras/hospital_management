@@ -113,14 +113,9 @@ class _EnterNameScreenState extends State<EnterNameScreen> {
                                       thecontroller: fname_controller,
                                       label: "First Name",
                                       type: TextInputType.text,
-                                      action: TextInputAction.next,
                                       lines: 1,
                                       secure: false,
-                                      focusChange: () {
-                                        fname_focusnode.unfocus();
-                                      },
                                       fontSize: 18.sp,
-                                      focusNode: fname_focusnode,
                                       text_color: black,
                                       hint_color: gray),
                                 ),
@@ -131,14 +126,9 @@ class _EnterNameScreenState extends State<EnterNameScreen> {
                                       thecontroller: mname_controller,
                                       label: "Middle Name",
                                       type: TextInputType.text,
-                                      action: TextInputAction.next,
                                       lines: 1,
                                       secure: false,
-                                      focusChange: () {
-                                        mname_focusnode.unfocus();
-                                      },
                                       fontSize: 18.sp,
-                                      focusNode: mname_focusnode,
                                       text_color: black,
                                       hint_color: gray),
                                 ),
@@ -149,14 +139,9 @@ class _EnterNameScreenState extends State<EnterNameScreen> {
                                       thecontroller: lname_controller,
                                       label: "Last Name",
                                       type: TextInputType.text,
-                                      action: TextInputAction.done,
                                       lines: 1,
                                       secure: false,
-                                      focusChange: () {
-                                        lname_focusnode.unfocus();
-                                      },
                                       fontSize: 18.sp,
-                                      focusNode: lname_focusnode,
                                       text_color: black,
                                       hint_color: gray),
                                 ),
