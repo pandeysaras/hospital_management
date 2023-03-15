@@ -63,9 +63,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
   @override
   void initState() {
     super.initState();
-    stateListViewModel.fetchStateList(context).then((_) {
-      setState(() {});
-    });
+    stateListViewModel.fetchStateList(context);
     security_controller = TextEditingController();
     address1_controller = TextEditingController();
     address2_controller = TextEditingController();
@@ -970,6 +968,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                 hint_color: gray),
                           ),
                         ),
+
                         Expanded(
                           child: Container(
                             margin: EdgeInsets.only(

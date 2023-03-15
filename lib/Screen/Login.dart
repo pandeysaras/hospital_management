@@ -141,9 +141,10 @@ class _LoginState extends State<Login> {
                                 label: 'SIGN IN',
                                 onPressed: () async {
                                     Map data = {
-                                      "email":"mili@mailinator.com",
-                                      "password":123456
+                                      "email": email_controller.text,
+                                      "password":password_controller.text
                                     };
+                                    if(email_controller.value.text.isNotEmpty && password_controller.value.text.isNotEmpty)
                                     loginViewModel.postLoginApi(data, context);
                                    // Navigator.push(
                                    //      context,
