@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,12 +35,16 @@ class _UploadLicenseState extends State<UploadLicense> {
   FocusNode license_no_focusnode = FocusNode();
 
   String gender = "male";
+  String licenseType = "";
+  String state = '';
 
   @override
   void initState() {
     super.initState();
     // fillList();
     context.read<ProfileViewModel>().listOfLicesnesAPI(context);
+
+    context.read<ProfileViewModel>().listOfStatesAPI(context);
     // licensedBy = TextEditingController();
     // license_no_controller = TextEditingController();
     // mobile_focusnode = FocusNode();
@@ -797,16 +802,38 @@ class _UploadLicenseState extends State<UploadLicense> {
                                     .watch<ProfileViewModel>()
                                     .listOfLicenseTypes
                                     .isEmpty
-                                ? const SizedBox()
-                                : DropdownButtonExample(
-                                    list: context
-                                        .read<ProfileViewModel>()
-                                        .listOfLicenseTypes,
+                                ? Expanded(
+                                    child: const LinearProgressIndicator(),
+                                  )
+                                : Expanded(
+                                    // width: 300,
+                                    child: DropdownSearch<String>(
+                                      popupProps: PopupProps.menu(
+                                        showSelectedItems: true,
+                                        disabledItemFn: (String s) =>
+                                            s.startsWith('I'),
+                                      ),
+                                      items: context
+                                          .read<ProfileViewModel>()
+                                          .listOfLicenseTypes,
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                          // labelText: "Menu mode",
+                                          hintText: "license Type",
+                                        ),
+                                      ),
+                                      onChanged: (value) {
+                                        print(value);
+                                        licenseType = value.toString();
+                                      },
+                                      // selectedItem: context
+                                      //     .read<ProfileViewModel>()
+                                      //     .listOfLicenseTypes
+                                      //     .first,
+                                    ),
                                   ),
-                            // Image.asset(
-                            //   'assets/down_arrow.png',
-                            //   color: black,
-                            // ),
                           ],
                         ),
                         // child: Row(
@@ -880,54 +907,87 @@ class _UploadLicenseState extends State<UploadLicense> {
                         ),
                         child: Row(
                           children: [
-                            Expanded(
-                              child: Container(
-                                margin:
-                                    EdgeInsets.only(left: 20.h, right: 20.w),
-                                child: TextField(
-                                  maxLines: 1,
-                                  autofocus: false,
-                                  enabled: false,
-                                  cursorColor: black,
-                                  style: TextStyle(
-                                    fontSize: 18.sp,
-                                    color: black,
-                                    fontFamily: "nunit_regular",
-                                  ),
-                                  onEditingComplete: () {
-                                    // focusChange();
-                                  },
-                                  decoration: InputDecoration(
-                                    focusedBorder: border,
-                                    border: border,
-                                    enabledBorder: border,
-                                    disabledBorder: border,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 0.0, horizontal: 0.0),
-                                    hintText: "State",
-                                    hintStyle: TextStyle(
-                                      fontSize: 18.sp,
-                                      color: gray,
-                                      fontFamily: "nunit_regular",
-                                    ),
-                                    suffixIconConstraints: BoxConstraints(
-                                        maxHeight: 20, maxWidth: 30),
-                                    suffixIcon: GestureDetector(
-                                      onTap: () {
-                                        //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.only(right: 5),
-                                        child: Image.asset(
-                                          'assets/down_arrow.png',
-                                          color: black,
+                            context
+                                    .watch<ProfileViewModel>()
+                                    .listOfLicenseTypes
+                                    .isEmpty
+                                ? Expanded(
+                                    child: const LinearProgressIndicator(),
+                                  )
+                                : Expanded(
+                                    // width: 300,
+                                    child: DropdownSearch<String>(
+                                      popupProps: PopupProps.menu(
+                                        showSelectedItems: true,
+                                        disabledItemFn: (String s) =>
+                                            s.startsWith('I'),
+                                      ),
+                                      items: context
+                                          .read<ProfileViewModel>()
+                                          .listStates,
+                                      dropdownDecoratorProps:
+                                          DropDownDecoratorProps(
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                          // labelText: "Menu mode",
+                                          hintText: "State",
                                         ),
                                       ),
+                                      onChanged: (value) {
+                                        print(value);
+                                        state = value.toString();
+                                      },
+                                      // selectedItem: "State",
                                     ),
                                   ),
-                                ),
-                              ),
-                            ),
+                            // Expanded(
+                            //   child: Container(
+                            //     margin:
+                            //         EdgeInsets.only(left: 20.h, right: 20.w),
+                            //     child: TextField(
+                            //       maxLines: 1,
+                            //       autofocus: false,
+                            //       enabled: false,
+                            //       cursorColor: black,
+                            //       style: TextStyle(
+                            //         fontSize: 18.sp,
+                            //         color: black,
+                            //         fontFamily: "nunit_regular",
+                            //       ),
+                            //       onEditingComplete: () {
+                            //         // focusChange();
+                            //       },
+                            //       decoration: InputDecoration(
+                            //         focusedBorder: border,
+                            //         border: border,
+                            //         enabledBorder: border,
+                            //         disabledBorder: border,
+                            //         contentPadding: EdgeInsets.symmetric(
+                            //             vertical: 0.0, horizontal: 0.0),
+                            //         hintText: "State",
+                            //         hintStyle: TextStyle(
+                            //           fontSize: 18.sp,
+                            //           color: gray,
+                            //           fontFamily: "nunit_regular",
+                            //         ),
+                            //         suffixIconConstraints: BoxConstraints(
+                            //             maxHeight: 20, maxWidth: 30),
+                            //         suffixIcon: GestureDetector(
+                            //           onTap: () {
+                            //             //loginController.pass_secure.value = !loginController.pass_secure.value;
+                            //           },
+                            //           child: Padding(
+                            //             padding: EdgeInsets.only(right: 5),
+                            //             child: Image.asset(
+                            //               'assets/down_arrow.png',
+                            //               color: black,
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -1184,7 +1244,16 @@ class _UploadLicenseState extends State<UploadLicense> {
                                     onPressed: () async {
                                       await context
                                           .read<ProfileViewModel>()
-                                          .updateLicence(file!, context);
+                                          .updateLicence(
+                                            file!,
+                                            context,
+                                            licenseType,
+                                            state,
+                                            license_no_controller.value.text,
+                                            licensedByController.value.text,
+                                            issuedateCtrlr.value.text,
+                                            expdateCtrlr.value.text,
+                                          );
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(

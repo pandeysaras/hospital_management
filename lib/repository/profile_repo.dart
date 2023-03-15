@@ -17,8 +17,18 @@ class ProfileRepository {
 
   Future<dynamic> listOflicenseAPI() async {
     try {
-      dynamic response = await _apiServices.getGetApiResponse(
-          AppUrl.licenseListEndPoint);
+      dynamic response =
+          await _apiServices.getGetApiResponse(AppUrl.licenseListEndPoint);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<dynamic> listStateAPI() async {
+    try {
+      dynamic response =
+          await _apiServices.getGetApiResponse(AppUrl.stateListEndPoint);
       return response;
     } catch (e) {
       rethrow;
