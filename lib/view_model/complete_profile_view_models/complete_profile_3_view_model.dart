@@ -49,7 +49,7 @@ class CompleteProfile3ViewModel with ChangeNotifier{
       if (response.statusCode == 200) {
         setLoading(false);
         Utils.showSnackBar(
-            context, "Step 4 Created Successfully", Colors.blue);
+            context, "Step 3 Created Successfully", Colors.blue);
       }
       else {
         print(" reason${response.reasonPhrase}");

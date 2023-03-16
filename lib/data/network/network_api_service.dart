@@ -15,8 +15,7 @@ class NetworkApiService extends BaseApiServices {
     try {
       final response = await http.get(Uri.parse(url), headers: {
         "Accept": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        'Accept': '*/*'
+        'Authorization': 'Bearer 15|RwugLsdQVMpFhdTa8H7LuRtFAS9CSSc9VYraopxy'
       }).timeout(
         const Duration(seconds: 60),
       );

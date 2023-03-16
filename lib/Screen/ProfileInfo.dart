@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:medteam/Components/CommonButtonWithPadding.dart';
@@ -11,6 +12,7 @@ import 'package:medteam/view_model/state_list_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../Utils/utils.dart';
+import '../view_model/sign_up_view_models/profile_view_model.dart';
 
 class ProfileInfo extends StatefulWidget {
   @override
@@ -36,6 +38,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
   DateTime _selectedDate = DateTime.now();
   bool isDateSelected = false;
   late int _selectedIndex;
+  String state = '';
   bool check = false;
   String dropdownValue = "State";
   List<String> list = [];
@@ -63,7 +66,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
   @override
   void initState() {
     super.initState();
-    stateListViewModel.fetchStateList(context);
+    context.read<ProfileViewModel>().listOfLicesnesAPI(context);
+    context.read<ProfileViewModel>().listOfStatesAPI(context);
     security_controller = TextEditingController();
     address1_controller = TextEditingController();
     address2_controller = TextEditingController();
@@ -979,48 +983,82 @@ class _ProfileInfoState extends State<ProfileInfo> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
-                                  child: TextField(
-                                      maxLines: 1,
-                                      autofocus: false,
-                                      enabled: false,
-                                      cursorColor: black,
-                                      style: TextStyle(
-                                        fontSize: 18.sp,
-                                        color: black,
-                                        fontFamily: "nunit_regular",
-                                      ),
-                                      onEditingComplete: () {
-                                        // focusChange();
-                                      },
-                                      decoration: InputDecoration(
-                                        focusedBorder: border,
-                                        border: border,
-                                        enabledBorder: border,
-                                        disabledBorder: border,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 0.0, horizontal: 15.0),
+
+                                context
+                                    .watch<ProfileViewModel>()
+                                    .listOfLicenseTypes
+                                    .isEmpty
+                                    ? Expanded(
+                                  child: const LinearProgressIndicator(),
+                                )
+                                    : Expanded(
+                                  // width: 300,
+                                  child: DropdownSearch<String>(
+                                    popupProps: PopupProps.menu(
+                                      showSelectedItems: true,
+                                      disabledItemFn: (String s) =>
+                                          s.startsWith('I'),
+                                    ),
+                                    items: context
+                                        .read<ProfileViewModel>()
+                                        .listStates,
+                                    dropdownDecoratorProps:
+                                    DropDownDecoratorProps(
+                                      dropdownSearchDecoration:
+                                      InputDecoration(
+                                        // labelText: "Menu mode",
                                         hintText: "State",
-                                        hintStyle: TextStyle(
-                                          fontSize: 18.sp,
-                                          color: gray,
-                                          fontFamily: "nunit_regular",
-                                        ),
-                                        suffixIconConstraints: BoxConstraints(
-                                            maxHeight: 20, maxWidth: 30),
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                          },
-                                          child: Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 5),
-                                              child: Image.asset(
-                                                'assets/down_arrow.png',
-                                              )),
-                                        ),
-                                      )),
+                                      ),
+                                    ),
+                                    onChanged: (value) {
+                                      print(value);
+                                      state = value.toString();
+                                    },
+                                    // selectedItem: "State",
+                                  ),
                                 ),
+                                // Expanded(
+                                //   child: TextField(
+                                //       maxLines: 1,
+                                //       autofocus: false,
+                                //       enabled: false,
+                                //       cursorColor: black,
+                                //       style: TextStyle(
+                                //         fontSize: 18.sp,
+                                //         color: black,
+                                //         fontFamily: "nunit_regular",
+                                //       ),
+                                //       onEditingComplete: () {
+                                //         // focusChange();
+                                //       },
+                                //       decoration: InputDecoration(
+                                //         focusedBorder: border,
+                                //         border: border,
+                                //         enabledBorder: border,
+                                //         disabledBorder: border,
+                                //         contentPadding: EdgeInsets.symmetric(
+                                //             vertical: 0.0, horizontal: 15.0),
+                                //         hintText: "State",
+                                //         hintStyle: TextStyle(
+                                //           fontSize: 18.sp,
+                                //           color: gray,
+                                //           fontFamily: "nunit_regular",
+                                //         ),
+                                //         suffixIconConstraints: BoxConstraints(
+                                //             maxHeight: 20, maxWidth: 30),
+                                //         suffixIcon: GestureDetector(
+                                //           onTap: () {
+                                //             //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                //           },
+                                //           child: Padding(
+                                //               padding:
+                                //                   EdgeInsets.only(right: 5),
+                                //               child: Image.asset(
+                                //                 'assets/down_arrow.png',
+                                //               )),
+                                //         ),
+                                //       )),
+                                // ),
                               ],
                             ),
                           ),
