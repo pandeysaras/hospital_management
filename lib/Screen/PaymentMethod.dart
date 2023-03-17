@@ -10,6 +10,8 @@ import 'package:medteam/Utils/colors.dart';
 import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../Utils/utils.dart';
+
 class PaymentMethod extends StatefulWidget {
   @override
   _PaymentMethodState createState() => _PaymentMethodState();
@@ -66,7 +68,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           )),
       drawer: Drawer(
         child: Container(
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             gradient:
                 LinearGradient(colors: [Color(0xFF0075B2), Color(0xFF3BA9E2)]),
           ),
@@ -662,74 +664,74 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                           "Account Holder Name",
                                                       type: TextInputType
                                                           .emailAddress,
-
                                                       lines: 1,
                                                       secure: false,
                                                       fontSize: 18.sp,
                                                       text_color: black,
                                                       hint_color: gray),
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 50.w,
-                                                    ),
-                                                    Radio(
-                                                        groupValue: gender,
-                                                        value: "Checking",
-                                                        fillColor:
-                                                            MaterialStateColor
-                                                                .resolveWith(
-                                                                    (states) =>
-                                                                        gray),
-                                                        activeColor:
-                                                            Colors.black,
-                                                        onChanged: (value) {
-                                                          print(value);
-                                                          setState(() {
+                                                StatefulBuilder(
+                                                  builder:
+                                                      (context, setState) =>
+                                                          Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 50.w,
+                                                      ),
+                                                      Radio(
+                                                          groupValue: gender,
+                                                          value: "Checking",
+                                                          fillColor:
+                                                              MaterialStateColor
+                                                                  .resolveWith(
+                                                                      (states) =>
+                                                                          gray),
+                                                          activeColor:
+                                                              Colors.black,
+                                                          onChanged: (value) {
                                                             setState(() {
                                                               gender = value
                                                                   .toString();
                                                             });
-                                                          });
-                                                        }),
-                                                    Text(
-                                                      'Checking',
-                                                      style: TextStyle(
-                                                          color: black,
-                                                          fontSize: 15.sp,
-                                                          fontFamily:
-                                                              'nunit_extrabold'),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Radio(
-                                                        groupValue: gender,
-                                                        value: "Saving",
-                                                        fillColor:
-                                                            MaterialStateColor
-                                                                .resolveWith(
-                                                                    (states) =>
-                                                                        gray),
-                                                        activeColor:
-                                                            Colors.black,
-                                                        onChanged: (value) {
-                                                          print(value);
-                                                          setState(() {
-                                                            gender = value
-                                                                .toString();
-                                                          });
-                                                        }),
-                                                    Text(
-                                                      'Saving',
-                                                      style: TextStyle(
-                                                          color: black,
-                                                          fontSize: 15.sp,
-                                                          fontFamily:
-                                                              'nunit_extrabold'),
-                                                    ),
-                                                  ],
+                                                          }),
+                                                      Text(
+                                                        'Checking',
+                                                        style: TextStyle(
+                                                            color: black,
+                                                            fontSize: 15.sp,
+                                                            fontFamily:
+                                                                'nunit_extrabold'),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 15,
+                                                      ),
+                                                      Radio(
+                                                          groupValue: gender,
+                                                          value: "Saving",
+                                                          fillColor:
+                                                              MaterialStateColor
+                                                                  .resolveWith(
+                                                                      (states) =>
+                                                                          gray),
+                                                          activeColor:
+                                                              Colors.black,
+                                                          onChanged: (value) {
+                                                            print(value);
+                                                            setState(() {
+                                                              gender = value
+                                                                  .toString();
+                                                            });
+                                                          }),
+                                                      Text(
+                                                        'Saving',
+                                                        style: TextStyle(
+                                                            color: black,
+                                                            fontSize: 15.sp,
+                                                            fontFamily:
+                                                                'nunit_extrabold'),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 Container(
                                                   margin: EdgeInsets.only(
@@ -743,9 +745,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                           TextInputType.number,
                                                       lines: 1,
                                                       secure: false,
-
                                                       fontSize: 18.sp,
-
                                                       text_color: black,
                                                       hint_color: gray),
                                                 ),
@@ -760,7 +760,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                           "Confirm Account Number",
                                                       type:
                                                           TextInputType.number,
-
                                                       lines: 1,
                                                       secure: false,
                                                       fontSize: 18.sp,
@@ -773,19 +772,17 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                       left: 30.h,
                                                       right: 30.h),
                                                   child: CommonTextField(
-                                                      thecontroller:
-                                                          routeAcNoCtrl,
-                                                      label:
-                                                          "Routing Account Number",
-                                                      type:
-                                                          TextInputType.number,
-                                                      lines: 1,
-                                                      secure: false,
-
-                                                      fontSize: 18.sp,
-
-                                                      text_color: black,
-                                                      hint_color: gray),
+                                                    thecontroller:
+                                                        routeAcNoCtrl,
+                                                    label:
+                                                        "Routing Account Number",
+                                                    type: TextInputType.number,
+                                                    lines: 1,
+                                                    secure: false,
+                                                    fontSize: 18.sp,
+                                                    text_color: black,
+                                                    hint_color: gray,
+                                                  ),
                                                 ),
                                                 SizedBox(
                                                   height: 50,
@@ -793,9 +790,46 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                                 CommonButton(
                                                     label: 'COMPLETE',
                                                     onPressed: () async {
-                                                      Navigator.pop(
-                                                        context,
-                                                      );
+                                                      if (nameCtrl.value.text.isNotEmpty &&
+                                                          acnoCtrl.value.text
+                                                              .isNotEmpty &&
+                                                          cAcnoCtrl.value.text
+                                                              .isNotEmpty &&
+                                                          routeAcNoCtrl
+                                                              .value
+                                                              .text
+                                                              .isNotEmpty) {
+                                                        // print(
+                                                        //   nameCtrl.value.text +
+                                                        //       acnoCtrl.value.text +
+                                                        //       cAcnoCtrl.value.text +
+                                                        //       routeAcNoCtrl.value.text,
+                                                        // );
+
+                                                        context
+                                                            .read<
+                                                                ProfileViewModel>()
+                                                            .bankDetailsUploadlWIthData(
+                                                              context,
+                                                              nameCtrl
+                                                                  .value.text,
+                                                              acnoCtrl
+                                                                  .value.text,
+                                                              cAcnoCtrl
+                                                                  .value.text,
+                                                              routeAcNoCtrl
+                                                                  .value.text,
+                                                            );
+
+                                                        Utils.showSnackBar(
+                                                            context,
+                                                            "Bank Details Added",
+                                                            Colors.blue);
+
+                                                        Navigator.pop(
+                                                          context,
+                                                        );
+                                                      }
                                                     },
                                                     border: 35.h,
                                                     height: 50.h,
@@ -928,31 +962,32 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                 : CommonButton(
                                     label: 'NEXT',
                                     onPressed: () async {
-                                      if (nameCtrl.value.text.isNotEmpty &&
-                                          acnoCtrl.value.text.isNotEmpty &&
-                                          cAcnoCtrl.value.text.isNotEmpty &&
-                                          routeAcNoCtrl.value.text.isNotEmpty) {
-                                        // print(
-                                        //   nameCtrl.value.text +
-                                        //       acnoCtrl.value.text +
-                                        //       cAcnoCtrl.value.text +
-                                        //       routeAcNoCtrl.value.text,
-                                        // );
-                                        context
-                                            .read<ProfileViewModel>()
-                                            .bankDetailsUploadlWIthData(
-                                              context,
-                                              nameCtrl.value.text,
-                                              acnoCtrl.value.text,
-                                              cAcnoCtrl.value.text,
-                                              routeAcNoCtrl.value.text,
-                                            );
-                                      }
+                                      // if (nameCtrl.value.text.isNotEmpty &&
+                                      //     acnoCtrl.value.text.isNotEmpty &&
+                                      //     cAcnoCtrl.value.text.isNotEmpty &&
+                                      //     routeAcNoCtrl.value.text.isNotEmpty) {
+                                      //   // print(
+                                      //   //   nameCtrl.value.text +
+                                      //   //       acnoCtrl.value.text +
+                                      //   //       cAcnoCtrl.value.text +
+                                      //   //       routeAcNoCtrl.value.text,
+                                      //   // );
+                                      //   context
+                                      //       .read<ProfileViewModel>()
+                                      //       .bankDetailsUploadlWIthData(
+                                      //         context,
+                                      //         nameCtrl.value.text,
+                                      //         acnoCtrl.value.text,
+                                      //         cAcnoCtrl.value.text,
+                                      //         routeAcNoCtrl.value.text,
+                                      //       );
+                                      // }
 
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => UploadedDocuments(),
+                                          builder: (context) =>
+                                              UploadedDocuments(),
                                         ),
                                       );
                                     },

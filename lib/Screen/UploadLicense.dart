@@ -38,6 +38,8 @@ class _UploadLicenseState extends State<UploadLicense> {
   String licenseType = "";
   String state = '';
 
+  bool isImage = false;
+
   @override
   void initState() {
     super.initState();
@@ -94,8 +96,15 @@ class _UploadLicenseState extends State<UploadLicense> {
       file = File(
         result.files.single.path!,
       );
+
+      setState(() {
+        isImage = true;
+      });
     } else {
       print("No pi");
+      setState(() {
+        isImage = false;
+      });
       // User canceled the picker
     }
   }
@@ -114,7 +123,7 @@ class _UploadLicenseState extends State<UploadLicense> {
         lastDate: DateTime(2101));
     if (picked != null && picked != _selectedDate) {
       setState(() {
-        issuedateCtrlr.text = _selectedDate.toString().substring(1, 11);
+        issuedateCtrlr.text = _selectedDate.toString().substring(0, 11);
         _selectedDate = picked;
         isDateSelected = true;
       });
@@ -129,7 +138,7 @@ class _UploadLicenseState extends State<UploadLicense> {
         lastDate: DateTime(2101));
     if (epicked != null && epicked != _eselectedDate) {
       setState(() {
-        expdateCtrlr.text = _eselectedDate.toString().substring(1, 11);
+        expdateCtrlr.text = _eselectedDate.toString().substring(0, 11);
         _eselectedDate = epicked;
         isDateSelected = true;
       });
@@ -750,12 +759,19 @@ class _UploadLicenseState extends State<UploadLicense> {
                               ),
                               child: Column(
                                 children: [
-                                  Image.asset(
-                                    'assets/license.png',
-                                    width: 70.h,
-                                    height: 80.h,
-                                    fit: BoxFit.contain,
-                                  ),
+                                  isImage == true
+                                      ? Image.file(
+                                          file!,
+                                          width: 70.h,
+                                          height: 80.h,
+                                          fit: BoxFit.contain,
+                                        )
+                                      : Image.asset(
+                                          'assets/license.png',
+                                          width: 70.h,
+                                          height: 80.h,
+                                          fit: BoxFit.contain,
+                                        ),
                                   Text(
                                     'Professional License',
                                     textAlign: TextAlign.center,
@@ -820,8 +836,12 @@ class _UploadLicenseState extends State<UploadLicense> {
                                           DropDownDecoratorProps(
                                         dropdownSearchDecoration:
                                             InputDecoration(
-                                          // labelText: "Menu mode",
-                                          hintText: "license Type",
+                                          contentPadding: EdgeInsets.only(
+                                            left: 20,
+                                            top: 13,
+                                          ),
+                                          border: InputBorder.none,
+                                          hintText: "License Type",
                                         ),
                                       ),
                                       onChanged: (value) {
@@ -929,6 +949,11 @@ class _UploadLicenseState extends State<UploadLicense> {
                                           DropDownDecoratorProps(
                                         dropdownSearchDecoration:
                                             InputDecoration(
+                                          contentPadding: EdgeInsets.only(
+                                            left: 20,
+                                            top: 13,
+                                          ),
+                                          border: InputBorder.none,
                                           // labelText: "Menu mode",
                                           hintText: "State",
                                         ),
@@ -1213,7 +1238,9 @@ class _UploadLicenseState extends State<UploadLicense> {
                           children: [
                             CommonButtonWhite(
                                 label: 'PREV',
-                                onPressed: () async {},
+                                onPressed: () async {
+                                  Navigator.pop(context);
+                                },
                                 border: 35.h,
                                 height: 50.h,
                                 fontSize: 18,

@@ -15,6 +15,8 @@ import 'package:medteam/Utils/colors.dart';
 import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../Utils/utils.dart';
+
 class YourResume extends StatefulWidget {
   @override
   _YourResumeState createState() => _YourResumeState();
@@ -43,6 +45,9 @@ class _YourResumeState extends State<YourResume> {
       setState(() {
         fileChoosed = true;
       });
+
+      context.read<ProfileViewModel>().updateUserResume(file!, context);
+      // Navigator.push(
     } else {
       print("No file");
       // User canceled the picker
@@ -294,9 +299,10 @@ class _YourResumeState extends State<YourResume> {
                                       'My Schedule',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          color: black,
-                                          fontSize: 15.sp,
-                                          fontFamily: 'nunit_extrabold'),
+                                        color: black,
+                                        fontSize: 15.sp,
+                                        fontFamily: 'nunit_extrabold',
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -706,8 +712,11 @@ class _YourResumeState extends State<YourResume> {
                                         .watch<ProfileViewModel>()
                                         .listCerti,
                                     dropdownDecoratorProps:
-                                        DropDownDecoratorProps(
+                                        const DropDownDecoratorProps(
                                       dropdownSearchDecoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        contentPadding:
+                                            EdgeInsets.only(left: 20, top: 13),
                                         // labelText: "Menu mode",
                                         hintText: "Extra Certificate",
                                       ),
@@ -715,7 +724,7 @@ class _YourResumeState extends State<YourResume> {
                                     onChanged: (value) {
                                       // print(value);
 
-                                      // certi 
+                                      // certi
                                       // licenseType = value.toString();
                                     },
                                     // selectedItem: context
@@ -841,22 +850,6 @@ class _YourResumeState extends State<YourResume> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    InkWell(
-                      onTap: () {
-                        // FileView(
-                        //   controller: FileViewController.asset('$file'),
-                        // );
-                      },
-                      child: Text(
-                        'View',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: black,
-                          fontSize: 20.sp,
-                          fontFamily: 'nunit_bold',
-                        ),
-                      ),
-                    ),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -868,7 +861,9 @@ class _YourResumeState extends State<YourResume> {
                               children: [
                                 CommonButtonWhite(
                                     label: 'PREV',
-                                    onPressed: () async {},
+                                    onPressed: () async {
+                                      Navigator.of(context);
+                                    },
                                     border: 35.h,
                                     height: 50.h,
                                     fontSize: 18,
@@ -883,12 +878,12 @@ class _YourResumeState extends State<YourResume> {
                                       )
                                     : CommonButton(
                                         label: 'NEXT',
-                                        onPressed: () async {
+                                        onPressed: () {
                                           if (fileChoosed == true) {
-                                            await context
-                                                .read<ProfileViewModel>()
-                                                .updateUserResume(
-                                                    file!, context);
+                                            // await context
+                                            //     .read<ProfileViewModel>()
+                                            //     .updateUserResume(
+                                            //         file!, context);
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -896,6 +891,11 @@ class _YourResumeState extends State<YourResume> {
                                                     UploadLicense(),
                                               ),
                                             );
+                                          } else {
+                                            Utils.showSnackBar(
+                                                context,
+                                                "Select or upload Resume",
+                                                Colors.red);
                                           }
                                         },
                                         border: 35.h,

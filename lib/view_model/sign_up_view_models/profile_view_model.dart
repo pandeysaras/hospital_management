@@ -6,6 +6,7 @@ import 'package:medteam/model/licence_list_model.dart';
 import 'package:medteam/repository/profile_repo.dart';
 import 'package:medteam/resources/app_url.dart';
 
+import '../../Screen/FindWorkBySort.dart';
 import '../../Utils/utils.dart';
 
 import 'package:http/http.dart' as http;
@@ -36,7 +37,10 @@ class ProfileViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUserResume(File file, BuildContext context,) async {
+  Future<void> updateUserResume(
+    File file,
+    BuildContext context,
+  ) async {
     setLoading();
     try {
       // setLoading();
@@ -163,8 +167,7 @@ class ProfileViewModel with ChangeNotifier {
       // print(value);
 
       // if (hearAboutUsModel.status == true) {
-      Utils.showSnackBar(
-          context, gloabalbankDetailsModel!.message.toString(), Colors.blue);
+      Utils.showSnackBar(context, "Bank Details Added", Colors.blue);
       // selectBoxesHearList = globalhearAboutUsModel!.data!;
       notifyListeners();
       // print("------------- ${gloabalbankDetailsModel!.status.toString()}");
@@ -191,6 +194,8 @@ class ProfileViewModel with ChangeNotifier {
   }
 
 //------------doc upload
+
+  bool isUploaded = false;
 
   Future<void> documentUpload(File file, BuildContext context,
       String licseneceNo, String expdate, String issuedate) async {
@@ -224,13 +229,25 @@ class ProfileViewModel with ChangeNotifier {
 
       if (response.statusCode == 200) {
         setLoading();
+        isUploaded = true;
+        notifyListeners();
         Utils.showSnackBar(context, "uploaded Successfully", Colors.blue);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FindWorkBySort(),
+          ),
+        );
       } else {
         setLoading();
         print(response.reasonPhrase);
+        isUploaded = false;
+        notifyListeners();
         throw Exception("Failed to create");
       }
     } catch (error) {
+      isUploaded = false;
+      notifyListeners();
       setLoading();
       throw Exception("Failed to create");
     }

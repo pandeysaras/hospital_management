@@ -9,6 +9,7 @@ import 'package:medteam/Components/CommonButtonWithPadding.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/FindWorkBySort.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/Utils/utils.dart';
 import 'package:medteam/view_model/sign_up_view_models/profile_view_model.dart';
 import 'dart:math';
 
@@ -39,7 +40,7 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
-      print("---------------------picked");
+      // print("---------------------picked");
       file = File(
         result.files.single.path!,
       );
@@ -52,6 +53,7 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
   //---------------------------
 
   //---------------------------
+
   DateTime _selectedDate = DateTime.now();
 
   DateTime _eselectedDate = DateTime.now();
@@ -65,7 +67,7 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
         lastDate: DateTime(2101));
     if (picked != null && picked != _selectedDate) {
       setState(() {
-        issuedateCtrlr.text = _selectedDate.toString().substring(1, 11);
+        issuedateCtrlr.text = _selectedDate.toString().substring(0, 11);
         _selectedDate = picked;
         isDateSelected = true;
       });
@@ -81,7 +83,7 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
     );
     if (epicked != null && epicked != _eselectedDate) {
       setState(() {
-        expdateCtrlr.text = _eselectedDate.toString().substring(1, 11);
+        expdateCtrlr.text = _eselectedDate.toString().substring(0, 11);
         _eselectedDate = epicked;
         isDateSelected = true;
       });
@@ -188,14 +190,15 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                         margin:
                             EdgeInsets.only(top: 20.h, left: 30.h, right: 30.h),
                         child: CommonTextField(
-                            thecontroller: licenseNumberController,
-                            label: "License Number",
-                            type: TextInputType.text,
-                            lines: 1,
-                            secure: false,
-                            fontSize: 18.sp,
-                            text_color: black,
-                            hint_color: gray),
+                          thecontroller: licenseNumberController,
+                          label: "License Number",
+                          type: TextInputType.text,
+                          lines: 1,
+                          secure: false,
+                          fontSize: 18.sp,
+                          text_color: black,
+                          hint_color: gray,
+                        ),
                       ),
                       Container(
                         margin:
@@ -215,45 +218,46 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                                   margin:
                                       EdgeInsets.only(left: 20.h, right: 20.w),
                                   child: TextField(
-                                      controller: issuedateCtrlr,
-                                      autofocus: false,
-                                      enabled: false,
-                                      cursorColor: black,
-                                      style: TextStyle(
+                                    controller: issuedateCtrlr,
+                                    autofocus: false,
+                                    enabled: false,
+                                    cursorColor: black,
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      color: black,
+                                      fontFamily: "nunit_regular",
+                                    ),
+                                    onEditingComplete: () {
+                                      // focusChange();
+                                    },
+                                    decoration: InputDecoration(
+                                      focusedBorder: border,
+                                      border: border,
+                                      enabledBorder: border,
+                                      disabledBorder: border,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 0.0, horizontal: 10.0),
+                                      hintText: "Issuing or Test Date",
+                                      hintStyle: TextStyle(
                                         fontSize: 18.sp,
-                                        color: black,
+                                        color: gray,
                                         fontFamily: "nunit_regular",
                                       ),
-                                      onEditingComplete: () {
-                                        // focusChange();
-                                      },
-                                      decoration: InputDecoration(
-                                        focusedBorder: border,
-                                        border: border,
-                                        enabledBorder: border,
-                                        disabledBorder: border,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 0.0, horizontal: 10.0),
-                                        hintText: "Issuing or Test Date",
-                                        hintStyle: TextStyle(
-                                          fontSize: 18.sp,
-                                          color: gray,
-                                          fontFamily: "nunit_regular",
+                                      suffixIconConstraints: BoxConstraints(
+                                          maxHeight: 20, maxWidth: 30),
+                                      suffixIcon: GestureDetector(
+                                        onTap: () {
+                                          //loginController.pass_secure.value = !loginController.pass_secure.value;
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.only(right: 5),
+                                          child: Image.asset(
+                                            'assets/calender.png',
+                                          ),
                                         ),
-                                        suffixIconConstraints: BoxConstraints(
-                                            maxHeight: 20, maxWidth: 30),
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-                                            //loginController.pass_secure.value = !loginController.pass_secure.value;
-                                          },
-                                          child: Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 5),
-                                              child: Image.asset(
-                                                'assets/calender.png',
-                                              )),
-                                        ),
-                                      )),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -380,37 +384,46 @@ class _UploadedDocumentsState extends State<UploadedDocuments> {
                       SizedBox(
                         height: 30.h,
                       ),
-                      CommonButton(
-                          label: 'DONE',
-                          onPressed: () async {
-                            if (issuedateCtrlr.text.isNotEmpty &&
-                                licenseNumberController.text.isNotEmpty &&
-                                file!.path.isNotEmpty)
-                              context.read<ProfileViewModel>().documentUpload(
-                                  file!,
-                                  context,
-                                  licenseNumberController.value.text,
-                                  expdateCtrlr.value.text,
-                                  issuedateCtrlr.value.text);
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (cont ext) => FindWorkBySort(),
-                            //   ),
-                            // );
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FindWorkBySort(),
-                              ),
-                            );
-                          },
-                          border: 35.h,
-                          height: 50.h,
-                          fontSize: 18,
-                          textColor: white,
-                          backgroundColor: black),
+                      context.watch<ProfileViewModel>().isLoading
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text("Updating Credentials..."),
+                                ),
+                                SizedBox(
+                                  width: 200.w,
+                                  child: LinearProgressIndicator(),
+                                ),
+                              ],
+                            )
+                          : CommonButton(
+                              label: 'DONE',
+                              onPressed: () async {
+                                if (issuedateCtrlr.text.isNotEmpty &&
+                                    licenseNumberController.text.isNotEmpty &&
+                                    file!.path.isNotEmpty) {
+                                  context
+                                      .read<ProfileViewModel>()
+                                      .documentUpload(
+                                          file!,
+                                          context,
+                                          licenseNumberController.value.text,
+                                          expdateCtrlr.value.text,
+                                          issuedateCtrlr.value.text);
+                                } else {
+                                  Utils.showSnackBar(
+                                    context,
+                                    "Some field or document is empty",
+                                    Colors.red,
+                                  );
+                                }
+                              },
+                              border: 35.h,
+                              height: 50.h,
+                              fontSize: 18,
+                              textColor: white,
+                              backgroundColor: black),
                       SizedBox(
                         height: 20.h,
                       ),
