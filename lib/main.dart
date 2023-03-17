@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medteam/Screen/PaymentMethod.dart';
-import 'package:medteam/Screen/UploadedDocuments.dart';
-import 'package:medteam/Screen/YourResume.dart';
 import 'package:medteam/view_model/bid_shift_view_model.dart';
 import 'package:medteam/view_model/complete_profile_view_models/complete_profile_1_view_model.dart';
 import 'package:medteam/view_model/complete_profile_view_models/complete_profile_2_view_model.dart';
@@ -63,7 +60,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: UploadedDocuments(),
+        home: SplashScreen(),
       ),
     );
   }

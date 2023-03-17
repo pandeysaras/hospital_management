@@ -68,7 +68,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           )),
       drawer: Drawer(
         child: Container(
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             gradient:
                 LinearGradient(colors: [Color(0xFF0075B2), Color(0xFF3BA9E2)]),
           ),
