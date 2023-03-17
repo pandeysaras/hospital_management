@@ -29,6 +29,8 @@ class LoginViewModel with ChangeNotifier{
           context, value["message"], Colors.blue);
     }).onError((error, stackTrace) {
       setLoading(false);
+      Utils.showSnackBar(
+          context,"Invalid password or email!", Colors.red);
       if (kDebugMode) {
         print(error.toString());
       }
