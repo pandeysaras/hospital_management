@@ -37,6 +37,7 @@ class AppUrl {
 
   //upload documents
   static var documetnsUplaoadEndpoint = "$baseUrl/api/profile_info_step_7";
+  
   static var completeProfileInfo1EndPoint =
       "https://clickandstaff.com/api/profile_info_step_1";
   static var completeProfileInfo2EndPoint = "$baseUrl/api/profile_info_step_2";
