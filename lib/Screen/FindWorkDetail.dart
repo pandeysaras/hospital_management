@@ -7,6 +7,9 @@ import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
 import 'package:medteam/Screen/PaymentMethod.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/Utils/utils.dart';
+import 'package:medteam/view_model/bid_shift_view_model.dart';
+import 'package:provider/provider.dart';
 
 class FindWorkDetail extends StatefulWidget {
   @override
@@ -16,21 +19,21 @@ class FindWorkDetail extends StatefulWidget {
 class _FindWorkDetailState extends State<FindWorkDetail> {
   late double screenWidth, screenHeight;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
-  late TextEditingController mobile_controller, license_no_controller;
   late FocusNode mobile_focusnode, license_no_focusnode;
+  TextEditingController _textEditingController = TextEditingController();
   String gender = "male";
+
 
   @override
   void initState() {
     super.initState();
-    mobile_controller = TextEditingController();
-    license_no_controller = TextEditingController();
     mobile_focusnode = FocusNode();
     license_no_focusnode = FocusNode();
   }
 
   @override
   Widget build(BuildContext context) {
+    final bidShiftViewModel = Provider.of<BidShiftViewModel>(context);
     screenWidth = MediaQuery
         .of(context)
         .size
@@ -268,7 +271,7 @@ class _FindWorkDetailState extends State<FindWorkDetail> {
                                       width: 2),
                                 ),
                                 child: TextField(
-
+                                  controller: _textEditingController,
                                     maxLines: 1,
                                     autofocus: false,
                                     enabled: true,
@@ -311,9 +314,16 @@ class _FindWorkDetailState extends State<FindWorkDetail> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            InkWell(
-                                onTap:(){
 
+                           bidShiftViewModel.loading ? CircularProgressIndicator() : InkWell(
+                                onTap:(){
+                                  Map data = {    "user_id":224,
+                                    "id":100,
+                                    "bid_price":_textEditingController.text};
+
+                                 _textEditingController.value.text.isNotEmpty ?  bidShiftViewModel.postBidShiftApi(data, context) :
+                                  Utils.showSnackBar(context, "Please enter bid value!", Colors.red);
+                                  ;
                                 },
                                 child:Center(
                                   child: Container(
