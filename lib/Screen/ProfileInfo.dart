@@ -1008,6 +1008,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
                                       InputDecoration(
                                         // labelText: "Menu mode",
                                         hintText: "State",
+                                        border: InputBorder.none,
+                                        contentPadding: EdgeInsets.only(left: 20, top: 13)
                                       ),
                                     ),
                                     onChanged: (value) {

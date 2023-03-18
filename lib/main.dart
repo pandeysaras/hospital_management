@@ -3,6 +3,8 @@ import 'package:medteam/view_model/bid_shift_view_model.dart';
 import 'package:medteam/view_model/complete_profile_view_models/complete_profile_1_view_model.dart';
 import 'package:medteam/view_model/complete_profile_view_models/complete_profile_2_view_model.dart';
 import 'package:medteam/view_model/complete_profile_view_models/complete_profile_3_view_model.dart';
+import 'package:medteam/view_model/complete_profile_view_models/login_user_cred_doc_view_model.dart';
+import 'package:medteam/view_model/shift_data_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/enter_name_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/hear_view_model.dart';
 import 'package:medteam/view_model/sign_up_view_models/industry_data_view_model.dart';
@@ -57,6 +59,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => ProfileViewModel()),
         ChangeNotifierProvider(create: (_) => StateListViewModel()),
         ChangeNotifierProvider(create: (_) => BidShiftViewModel()),
+        ChangeNotifierProvider(create: (_) => ShiftDataViewModel()),
+        ChangeNotifierProvider(create: (_) => LoginUserCredDocViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

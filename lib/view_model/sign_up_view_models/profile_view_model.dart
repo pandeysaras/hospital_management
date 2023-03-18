@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:medteam/Screen/ProfileCreated.dart';
 import 'package:medteam/model/licence_list_model.dart';
 import 'package:medteam/repository/profile_repo.dart';
 import 'package:medteam/resources/app_url.dart';
@@ -235,7 +236,7 @@ class ProfileViewModel with ChangeNotifier {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => FindWorkBySort(),
+            builder: (context) => ProfileCreated(),
           ),
         );
       } else {

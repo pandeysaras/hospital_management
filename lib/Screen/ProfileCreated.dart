@@ -7,6 +7,10 @@ import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
 import 'package:medteam/Screen/UploadedDocuments.dart';
 import 'package:medteam/Utils/colors.dart';
+import 'package:medteam/view_model/complete_profile_view_models/login_user_cred_doc_view_model.dart';
+import 'package:provider/provider.dart';
+
+import '../data/response/status.dart';
 
 class ProfileCreated extends StatefulWidget {
   @override
@@ -19,9 +23,11 @@ class _ProfileCreatedState extends State<ProfileCreated> {
   late TextEditingController mobile_controller;
   late FocusNode mobile_focusnode;
   String gender = "male";
+  LoginUserCredDocViewModel loginUserCredDocViewModel = LoginUserCredDocViewModel();
 
   @override
   void initState() {
+    loginUserCredDocViewModel.fetchLoginUserCredDocApi(context);
     super.initState();
     mobile_controller = TextEditingController();
     mobile_focusnode = FocusNode();
@@ -579,206 +585,53 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                         child: Column(
                           children: [
                             SizedBox(height: 10),
-                            Container(
-                              margin: EdgeInsets.only(left: 20, right: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
+                            ChangeNotifierProvider<LoginUserCredDocViewModel>(
+                              create: (BuildContext context) => loginUserCredDocViewModel,
+                              child: Consumer<LoginUserCredDocViewModel>(builder: (context, value, _) {
+                                switch (value.userCredDoc.status) {
+                                  case Status.loading:
+                                    return Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  case Status.error:
+                                    return Center(
                                       child: Text(
-                                        '1.',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: black,
-                                            fontSize: 15.sp,
-                                            fontFamily: 'nunit_regular'),
+                                          "Sorry For Inconvenience!"
                                       ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Text(
-                                        'BLS-Basic Life Support',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: black,
-                                            fontSize: 15.sp,
-                                            fontFamily: 'nunit_regular'),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Image.asset(
-                                        'assets/edit_black.png',
-                                        height: 15,
-                                        width: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Container(
-                              margin: EdgeInsets.only(left: 20, right: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Text(
-                                        '2.',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: black,
-                                            fontSize: 15.sp,
-                                            fontFamily: 'nunit_regular'),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Text(
-                                        'TB or Chest-XRay',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: black,
-                                            fontSize: 15.sp,
-                                            fontFamily: 'nunit_regular'),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Image.asset(
-                                        'assets/edit_black.png',
-                                        height: 15,
-                                        width: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Container(
-                              margin: EdgeInsets.only(left: 20, right: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Text(
-                                        '3.',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: black,
-                                            fontSize: 15.sp,
-                                            fontFamily: 'nunit_regular'),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Text(
-                                        'Flu Shots or Declinations',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: black,
-                                            fontSize: 15.sp,
-                                            fontFamily: 'nunit_regular'),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Image.asset(
-                                        'assets/edit_black.png',
-                                        height: 15,
-                                        width: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Container(
-                              margin: EdgeInsets.only(left: 20, right: 20),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Text(
-                                        '4.',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: black,
-                                            fontSize: 15.sp,
-                                            fontFamily: 'nunit_regular'),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 4,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Text(
-                                        'CPR Card',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: black,
-                                            fontSize: 15.sp,
-                                            fontFamily: 'nunit_regular'),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0, left: 0, right: 0),
-                                      child: Image.asset(
-                                        'assets/edit_black.png',
-                                        height: 15,
-                                        width: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 10),
+                                    );
+                                  case Status.completed:
+                                    return SizedBox(
+                                      width: double.infinity,
+                                      height: 200,
+                                      child:  value.userCredDoc.data!.data!.isEmpty ?
+                                      Center(
+                                        child: Text("Sorry For Inconvenience!"),
+                                      ) :ListView.builder(
+                                          itemCount: value.userCredDoc.data!.data!.length,
+                                          itemBuilder: (context, index) {
+                                            return itemWidget(index, value.userCredDoc.data!.data![index].documentName.toString(), () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          UploadedDocuments()));
+                                            });
+
+
+                                            //
+                                            //   SelectIndustryCard(text: value.industryData.data!.data![index].name.toString(), func: (){
+                                            //   _onSelected(index);
+                                            //   print(index);
+                                            //
+                                            // },);
+                                          }),
+                                    );
+                                  default:
+                                    return Container();
+                                }
+                              }),
+                            )  ,
+
                           ],
                         ),
                       ),
@@ -831,5 +684,65 @@ class _ProfileCreatedState extends State<ProfileCreated> {
   final border = UnderlineInputBorder(
     borderRadius: BorderRadius.circular(15.0),
     borderSide: BorderSide.none,
+  );
+}
+
+Widget itemWidget (int serialNum, String listItem, VoidCallback onPress) {
+  return Column(
+    children: [
+      Container(
+        margin: EdgeInsets.only(left: 20, right: 20),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: EdgeInsets.only(
+                    top: 0, left: 0, right: 0),
+                child: Text(
+                  '${(serialNum + 1).toString()}.',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      color: black,
+                      fontSize: 15.sp,
+                      fontFamily: 'nunit_regular'),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Container(
+                padding: EdgeInsets.only(
+                    top: 0, left: 0, right: 0),
+                child: Text(
+                  listItem,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      color: black,
+                      fontSize: 15.sp,
+                      fontFamily: 'nunit_regular'),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: onPress,
+                child: Container(
+                  padding: EdgeInsets.only(
+                      top: 0, left: 0, right: 0),
+                  child: Image.asset(
+                    'assets/edit_black.png',
+                    height: 15,
+                    width: 15,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(height: 15),
+    ],
   );
 }

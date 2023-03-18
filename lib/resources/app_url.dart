@@ -51,4 +51,6 @@ class AppUrl {
   static var getSUbspltyEndPoint = "$baseUrl/api/getSubSpecialityData?";
   static var getShiftDataEndPoint = "$baseUrl/api/get_shift_data?user_id=224";
   static var postBidShiftEndPoint = "$baseUrl/api/bid_shift";
+  static var loggedInUserCredentialDocumentEndPoint = "$baseUrl/api/get_user_credential_documents?user_id=224";
+  static var updateCredentialDocumentEndPoint = "$baseUrl/api/update_credential_documents";
 }
