@@ -37,7 +37,7 @@ class AppUrl {
 
   //upload documents
   static var documetnsUplaoadEndpoint = "$baseUrl/api/profile_info_step_7";
-  
+
   static var completeProfileInfo1EndPoint =
       "https://clickandstaff.com/api/profile_info_step_1";
   static var completeProfileInfo2EndPoint = "$baseUrl/api/profile_info_step_2";
@@ -51,6 +51,11 @@ class AppUrl {
   static var getSUbspltyEndPoint = "$baseUrl/api/getSubSpecialityData?";
   static var getShiftDataEndPoint = "$baseUrl/api/get_shift_data?user_id=224";
   static var postBidShiftEndPoint = "$baseUrl/api/bid_shift";
-  static var loggedInUserCredentialDocumentEndPoint = "$baseUrl/api/get_user_credential_documents?user_id=224";
-  static var updateCredentialDocumentEndPoint = "$baseUrl/api/update_credential_documents";
+  static var loggedInUserCredentialDocumentEndPoint =
+      "$baseUrl/api/get_user_credential_documents?user_id=224";
+  static var updateCredentialDocumentEndPoint =
+      "$baseUrl/api/update_credential_documents";
+
+  static var getUploadedDocumentEndPoint =
+      "$baseUrl/api/get_user_certificates?user_id=224";
 }

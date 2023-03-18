@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:medteam/Screen/ProfileCreated.dart';
 import 'package:medteam/model/licence_list_model.dart';
+import 'package:medteam/model/list_of_loaded_model.dart';
 import 'package:medteam/repository/profile_repo.dart';
 import 'package:medteam/resources/app_url.dart';
 
@@ -394,5 +395,53 @@ class ProfileViewModel with ChangeNotifier {
     });
   }
 
-  //------------
+  //------------list of uploaded docs
+
+  List<String> listOFUploadDocs = [];
+
+  Future<void> listOFUploadedDocAPI(BuildContext context) async {
+    //-------register api call-----------//
+
+    await _myRepo.listOfUploadedAPI().then((value) async {
+      // refModel refObj = refModel.fromJson(value);
+      golablListOfUploadedDataModel =
+          ListOfUploadedDataModel.fromJson(value); //
+
+      for (int i = 0;
+          i <= golablListOfUploadedDataModel!.data!.length - 1;
+          i++) {
+        listOFUploadDocs.add(
+            golablListOfUploadedDataModel!.data![i].certificateName.toString());
+        // globalLicenseListModel!.data![i].name.toString();
+        notifyListeners();
+      }
+
+      // print(value);
+
+      // if (hearAboutUsModel.status == true) {
+      // Utils.showSnackBar(context, licenseListModel.message.toString(), Colors.blue);
+      // selectBoxesHearList = globalhearAboutUsModel!.data!;
+      notifyListeners();
+
+      // print(listOfLicenseTypes[1]);
+
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => FindWork()),
+      // );
+
+      // if (kDebugMode) {
+      //   print(value.toString());
+      // }
+    }).onError((error, stackTrace) async {
+      _isLoading = false;
+      notifyListeners();
+      throw {
+        if (kDebugMode)
+          {
+            print(error.toString()),
+          }
+      };
+    });
+  }
 }

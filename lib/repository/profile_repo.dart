@@ -44,4 +44,14 @@ class ProfileRepository {
       rethrow;
     }
   }
+
+  Future<dynamic> listOfUploadedAPI() async {
+    try {
+      dynamic response =
+          await _apiServices.getGetApiResponse(AppUrl.getUploadedDocumentEndPoint);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

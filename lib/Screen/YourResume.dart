@@ -62,6 +62,7 @@ class _YourResumeState extends State<YourResume> {
   void initState() {
     super.initState();
     context.read<ProfileViewModel>().subSlAPI(context);
+    context.read<ProfileViewModel>().listOFUploadedDocAPI(context);
     mobile_controller = TextEditingController();
     mobile_focusnode = FocusNode();
 
@@ -733,59 +734,60 @@ class _YourResumeState extends State<YourResume> {
                                     //     .first,
                                   ),
                                 ),
-                          // Expanded(
-                          //   child: Container(
-                          //     margin: EdgeInsets.only(left: 20.h, right: 20.w),
-                          //     child: TextField(
-                          //         maxLines: 1,
-                          //         keyboardType: TextInputType.text,
-                          //         textInputAction: TextInputAction.done,
-                          //         obscureText: true,
-                          //         autofocus: false,
-                          //         enabled: true,
-                          //         cursorColor: black,
-                          //         style: TextStyle(
-                          //           fontSize: 18.sp,
-                          //           color: black,
-                          //           fontFamily: "nunit_regular",
-                          //         ),
-                          //         controller: mobile_controller,
-                          //         focusNode: mobile_focusnode,
-                          //         onEditingComplete: () {
-                          //           // focusChange();
-                          //         },
-                          //         decoration: InputDecoration(
-                          //           focusedBorder: border,
-                          //           border: border,
-                          //           enabledBorder: border,
-                          //           disabledBorder: border,
-                          //           contentPadding: EdgeInsets.symmetric(
-                          //               vertical: 0.0, horizontal: 10.0),
-                          //           hintText: "Extra Certificate",
-                          //           hintStyle: TextStyle(
-                          //             fontSize: 18.sp,
-                          //             color: gray,
-                          //             fontFamily: "nunit_regular",
-                          //           ),
-                          //           suffixIconConstraints: BoxConstraints(
-                          //               maxHeight: 20, maxWidth: 30),
-                          //           suffixIcon: GestureDetector(
-                          //             onTap: () {
-                          //               //loginController.pass_secure.value = !loginController.pass_secure.value;
-                          //             },
-                          //             child: Padding(
-                          //                 padding: EdgeInsets.only(right: 5),
-                          //                 child: Image.asset(
-                          //                   'assets/down_arrow.png',
-                          //                   color: black,
-                          //                 )),
-                          //           ),
-                          //         )),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
+
+                    //-------------------
+
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Text(
+                          "Uploaded Certificates",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Expanded(
+                      // height: MediaQuery.of(context).size.height*0.2,
+                      child: Scrollbar(
+                        thumbVisibility: true,
+                        trackVisibility: true,
+                        child: ListView.builder(
+                          itemCount: context
+                              .watch<ProfileViewModel>()
+                              .listOFUploadDocs
+                              .length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Column(
+                                children: [
+                                  Divider(),
+                                  Text(
+                                    context
+                                        .watch<ProfileViewModel>()
+                                        .listOFUploadDocs[index],
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+
+                    //--------------------
                     SizedBox(
                       height: 25.h,
                     ),

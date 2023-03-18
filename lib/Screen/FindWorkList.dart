@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:medteam/Components/CommonButton.dart';
-import 'package:medteam/Components/CommonButtonWhite.dart';
-import 'package:medteam/Components/CommonButtonWithPadding.dart';
-import 'package:medteam/Components/CommonTextField.dart';
-import 'package:medteam/Screen/BottomMenuBar.dart';
-import 'package:medteam/Screen/PaymentMethod.dart';
 import 'package:medteam/Utils/colors.dart';
 import 'package:medteam/view_model/shift_data_view_model.dart';
 import 'package:provider/provider.dart';
