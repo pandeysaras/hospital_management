@@ -32,6 +32,9 @@ class _YourResumeState extends State<YourResume> {
   File? file;
   String? fileName;
   bool fileChoosed = false;
+   String certificateName = "";
+   String certificateId = "";
+   ProfileViewModel profileViewModel = ProfileViewModel();
 
   void pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
@@ -46,7 +49,8 @@ class _YourResumeState extends State<YourResume> {
         fileChoosed = true;
       });
 
-      context.read<ProfileViewModel>().updateUserResume(file!, context);
+      context.read<ProfileViewModel>().updateUserResume(file!, context, certificateName, certificateId);
+      await profileViewModel.listOFUploadedDocAPI(context);
       // Navigator.push(
     } else {
       print("No file");
@@ -723,8 +727,12 @@ class _YourResumeState extends State<YourResume> {
                                       ),
                                     ),
                                     onChanged: (value) {
-                                      // print(value);
-
+                                       print(value);
+                                      certificateName = value!;
+                                       int id = context.read<ProfileViewModel>().listCerti.indexOf(value);
+                                       print(id);
+                                       certificateId = context.read<ProfileViewModel>().certiId[id].toString();
+                                      // print(certificateId);
                                       // certi
                                       // licenseType = value.toString();
                                     },
@@ -791,9 +799,9 @@ class _YourResumeState extends State<YourResume> {
                     SizedBox(
                       height: 25.h,
                     ),
-                    fileChoosed ? Divider() : SizedBox(),
-                    fileChoosed ? Text(fileName.toString()) : SizedBox(),
-                    fileChoosed ? Divider() : SizedBox(),
+                   // fileChoosed ? Divider() : SizedBox(),
+                   // fileChoosed ? Text(fileName.toString()) : SizedBox(),
+                   // fileChoosed ? Divider() : SizedBox(),
                     SizedBox(
                       height: 15.h,
                     ),
@@ -864,7 +872,7 @@ class _YourResumeState extends State<YourResume> {
                                 CommonButtonWhite(
                                     label: 'PREV',
                                     onPressed: () async {
-                                      Navigator.of(context);
+                                      Navigator.pop(context);
                                     },
                                     border: 35.h,
                                     height: 50.h,
@@ -881,24 +889,31 @@ class _YourResumeState extends State<YourResume> {
                                     : CommonButton(
                                         label: 'NEXT',
                                         onPressed: () {
-                                          if (fileChoosed == true) {
-                                            // await context
-                                            //     .read<ProfileViewModel>()
-                                            //     .updateUserResume(
-                                            //         file!, context);
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    UploadLicense(),
-                                              ),
-                                            );
-                                          } else {
-                                            Utils.showSnackBar(
-                                                context,
-                                                "Select or upload Resume",
-                                                Colors.red);
-                                          }
+                                          // if (fileChoosed == true) {
+                                          //   // await context
+                                          //   //     .read<ProfileViewModel>()
+                                          //   //     .updateUserResume(
+                                          //   //         file!, context);
+                                          //   Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           UploadLicense(),
+                                          //     ),
+                                          //   );
+                                          // } else {
+                                          //   Utils.showSnackBar(
+                                          //       context,
+                                          //       "Select or upload Resume",
+                                          //       Colors.red);
+                                          // }
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  UploadLicense(),
+                                            ),
+                                          );
                                         },
                                         border: 35.h,
                                         height: 50.h,

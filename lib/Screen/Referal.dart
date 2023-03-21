@@ -138,7 +138,12 @@ class _ReferalState extends State<Referal> {
                             children: [
                               CommonButtonWhite(
                                   label: 'SKIP',
-                                  onPressed: () async {},
+                                  onPressed: ()  {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HearAboutUs()));
+                                  },
                                   border: 35.h,
                                   height: 50.h,
                                   fontSize: 18,

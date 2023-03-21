@@ -155,7 +155,9 @@ class _EnterNameScreenState extends State<EnterNameScreen> {
                                     children: [
                                       CommonButtonWhite(
                                           label: 'PREV',
-                                          onPressed: () async {},
+                                          onPressed: ()  {
+                                            Navigator.pop(context);
+                                          },
                                           border: 35.h,
                                           height: 50.h,
                                           fontSize: 18,

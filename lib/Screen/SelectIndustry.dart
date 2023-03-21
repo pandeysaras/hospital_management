@@ -198,29 +198,29 @@ class _SelectIndustryState extends State<SelectIndustry> {
                             textColor: white,
                             backgroundColor: black),
                         SizedBox(height: 15.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't have account?",
-                              style: TextStyle(
-                                  color: gray,
-                                  fontSize: 17.sp,
-                                  fontFamily: 'nunit_regular'),
-                            ),
-                            InkWell(
-                              onTap: () {
-                              },
-                              child: Text(
-                                " SIGN UP",
-                                style: TextStyle(
-                                    color: app_text_color,
-                                    fontSize: 17.sp,
-                                    fontFamily: 'nunit_bold'),
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     Text(
+                        //       "Don't have account?",
+                        //       style: TextStyle(
+                        //           color: gray,
+                        //           fontSize: 17.sp,
+                        //           fontFamily: 'nunit_regular'),
+                        //     ),
+                        //     InkWell(
+                        //       onTap: () {
+                        //       },
+                        //       child: Text(
+                        //         " SIGN UP",
+                        //         style: TextStyle(
+                        //             color: app_text_color,
+                        //             fontSize: 17.sp,
+                        //             fontFamily: 'nunit_bold'),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         SizedBox(height: 30.h),
                       ],
                     ),

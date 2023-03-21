@@ -179,7 +179,10 @@ class _SkillSetSubCatScreenState extends State<SkillSetSubCatScreen> {
                             children: [
                               CommonButtonWhite(
                                   label: 'PREV',
-                                  onPressed: () async {},
+                                  onPressed: (
+                                      )  {
+                                    Navigator.pop(context);
+                                  },
                                   border: 35.h,
                                   height: 50.h,
                                   fontSize: 18,

@@ -383,12 +383,15 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                     EdgeInsets.only(left: 40.h, right: 40.h),
                                 child: Row(
                                   children: [
-                                    Container(
-                                      child: Image.asset(
-                                        'assets/back.png',
-                                        width: 65.h,
-                                        height: 65.h,
-                                        fit: BoxFit.contain,
+                                    GestureDetector(
+                                      onTap: () {Navigator.pop(context);},
+                                      child: Container(
+                                        child: Image.asset(
+                                          'assets/back.png',
+                                          width: 65.h,
+                                          height: 65.h,
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                     ),
                                     Expanded(

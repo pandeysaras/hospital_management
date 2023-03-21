@@ -5,6 +5,7 @@ import 'package:medteam/Components/CommonButtonWhite.dart';
 import 'package:medteam/Components/CommonButtonWithPadding.dart';
 import 'package:medteam/Components/CommonTextField.dart';
 import 'package:medteam/Screen/BottomMenuBar.dart';
+import 'package:medteam/Screen/FindWork.dart';
 import 'package:medteam/Screen/UploadedDocuments.dart';
 import 'package:medteam/Utils/colors.dart';
 import 'package:medteam/view_model/complete_profile_view_models/login_user_cred_doc_view_model.dart';
@@ -658,7 +659,7 @@ class _ProfileCreatedState extends State<ProfileCreated> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => UploadedDocuments(),
+                                builder: (context) => FindWork(),
                               ),
                             );
                           },

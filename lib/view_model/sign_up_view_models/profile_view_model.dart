@@ -41,7 +41,7 @@ class ProfileViewModel with ChangeNotifier {
 
   Future<void> updateUserResume(
     File file,
-    BuildContext context,
+    BuildContext context, String certificateName, String certificateId
   ) async {
     setLoading();
     try {
@@ -59,8 +59,8 @@ class ProfileViewModel with ChangeNotifier {
 
       request.fields.addAll({
         'user_id': "224",
-        "certificate_id": "20",
-        "certificate_name": "somename",
+        "certificate_id": certificateId,
+        "certificate_name": certificateName,
       });
       // if (file == null || file == "") {
       // } else {
@@ -350,6 +350,7 @@ class ProfileViewModel with ChangeNotifier {
 
   //-------------------------sub it
   List<String> listCerti = [];
+  List<String> certiId = [];
 
   Future<void> subSlAPI(BuildContext context) async {
     //-------register api call-----------//
@@ -362,6 +363,7 @@ class ProfileViewModel with ChangeNotifier {
           i <= globalSubSpecialityDataModel!.data!.length - 1;
           i++) {
         listCerti.add(globalSubSpecialityDataModel!.data![i].name.toString());
+        certiId.add(globalSubSpecialityDataModel!.data![i].id.toString());
         // globalLicenseListModel!.data![i].name.toString();
         notifyListeners();
       }
